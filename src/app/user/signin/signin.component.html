@@ -1,0 +1,57 @@
+<div class="row mt-3">
+  <div class="col-md-8 offset-md-2">
+    <div class="alert alert-hollow">
+
+      <h1>Sign in</h1>
+      <div class="alert alert-danger" *ngIf="apiError">
+        Signin is error, please verify your informations
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input formControlName="email" type="email" id="email" name="email" class="form-control" autofocus
+            [ngClass]="{'is-invalid':hasError('email')}" />
+          <app-form-error *ngIf="hasError('email')" [text]="getErrorMessage('email')">
+          </app-form-error>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input formControlName="password" type="password" id="password" class="form-control" name="password"
+                [ngClass]="{'is-invalid':hasError('password')}" />
+              <app-form-error *ngIf="hasError('password')" [text]="getErrorMessage('password')">
+              </app-form-error>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="password_repeat">Repeat password</label>
+              <input formControlName="password_repeat" type="password" id="password_repeat" name="password_repeat"
+                class="form-control" [ngClass]="{'is-invalid':hasError('password_repeat')}" />
+              <app-form-error *ngIf="hasError('password_repeat')" [text]="getErrorMessage('password_repeat')">
+              </app-form-error>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input formControlName="name" type="text" name="name" id="name" class="form-control"
+            [ngClass]="{'is-invalid':hasError('name')}">
+          <app-form-error *ngIf="hasError('name')" [text]="getErrorMessage('name')"></app-form-error>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Signin</button>
+
+      </form>
+
+    </div>
+  </div>
+</div>

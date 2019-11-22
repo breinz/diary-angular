@@ -1,0 +1,22 @@
+<div class="row mt-3">
+  <div class="col-md-8 offset-md-2">
+    <div class="alert alert-hollow">
+
+      <h1>Login</h1>
+      <div class="alert alert-danger" *ngIf="hasError">
+        Login error, please verify your email / password
+      </div>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input formControlName="email" type="email" id="email" name="email" class="form-control" autofocus />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input formControlName="password" type="password" id="password" name="password" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-success" [disabled]="!form.valid">Login</button>
+      </form>
+    </div>
+  </div>
+</div>

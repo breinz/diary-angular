@@ -1,0 +1,14 @@
+footer {
+  margin-top: 1rem;
+  background-color: #666;
+  color: white;
+}
+
+a {
+  color: white;
+
+  &:hover {
+    color: #ccc;
+    text-decoration: none;
+  }
+}

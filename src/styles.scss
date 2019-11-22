@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+@import "../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/solid";
+@import "assets/scss/variables_override";
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+body {
+  background-color: $gray-100;
+}
+
+.alert-hollow {
+  border: 1px solid $gray-400;
+  background-color: $white;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+}
+
+.a {
+  cursor: pointer;
+}
+
+.actions {
+  width: 2%;
+  white-space: nowrap;
+}
