@@ -13,22 +13,26 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav mr-auto">
 
-      <li class="nav-item" *ngIf="isAuthenticated">
-        <a routerLink="/expense" class="nav-link">Expenses</a>
+      <li class="nav-item">
+        <!--*ngIf="isAuthenticated"-->
+        <a routerLink="/expense" class="nav-link">{{ t.t('expense.title.navbar')}}</a>
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li class="nav-item" *ngIf="!isAuthenticated">
-        <a routerLink="/signin" class="nav-link">Sign in</a>
+        <a routerLink="/signin" class="nav-link">{{ t.t('action.signin') }}</a>
       </li>
       <li class="nav-item" *ngIf="!isAuthenticated">
-        <a routerLink="/login" class="nav-link">Log in</a>
+        <a routerLink="/login" class="nav-link">{{ t.t('action.login' )}}</a>
       </li>
       <li class="nav-item" *ngIf="isAuthenticated">
         <a routerLink="/me" class="nav-link a">{{ current_user.name }}</a>
       </li>
       <li class="nav-item" *ngIf="isAuthenticated">
-        <a (click)="logout()" class="nav-link a">Logout</a>
+        <a (click)="logout()" class="nav-link a">{{ t.t('action.logout') }}</a>
+      </li>
+      <li *ngIf="current_user">
+        <a (click)="test()" class="nav-link a">{{ current_user.lang }}</a>
       </li>
       <!-- <li class="dropdown" appDropdown *ngIf="isAuthenticated">
         <a  class="dropdown-toggle" class="nav-link" role="button">Manage <span class="caret"></span></a>

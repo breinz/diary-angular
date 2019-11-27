@@ -1,0 +1,73 @@
+<div class="alert alert-hollow mt-4">
+  <h1>{{ t.t('expense.title.new') }}</h1>
+
+  <form [formGroup]="form">
+
+    <div class="row">
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="amount">{{ t.t('expense.model.amount') }}</label>
+          <input formControlName="amount" id="amount" type="number" class="form-control" name="amount"
+            [ngClass]="fs.is_invalid('amount')" autofocus>
+          <app-form-error [text]="fs.getErrorMessage('amount')" *ngIf="fs.hasError('amount')"></app-form-error>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="date">{{ t.t('expense.model.date') }}</label>
+          <input formControlName="date" id="date" type="date" class="form-control" name="date"
+            [ngClass]="fs.is_invalid('date')">
+          <app-form-error [text]="fs.getErrorMessage('date')" *ngIf="fs.hasError('date')"></app-form-error>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <label for="description">{{ t.t('expense.model.description') }}</label>
+      <input formControlName="description" id="description" type="text" class="form-control" name="description">
+    </div>
+
+    <label>{{ t.t('expense.model.category') }}</label>
+    <div class="form-group categories-radio">
+      <div class="row">
+        <div class="col-sm-2 text-center" *ngFor="let category of categories">
+          <label [for]="'category-'+category._id">
+            <input formControlName="category" type="radio" name="category" [id]="'category-'+category._id"
+              [value]="category._id">
+            <div class="content" [style]="sanitizer.bypassSecurityTrustStyle('--color:'+category.color)">
+
+              <span class="big">
+                <i [fa-icon]="category.icon"></i>
+              </span>
+              <br>
+              {{ category.name }}
+            </div>
+          </label>
+
+        </div>
+
+        <div class="col-sm-2 text-center">
+          <label for="category-plus">
+            <input type="button" name="category" id="category-plus" value="Add" (click)="onAddCategory($event)">
+            <div class="content plus" style="--color:#999;">
+
+              <span class="big">
+                <i fa-icon="plus"></i>
+              </span>
+              <br>
+              {{ t.t('expense.category.btn.new')}}
+            </div>
+          </label>
+
+        </div>
+
+      </div>
+    </div>
+
+    <input type="submit" [value]="t.t('action.save')" class="btn btn-success" [disabled]="form.invalid">
+
+  </form>
+</div>

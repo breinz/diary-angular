@@ -2,9 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { UserService } from '../user.service';
-import { FormErrorService } from "../../shared/form-error/form-error.service";
+import { FormErrorService } from "../../shared/form/form-error/form-error.service";
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { FlashService } from 'src/app/shared/flash/flash.service';
 
 @Component({
   selector: 'app-signin',
@@ -20,7 +21,8 @@ export class SigninComponent implements OnInit {
   constructor(
     private userService: UserService,
     private formError: FormErrorService,
-    private router: Router
+    private router: Router,
+    private flash: FlashService
   ) { }
 
   ngOnInit() {
@@ -40,15 +42,15 @@ export class SigninComponent implements OnInit {
 
     this.apiError = false;
 
+    // TODO: Sign in doesn't log in !
     this.userService.signin(this.form.value).subscribe(
       result => {
+        this.flash.success("Successfully signed in");
         this.form.reset();
         this.router.navigate(["/"]);
 
-        console.log(result);
       },
       error => {
-        console.log(error.error.errors);
         for (let key in error.error.errors) {
           if (error.error.errors.hasOwnProperty(key)) {
 

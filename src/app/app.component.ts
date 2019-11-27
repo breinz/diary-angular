@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from './user/user.service';
+import { TranslationService } from './translation.service';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +9,14 @@ import { UserService } from './user/user.service';
 })
 export class AppComponent implements OnInit {
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private t: TranslationService
   ) { }
 
   ngOnInit() {
     this.userService.autoLogin();
+
+    this.t.init(this.userService);
+
   }
 }

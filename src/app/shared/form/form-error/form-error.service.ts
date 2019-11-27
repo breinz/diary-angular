@@ -1,14 +1,39 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
+import { AbstractControl, FormGroup } from '@angular/forms';
 
+/**
+ * @deprecated 
+ * @use shared/form.service
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class FormErrorService {
 
+  form: FormGroup = null;
+
   constructor() { }
 
-  getMessage(comp: AbstractControl, key: string): string {
+
+  public hasError(field: string): boolean {
+    if (!this.form) {
+      throw "FormService need a form (FormGroup) to work properly"
+    }
+
+    const control = this.form.get(field);
+
+    if (control) {
+      return control.invalid && control.touched;
+    }
+
+    return false;
+  }
+
+  public is_invalid(field: string): { [key: string]: boolean } {
+    return { "is-invalid": this.hasError(field) };
+  }
+
+  public getMessage(comp: AbstractControl, key: string): string {
     switch (key) {
       case "email":
         if (comp.errors.email) return "Email doesn't seem to be valid";

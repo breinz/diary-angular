@@ -1,0 +1,42 @@
+@import "../../../assets/scss/variables_override";
+
+.categories-radio {
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+
+    & ~ .content {
+      //color: $text-muted;
+      cursor: pointer;
+
+      &.plus {
+        background-color: #dee2e6;
+      }
+    }
+
+    &:hover ~ .content {
+      background-color: $gray-300;
+
+      &.plus {
+        background-color: $gray-500;
+      }
+    }
+
+    &:checked ~ .content {
+      background-color: var(--color);
+      //color: $black;
+    }
+  }
+
+  label {
+    display: block;
+
+    .content {
+      border-radius: $border-radius; // 3px;
+      border: 1px solid $border-color;
+    }
+  }
+}

@@ -4,27 +4,107 @@
     <h1>
       November 2019
     </h1>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col">
+
+            <!-- Total -->
+            <div class="alert alert-hollow text-center">
+              <div class="huge">
+                {{ total | fixed:0 }} €
+              </div>
+              Spent this month
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="row">
+
+              <!-- Categories -->
+              <div class="col" *ngIf="report && report.categories">
+                <div class="alert alert-hollowx">
+                  <div class="row" *ngFor="let category of report.categories">
+                    <div class="col-sm-8" [style]="getCategoryBg(category.category)">
+                      <i class="fa fa-fw" [ngClass]="getIcon(category.category)"></i>
+                      {{ category.category ? category.category.name : "No category" }}
+                    </div>
+                    <div class="col-sm-4 text-right" [style]="getCategoryBg(category.category)">
+                      <b>{{ category.total | fixed:0 }} €</b>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-8">
+        <!-- Chart -->
+      </div>
+
+      <div class="col" *ngIf="report && report.reports">
+        <div class="row">
+          <div class="col-md-4" *ngFor="let r of report.reports">
+            <div class="alert alert-hollow text-center">
+              <div class="huge">
+                <i [fa-icon]="r.icon" element="expense" [style]="getStyleColor('color', r.color)" class="outline"></i>
+                {{ r.report.value | fixed}}
+              </div>
+              {{ 'per '+r.report.per}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Detail -->
     <div class="alert alert-hollow">
+
+      <div class="h1-actions">
+        <div class="btn-group">
+          <a new-btn="New expense" href="/expense/new" routerLink="/expense/new"></a>
+          <a secondary-btn="Categories" icon="fa-list" href="/expense/category" routerLink="/expense/category"></a>
+        </div>
+      </div>
       <h3>Detail</h3>
 
-      <table class="table table-hover">
+      <table class="table table-hover table-no-head">
+
         <tr *ngFor="let expense of expenses">
+
           <td>
             {{ expense.date | date:"d MMM yy" }}
             <small class="text-muted">{{ expense.description }}</small>
           </td>
+
           <td>
-            <i class="fa fa-fw" [ngClass]="getExpenseIconClass(expense)"></i>
-            {{ expense.amount.toFixed(2) }}
-          </td>
-          <td class="actions">
-            <div class="btn-group">
-              <button edit_btn></button>
-              <button delete_btn></button>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-6 text-right">
+                  <i class="fa" [ngClass]="getExpenseIconClass(expense)"></i>
+                  &nbsp;
+                  {{ expense.amount | fixed }}
+                </div>
+              </div>
             </div>
           </td>
+
+          <td class="actions">
+            <div class="btn-group">
+              <a href="#" edit-btn></a>
+              <a href="#" delete-btn></a>
+            </div>
+          </td>
+
         </tr>
+
       </table>
+
     </div>
+
   </div>
 </div>

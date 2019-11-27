@@ -1,0 +1,24 @@
+<div class="mt-4" *ngIf="category">
+
+  <element-deleted *ngIf="category.deleted" (recover)="onRecover()" (remove)="onRemove()"></element-deleted>
+
+  <div class="alert alert-hollow mt-4">
+    <div class="h1-actions" *ngIf="!category.deleted">
+      <div class="btn-group">
+        <a href="" [edit-btn]="t.t('action.edit')" routerLink="edit"></a>
+        <a href="" [delete-btn]="t.t('action.delete')" (click)="onDelete($event)"></a>
+      </div>
+    </div>
+    <h1>{{ category.name }}</h1>
+
+    <dl>
+      <dd>Icon</dd>
+      <dd>
+        <i [fa-icon]="category.icon" class="big"></i>
+      </dd>
+      <dd>Deleted</dd>
+      <dt>{{ category.deleted }}</dt>
+    </dl>
+  </div>
+
+</div>

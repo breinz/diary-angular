@@ -1,0 +1,35 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+        <label for="name">{{ t.t('expense.model.name') }}</label>
+        <input type="text" id="name" formControlName="name" class="form-control"
+            [ngClass]="formService.is_invalid('name')">
+        <app-form-error [text]="formService.getErrorMessage('name')" *ngIf="formService.hasError('name')">
+        </app-form-error>
+    </div>
+
+    <div class="form-group">
+        <label for="icon">{{ t.t('expense.model.icon') }}</label>
+        <input type="text" id="icon" formControlName="icon" class="form-control"
+            [ngClass]="formService.is_invalid('icon')">
+        <form-instruction *ngIf="!formService.hasError('icon')">
+            <span [innerHTML]="t.st('expense.instruction.icon')"></span>
+        </form-instruction>
+        <app-form-error [text]="formService.getErrorMessage('icon')" *ngIf="formService.hasError('icon')">
+        </app-form-error>
+    </div>
+
+    <div class="form-group">
+        <label for="color">{{ t.t('expense.model.color') }}</label>
+        <input type="text" id="color" formControlName="color" class="form-control"
+            [ngClass]="formService.is_invalid('color')">
+        <form-instruction *ngIf="!formService.hasError('color')">
+            <span [innerHTML]="t.st('expense.instruction.color')"></span>
+        </form-instruction>
+        <app-form-error *ngIf="formService.hasError('color')" [text]="formService.getErrorMessage('color')">
+        </app-form-error>
+    </div>
+
+    <input type="submit" [value]="t.t('action.save')" class="btn btn-success" [disabled]="form.invalid">
+
+</form>

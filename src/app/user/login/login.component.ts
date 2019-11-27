@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
+import { FlashService } from 'src/app/shared/flash/flash.service';
+import { TranslationService } from 'src/app/translation.service';
 
 @Component({
   selector: 'app-login',
@@ -20,8 +22,11 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private flash: FlashService,
+    public t: TranslationService
+  ) {
+  }
 
   ngOnInit() {
   }
@@ -34,6 +39,7 @@ export class LoginComponent implements OnInit {
     this.userService.login(this.form.value).subscribe(
       res => {
         this.form.reset();
+        this.flash.success(this.t.t("login.flash.loggedin"));
         this.router.navigate(["/"]);
       }, error => {
         this.form.patchValue({ password: "" });

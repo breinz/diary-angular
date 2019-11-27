@@ -1,0 +1,6 @@
+<div class="alert alert-danger text-center">
+  {{ t.t('element_deleted.text') }}
+  <a href [secondary-btn]="t.t('action.recover')" [br]="false" (click)="onRecover($event)"></a>
+  {{ t.t('element_deleted.or') }}
+  <a href [remove-btn]="t.t('action.remove')" [br]="false" (click)="onRemove($event)"></a>
+</div>
