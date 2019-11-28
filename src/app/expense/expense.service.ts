@@ -52,6 +52,18 @@ export class ExpenseService {
 			);
 	}
 
+	public edit(id: string, data: Expense) {
+
+		return this.http
+			.patch<{ ok: boolean }>("/expense", data, { params: { id: id } })
+			.pipe(
+				tap(res => {
+					this.getExpenses();
+					this.getReport();
+				})
+			);
+	}
+
 	public delete(expense: Expense) {
 		return this.http
 			.delete("/expense", { params: { id: expense._id } })

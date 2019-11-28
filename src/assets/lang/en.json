@@ -151,7 +151,8 @@
         "title": {
             "navbar": "Expenses",
             "new": "New expense",
-            "detail": "Expense"
+            "detail": "Expense",
+            "edit": "Edit expense"
         },
         "model": {
             "amount": "Amount",
@@ -165,6 +166,7 @@
         },
         "flash": {
             "created": "Expense saved",
+            "edited": "Expense edited",
             "deleted": "Expense deleted",
             "not_found": "Expense not found"
         },

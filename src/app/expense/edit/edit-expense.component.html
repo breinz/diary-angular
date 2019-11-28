@@ -3,6 +3,8 @@
 
   </div>
 
-  <h1>{{ t.t('expense.title.detail') }}</h1>
+  <h1>{{ t.t('expense.title.edit') }}</h1>
+
+  <expense-form [values]="expense" (send)="onSubmit($event)"></expense-form>
 
 </div>

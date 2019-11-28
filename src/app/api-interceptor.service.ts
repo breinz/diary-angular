@@ -23,7 +23,7 @@ export class ApiInterceptorService implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler) {
 
-        console.log(req.url[0] == "/" ? "API: " : "FILE: ", req.url);
+        console.log(req.url[0] == "/" ? ("API: " + req.method) : "FILE:", req.url);
 
         return this.userService.current_user.pipe(
             take(1),

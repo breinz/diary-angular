@@ -1,0 +1,73 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col-md-6">
+
+      <!-- Amount -->
+      <div class="form-group">
+        <label for="amount">{{ t.t('expense.model.amount') }}</label>
+        <input formControlName="amount" class="form-control" type="number" id="amount"
+          [ngClass]="f.is_invalid('amount')">
+        <app-form-error *ngIf="f.hasError('amount')" [text]="f.getErrorMessage('amount')"></app-form-error>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+
+      <!-- Date -->
+      <div class="form-group">
+        <label for="date">{{ t.t('expense.model.date') }}</label>
+        <input type="date" formControlName="date" id="date" [ngClass]="f.is_invalid('date')" class="form-control">
+        <app-form-error *ngIf="f.hasError('date')" [text]="f.getErrorMessage('date')"></app-form-error>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Description -->
+  <div class="form-group">
+    <label for="description">{{ t.t('expense.model.description') }}</label>
+    <input type="text" formControlName="description" id="description" class="form-control">
+  </div>
+
+
+  <!-- Category -->
+  <label>{{ t.t('expense.model.category') }}</label>
+  <div class="form-group categories-radio">
+    <div class="row">
+      <div class="col-sm-2 text-center" *ngFor="let category of categories">
+        <label [for]="'category-'+category._id">
+          <input formControlName="category" type="radio" name="category" [id]="'category-'+category._id"
+            [value]="category._id">
+          <div class="content" [style]="sanitizer.bypassSecurityTrustStyle('--color:'+category.color)">
+
+            <span class="big">
+              <i [fa-icon]="category.icon"></i>
+            </span>
+            <br>
+            {{ category.name }}
+          </div>
+        </label>
+
+      </div>
+
+      <div class="col-sm-2 text-center">
+        <label for="category-plus">
+          <input type="button" name="category" id="category-plus" value="Add" (click)="onAddCategory($event)">
+          <div class="content plus" style="--color:#999;">
+
+            <span class="big">
+              <i fa-icon="plus"></i>
+            </span>
+            <br>
+            {{ t.t('expense.category.btn.new')}}
+          </div>
+        </label>
+
+      </div>
+
+    </div>
+  </div>
+
+  <input type="submit" [value]="t.t('action.save')" class="btn btn-success" [disabled]="form.invalid">
+
+</form>

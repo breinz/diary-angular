@@ -55,6 +55,7 @@ import { NewBtnComponent } from './shared/btn/new-btn/new-btn.component';
 import { SecondaryBtnComponent } from './shared/btn/secondary-btn/secondary-btn.component';
 import { RecoverBtnComponent } from './shared/btn/recover-btn/recover-btn.component';
 import { RemoveBtnComponent } from './shared/btn/remove-btn/remove-btn.component';
+import { ExpenseFormComponent } from './expense/form/form.component';
 
 
 export function translationInitializer(provider: TranslationService) {
@@ -69,7 +70,7 @@ export function translationInitializer(provider: TranslationService) {
     AppHeaderComponent, FooterComponent,
 
     // Expenses
-    ExpenseComponent, NewExpenseComponent, EditExpenseComponent, ExpenseExpenseComponent,
+    ExpenseComponent, NewExpenseComponent, EditExpenseComponent, ExpenseExpenseComponent, ExpenseFormComponent,
 
     // Expense Categories
     ExpenseCategoryComponent, NewExpenseCategoryComponent, EditExpenseCategoryComponent, ExpenseCategoryDetailComponent, ExpenseCategoryForm,
