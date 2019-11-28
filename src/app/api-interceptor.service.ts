@@ -1,10 +1,10 @@
 import { HttpInterceptor, HttpRequest, HttpHandler } from '@angular/common/http';
-import { UserService } from '../user/user.service';
+import { UserService } from './user/user.service';
 import { Injectable } from '@angular/core';
 import { take, exhaustMap, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
-import { FlashService } from './flash/flash.service';
+import { FlashService } from './shared/flash/flash.service';
 
 /**
  * Prepend the api url
@@ -64,7 +64,6 @@ export class ApiInterceptorService implements HttpInterceptor {
                     })
                 );
             }));
-
 
     }
 

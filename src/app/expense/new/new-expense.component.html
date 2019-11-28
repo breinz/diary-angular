@@ -1,7 +1,7 @@
 <div class="alert alert-hollow mt-4">
   <h1>{{ t.t('expense.title.new') }}</h1>
 
-  <form [formGroup]="form">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
     <div class="row">
 

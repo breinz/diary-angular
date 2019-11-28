@@ -3,6 +3,7 @@ import { UserService } from '../user/user.service';
 import { Subscription } from 'rxjs';
 import User from '../user/user.model';
 import { TranslationService } from '../translation.service';
+import { LoadingStatusService } from '../loading-status.service';
 
 @Component({
   selector: 'app-header',
@@ -11,13 +12,17 @@ import { TranslationService } from '../translation.service';
 })
 export class AppHeaderComponent implements OnInit, OnDestroy {
 
-  current_userSub: Subscription;
-  isAuthenticated: boolean;
-  current_user: User;
+  public isAuthenticated: boolean;
+  public current_user: User;
+  private current_userSub: Subscription;
+
+  public loading: boolean;
+  private loader_sub: Subscription;
 
   constructor(
     private userService: UserService,
-    public t: TranslationService
+    public t: TranslationService,
+    private loader: LoadingStatusService
   ) { }
 
   ngOnInit() {
@@ -25,6 +30,10 @@ export class AppHeaderComponent implements OnInit, OnDestroy {
       this.isAuthenticated = !!user;
       this.current_user = user;
     });
+
+    this.loader_sub = this.loader.loading.subscribe(res => {
+      this.loading = res;
+    })
   }
 
   test() {
@@ -37,5 +46,6 @@ export class AppHeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.current_userSub.unsubscribe();
+    this.loader_sub.unsubscribe();
   }
 }

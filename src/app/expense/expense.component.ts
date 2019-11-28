@@ -1,62 +1,115 @@
-import { Component, OnInit } from '@angular/core';
-import { ExpenseService, ExpenseReport } from './expense.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ExpenseService, ExpenseReport, Report } from './expense.service';
 import Expense from './expense.model';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Subscription } from 'rxjs';
+import { LoadingStatusService } from '../loading-status.service';
+import { FlashService } from '../shared/flash/flash.service';
+import { TranslationService } from '../translation.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-expense',
-  templateUrl: './expense.component.html',
-  styleUrls: ['./expense.component.scss']
+	selector: 'app-expense',
+	templateUrl: './expense.component.html',
+	styleUrls: ['./expense.component.scss']
 })
-export class ExpenseComponent implements OnInit {
+export class ExpenseComponent implements OnInit, OnDestroy {
 
-  public expenses: Expense[];
-  public report: ExpenseReport;
-  public total: number;
+	public expenses: Expense[];
+	public report: ExpenseReport;
+	// public total: number;
 
-  constructor(
-    private expenseService: ExpenseService,
-    private sanitizer: DomSanitizer) { }
+	private report_sub: Subscription;
+	private expense_sub: Subscription;
 
-  ngOnInit() {
-    this.expenseService.getExpenses().subscribe(res => {
-      this.expenses = res.expenses;
-      this.report = res.report;
-      this.total = this.report.total;
-    });
-  }
+	constructor(
+		private service: ExpenseService,
+		private sanitizer: DomSanitizer,
+		private loader: LoadingStatusService,
+		private flash: FlashService,
+		private t: TranslationService,
+		private router: Router) { }
 
-  getExpenseIconClass(expense: Expense): { [index: string]: boolean } {
-    if (!expense.category) {
-      return { 'fa-question': true };
-    }
+	ngOnInit() {
+		this.expense_sub = this.service.expenses.subscribe(res => {
+			if (res) {
+				this.expenses = res;
+			}
+		})
 
-    let obj = {};
+		this.report_sub = this.service.report.subscribe(res => {
+			if (res) {
+				this.report = res;
+			}
+		});
 
-    obj["fa-" + expense.category.icon] = true;
-    return obj;
-  }
+	}
 
-  getIcon(obj: { icon: string }): string {
-    if (!obj || !obj.icon) {
-      return "fa-euro-sign";
-    }
+	public onDelete(e: Event, expense: Expense) {
+		e.preventDefault();
 
-    return "fa-" + obj.icon;
-  }
+		if (confirm(this.t.t("expense.confirm.delete"))) {
 
-  getCategoryBg(category) {
-    let color = "#DDD";
-    if (category) {
 
-      color = category.color;
-    }
+			this.loader.loaderStart();
 
-    return this.sanitizer.bypassSecurityTrustStyle("padding-top:4px;padding-bottom:4px;background-color:" + color);
-  }
+			this.service.delete(expense).subscribe(res => {
+				this.loader.loaderEnd();
 
-  getStyleColor(attr: string, color: string) {
-    return this.sanitizer.bypassSecurityTrustStyle(attr + ":" + color);
-  }
+				this.flash.success(this.t.t("expense.flash.deleted"));
+
+				this.router.navigate(['/expense']);
+
+			});
+		}
+	}
+
+	getExpenseIconClass(expense: Expense): { [index: string]: boolean } {
+		if (!expense.category) {
+			return { 'fa-question': true };
+		}
+
+		let obj = {};
+
+		obj["fa-" + expense.category.icon] = true;
+		return obj;
+	}
+
+	getIcon(obj: { icon: string }): string {
+		if (!obj || !obj.icon) {
+			return "fa-euro-sign";
+		}
+
+		return "fa-" + obj.icon;
+	}
+
+	getCategoryBg(category) {
+		let color = "#DDD";
+		if (category) {
+
+			color = category.color;
+		}
+
+		return this.sanitizer.bypassSecurityTrustStyle("padding-top:4px;padding-bottom:4px;background-color:" + color);
+	}
+
+	getStyleColor(attr: string, color: string) {
+		return this.sanitizer.bypassSecurityTrustStyle(attr + ":" + color);
+	}
+
+	public getActiveReports() {
+		let reports: Report[] = [];
+		for (const r of this.report.reports) {
+			if (r.report.value > 0) {
+				reports.push(r);
+			}
+		}
+		return reports;
+	}
+
+	ngOnDestroy() {
+		this.report_sub.unsubscribe();
+		this.expense_sub.unsubscribe();
+	}
 
 }

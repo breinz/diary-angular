@@ -6,6 +6,10 @@ import { map } from 'rxjs/operators';
 import { TranslationService } from 'src/app/translation.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormService } from 'src/app/shared/form.service';
+import { ExpenseService } from '../expense.service';
+import { LoadingStatusService } from 'src/app/loading-status.service';
+import { FlashService } from 'src/app/shared/flash/flash.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-expense',
@@ -24,10 +28,14 @@ export class NewExpenseComponent implements OnInit {
   public categories: ExpenseCategory[] = null;
 
   constructor(
+    private service: ExpenseService,
     private catService: ExpenseCategoryService,
     public t: TranslationService,
     public sanitizer: DomSanitizer,
-    public fs: FormService
+    public fs: FormService,
+    private loader: LoadingStatusService,
+    private flash: FlashService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -57,7 +65,18 @@ export class NewExpenseComponent implements OnInit {
     });
   }
 
-  onAddCategory(e: Event) {
+  public onSubmit() {
+    this.loader.loaderStart();
+    this.service.add(this.form.value).subscribe(res => {
+      this.loader.loaderEnd();
+
+      this.flash.success(this.t.t("expense.flash.created"));
+
+      this.router.navigate(['/expense']);
+    });
+  }
+
+  public onAddCategory(e: Event) {
     e.preventDefault();
   }
 

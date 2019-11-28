@@ -7,7 +7,90 @@
         "edit": "Edit",
         "delete": "Delete",
         "recover": "Recover",
-        "remove": "Delete permanently"
+        "remove": "Delete permanently",
+        "loading": "Loading..."
+    },
+    "date": {
+        "month": [
+            {
+                "long": "January",
+                "short": "jan"
+            },
+            {
+                "long": "February",
+                "short": "feb"
+            },
+            {
+                "long": "March",
+                "short": "mar"
+            },
+            {
+                "long": "April",
+                "short": "apr"
+            },
+            {
+                "long": "Mai",
+                "short": "mai"
+            },
+            {
+                "long": "June",
+                "short": "jun"
+            },
+            {
+                "long": "July",
+                "short": "jul"
+            },
+            {
+                "long": "August",
+                "short": "aug"
+            },
+            {
+                "long": "September",
+                "short": "sep"
+            },
+            {
+                "long": "October",
+                "short": "oct"
+            },
+            {
+                "long": "November",
+                "short": "nov"
+            },
+            {
+                "long": "December",
+                "short": "dec"
+            }
+        ],
+        "days": [
+            {
+                "long": "Monday",
+                "short": "mon"
+            },
+            {
+                "long": "Tuesday",
+                "short": "tue"
+            },
+            {
+                "long": "Wednesday",
+                "short": "wed"
+            },
+            {
+                "long": "Thursday",
+                "short": "thu"
+            },
+            {
+                "long": "Friday",
+                "short": "fri"
+            },
+            {
+                "long": "Saturday",
+                "short": "sat"
+            },
+            {
+                "long": "Sunday",
+                "short": "sun"
+            }
+        ]
     },
     "global": {
         "error": {
@@ -59,11 +142,16 @@
             "confirm": {
                 "delete": "Do you want to remove this category and uncategorize all expenses linked?",
                 "remove": "Are you 100%% sure?"
+            },
+            "no": {
+                "name": "No category",
+                "color": "#EEE"
             }
         },
         "title": {
             "navbar": "Expenses",
-            "new": "New expense"
+            "new": "New expense",
+            "detail": "Expense"
         },
         "model": {
             "amount": "Amount",
@@ -74,6 +162,14 @@
         "instruction": {
             "icon": "Category icon (<i class='fa fa-utensils'></i> <b>utensils</b> is good for food for example) visit <a href='https://fontawesome.com/icons?d=gallery&m=free' target='_blank'>font awesome list</a>",
             "color": "Try one of <b>#c3e6cb</b> (green) <b>#f5c6cb</b> (red) <b>#ffeeba</b> (yellow) <b>#b8daff</b> (blue) <b>#d6d8db</b> (gray) <b>#bee5eb</b> (cyan)"
+        },
+        "flash": {
+            "created": "Expense saved",
+            "deleted": "Expense deleted",
+            "not_found": "Expense not found"
+        },
+        "confirm": {
+            "delete": "Do you want to remove this expense?"
         }
     }
 }

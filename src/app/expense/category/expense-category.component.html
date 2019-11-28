@@ -1,5 +1,6 @@
 <div class="alert alert-hollow mt-4">
     <div class="h1-actions">
+
         <div class="btn-group" *ngIf="!show_deleted">
             <a [new-btn]="t.t('expense.category.btn.new')" href="new" routerLink="new"></a>
             <a href [secondary-btn]="t.t('expense.category.btn.show_deleted')" icon="fa-trash"

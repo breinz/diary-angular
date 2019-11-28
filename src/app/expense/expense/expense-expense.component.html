@@ -1,0 +1,32 @@
+<div class="alert alert-hollow mt-4">
+  <div class="h1-actions">
+    <div class="btn-group">
+      <a href="" [edit-btn]="t.t('action.edit')" [routerLink]="'/expense/'+expense._id+'/edit'"></a>
+      <a [href]="'/expense/'+expense._id+'/delete'" [delete-btn]="t.t('action.delete')" (click)="onDelete($event)"></a>
+    </div>
+  </div>
+
+  <h1>{{ t.t('expense.title.detail') }}</h1>
+
+  <div class="row">
+    <div class="col-md-6 text-center">
+
+      <i [fa-icon]="expense.category ? expense.category.icon : 'question'" class="huge outline"
+        [style]="sanitizer.bypassSecurityTrustStyle('color:'+(expense.category ? expense.category.color : t.t('expense.category.no.color')))"></i>
+      <br>
+      {{ expense.category ? expense.category.name : t.t('expense.category.no.name') }}
+    </div>
+    <div class="col-md-6">
+      <dl>
+        <dt>{{ t.t('expense.model.date') }}</dt>
+        <dd>{{ expense.date | date }}</dd>
+
+        <dt>{{ t.t('expense.model.amount') }}</dt>
+        <dd class="big">{{ expense.amount }}</dd>
+
+        <dt>{{ t.t('expense.model.description') }}</dt>
+        <dd>{{ expense.description }}</dd>
+      </dl>
+    </div>
+  </div>
+</div>
