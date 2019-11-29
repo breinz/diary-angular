@@ -13,9 +13,11 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav mr-auto">
 
-      <li class="nav-item">
-        <!--*ngIf="isAuthenticated"-->
-        <a routerLink="/expense" class="nav-link">{{ t.t('expense.title.navbar')}}</a>
+      <li class="nav-item" [ngClass]="{active:active==='expense'}">
+        <a routerLink="/expense" class="nav-link" *ngIf="isAuthenticated">{{ t.t('expense.title.navbar')}}</a>
+      </li>
+      <li class="nav-item" [ngClass]="{active:active==='people'}">
+        <a routerLink="/people" class="nav-link" *ngIf="isAuthenticated">{{ t.t('people.title.navbar')}}</a>
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
@@ -31,11 +33,18 @@
       <li class="nav-item" *ngIf="isAuthenticated">
         <a routerLink="/me" class="nav-link a">{{ current_user.name }}</a>
       </li>
-      <li class="nav-item" *ngIf="isAuthenticated">
-        <a (click)="logout()" class="nav-link a">{{ t.t('action.logout') }}</a>
-      </li>
-      <li *ngIf="current_user">
+      <li class="nav-item" *ngIf="current_user">
         <a (click)="test()" class="nav-link a">{{ current_user.lang }}</a>
+      </li>
+      <li class="nav-item" [ngClass]="{active:active==='settings'}">
+        <a routerLink="/settings" class="nav-link" *ngIf="isAuthenticated" [title]="t.t('settings.title.navbar')">
+          <i fa-icon="cog"></i>
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="isAuthenticated">
+        <a (click)="logout()" class="nav-link a" [title]="t.t('action.logout')">
+          <i fa-icon="times"></i>
+        </a>
       </li>
       <!-- <li class="dropdown" appDropdown *ngIf="isAuthenticated">
         <a  class="dropdown-toggle" class="nav-link" role="button">Manage <span class="caret"></span></a>

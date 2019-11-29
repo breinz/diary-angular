@@ -23,8 +23,6 @@ export class DeletedPipe implements PipeTransform {
       }
     }
     return newList;
-    // console.log(el, show);
-    // return el.deleted === show;
   }
 
 }

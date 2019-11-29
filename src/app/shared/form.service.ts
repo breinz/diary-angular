@@ -59,6 +59,16 @@ export class FormService {
             }
         }
 
+        if (this.element == "people") {
+            switch (field) {
+                case "metIn":
+                    if (comp.errors.required) return "Where did you meet?";
+                case "met_at":
+                    if (comp.errors.required) return this.t.t("people.error.met_at.required");
+
+            }
+        }
+
         // Generic error messages
 
         switch (field) {
@@ -81,6 +91,8 @@ export class FormService {
                 if (comp.errors.no_match) return "The passwords don't match";
             case 'date':
                 if (comp.errors.required) return "The date is required";
+            case 'firstName':
+                if (comp.errors.required) return "First name is required";
             default:
                 return `Message not set (form-error.service)`
         }

@@ -1,0 +1,58 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="row">
+        <div class="col-sm-2">
+            <!-- Sex -->
+            <div class="form-group">
+                <label for="sexe">{{ t.t('people.model.sex') }}</label>
+                <br>
+                <input type="checkbox" formControlName="sex" id="sex" data-toggle="toggle" data-onstyle="danger"
+                    data-offstyle="info" data-on='<i class="fa fa-2x fa-female"></i>'
+                    data-off="<i class='fa fa-2x fa-male'></i>">
+                <br>
+            </div>
+        </div>
+
+        <div class="col-md-5 col-sm-10">
+            <!-- First name -->
+            <div class="form-group">
+                <label for="firstName">{{ t.t('people.model.firstName') }}</label>
+                <input type="text" class="form-control" id="firstName" formControlName="firstName" autofocus
+                    [ngClass]="f.is_invalid('firstName')">
+                <app-form-error *ngIf="f.hasError('firstName')" [text]="f.getErrorMessage('firstName')">
+                </app-form-error>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <!-- Last name -->
+            <div class="form-group">
+                <label for="lastName">{{ t.t('people.model.lastName') }}</label>
+                <input type="text" class="form-control" id="lastName" formControlName="lastName">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <!-- Met at -->
+            <div class="form-group">
+                <label for="met_at">{{ t.t('people.model.met_at') }}</label>
+                <input type="date" class="form-control" formControlName="met_at" name="met_at" id="met_at"
+                    [ngClass]="f.is_invalid('met_at')">
+                <app-form-error *ngIf="f.hasError('met_at')" [text]="f.getErrorMessage('met_at')"></app-form-error>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <!-- Met in -->
+            <div class="form-group">
+                <label for="metIn">{{ t.t('people.model.metIn') }}</label>
+                <input type="text" class="form-control" formControlName="metIn" [ngClass]="f.is_invalid('metIn')">
+                <app-form-error *ngIf="f.hasError('metIn')" [text]="f.getErrorMessage('metIn')"></app-form-error>
+            </div>
+        </div>
+    </div>
+
+
+    <input type="submit" [value]="t.t('action.save')" class="btn btn-success" [disabled]="form.invalid">
+</form>

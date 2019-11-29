@@ -1,0 +1,10 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="name">{{ t.t('country.model.name') }}</label>
+        <input type="text" formControlName="name" name="name" class="form-control" autofocus
+            [ngClass]="f.is_invalid('name')">
+        <app-form-error *ngIf="f.hasError('name')" [text]="f.getErrorMessage('name')"></app-form-error>
+    </div>
+
+    <input type="submit" [value]="t.t('action.save')" class="btn btn-success">
+</form>

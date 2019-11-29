@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import sprintf from "sprintf-js";
+import { vsprintf } from "sprintf-js";
 
 import { UserService } from './user/user.service.js';
 import { HttpClient } from '@angular/common/http';
-import { DomSanitizer, SafeHtml, SafeValue } from '@angular/platform-browser';
+import { DomSanitizer, SafeValue } from '@angular/platform-browser';
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class TranslationService {
 
     private data: any = null;
@@ -92,7 +92,7 @@ export class TranslationService {
             return fallback(str, useSanitizer, args);
         }
 
-        const res = sprintf.vsprintf(dataset, args);
+        const res = vsprintf(dataset, args);
         if (!useSanitizer) {
             return this.sanitizer.bypassSecurityTrustHtml(res);
         }
@@ -101,6 +101,7 @@ export class TranslationService {
     }
 
     private writeMissing(str: string, useSanitizer: boolean, params: any, pluralisation: boolean = false): string {
+        console.error("WRITE MISSING: ", str);
         let ar = str.split(".");
 
         // No writing here (not in Node env)

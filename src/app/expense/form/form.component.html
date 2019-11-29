@@ -6,7 +6,7 @@
       <div class="form-group">
         <label for="amount">{{ t.t('expense.model.amount') }}</label>
         <input formControlName="amount" class="form-control" type="number" id="amount"
-          [ngClass]="f.is_invalid('amount')">
+          [ngClass]="f.is_invalid('amount')" autofocus>
         <app-form-error *ngIf="f.hasError('amount')" [text]="f.getErrorMessage('amount')"></app-form-error>
       </div>
     </div>

@@ -1,0 +1,21 @@
+<div class="alert alert-hollow">
+    <div class="h1-actions">
+        <div class="btn-group">
+            <a routerLink="/settings/country/new" [new-btn]="t.t('country.btn.new')"></a>
+        </div>
+    </div>
+    <h1>{{ t.t("country.title.index") }}</h1>
+
+    <table class="table table-hover table-no-head">
+        <tr *ngFor="let country of countries">
+            <td [link]="'/settings/country/'+country._id">{{ country.name }}</td>
+            <td class="actions">
+                <div class="btn-group">
+                    <a [routerLink]="'/settings/country/'+country._id+'/edit'" edit-btn></a>
+                    <a [href]="'/settings/country/'+country._id+'/delete'" (click)="onDelete($event, country)"
+                        delete-btn></a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

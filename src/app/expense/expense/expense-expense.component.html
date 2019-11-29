@@ -22,10 +22,12 @@
         <dd>{{ expense.date | date }}</dd>
 
         <dt>{{ t.t('expense.model.amount') }}</dt>
-        <dd class="big">{{ expense.amount }}</dd>
+        <dd class="big">{{ expense.amount | fixed }} €</dd>
 
         <dt>{{ t.t('expense.model.description') }}</dt>
-        <dd>{{ expense.description }}</dd>
+        <dd class="text-muted">
+          <small>{{ expense.description }}</small>
+        </dd>
       </dl>
     </div>
   </div>

@@ -22,7 +22,7 @@ export class ExpenseGuard implements CanActivate {
 
     public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-        if (route.routeConfig.path === "expense/:id" || route.routeConfig.path === "expense/:id/edit") {
+        if (route.routeConfig.path === ":id" || route.routeConfig.path === ":id/edit") {
             return this.loadExpense(route.params.id);
         }
 
@@ -37,8 +37,12 @@ export class ExpenseGuard implements CanActivate {
      * 
      * @param {string} id The expense id
      */
-    private loadExpense(id: string): Promise<boolean> {
+    private loadExpense(id: string): Promise<boolean> | boolean {
 
+        // if (this.service.expense.value && this.service.expense.value._id === id) {
+        //     // We already checked this expense
+        //     return true;
+        // }
         this.l.loaderStart();
 
         return new Promise((resolve, reject) => {

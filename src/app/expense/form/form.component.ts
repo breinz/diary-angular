@@ -56,4 +56,11 @@ export class ExpenseFormComponent implements OnInit {
     this.send.emit(this.form.value);
   }
 
+  onAddCategory(e: Event) {
+    e.preventDefault();
+
+    alert("To be implemented");
+
+  }
+
 }

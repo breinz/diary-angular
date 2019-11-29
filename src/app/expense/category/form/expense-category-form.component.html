@@ -1,7 +1,7 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
     <div class="form-group">
-        <label for="name">{{ t.t('expense.model.name') }}</label>
+        <label for="name">{{ t.t('expense.category.model.name') }}</label>
         <input type="text" id="name" formControlName="name" class="form-control"
             [ngClass]="formService.is_invalid('name')">
         <app-form-error [text]="formService.getErrorMessage('name')" *ngIf="formService.hasError('name')">
@@ -9,7 +9,7 @@
     </div>
 
     <div class="form-group">
-        <label for="icon">{{ t.t('expense.model.icon') }}</label>
+        <label for="icon">{{ t.t('expense.category.model.icon') }}</label>
         <input type="text" id="icon" formControlName="icon" class="form-control"
             [ngClass]="formService.is_invalid('icon')">
         <form-instruction *ngIf="!formService.hasError('icon')">
@@ -20,7 +20,7 @@
     </div>
 
     <div class="form-group">
-        <label for="color">{{ t.t('expense.model.color') }}</label>
+        <label for="color">{{ t.t('expense.category.model.color') }}</label>
         <input type="text" id="color" formControlName="color" class="form-control"
             [ngClass]="formService.is_invalid('color')">
         <form-instruction *ngIf="!formService.hasError('color')">

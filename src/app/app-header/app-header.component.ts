@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import User from '../user/user.model';
 import { TranslationService } from '../translation.service';
 import { LoadingStatusService } from '../loading-status.service';
+import { HeaderService } from './header.service';
 
 @Component({
   selector: 'app-header',
@@ -19,10 +20,13 @@ export class AppHeaderComponent implements OnInit, OnDestroy {
   public loading: boolean;
   private loader_sub: Subscription;
 
+  public active: string;
+
   constructor(
     private userService: UserService,
     public t: TranslationService,
-    private loader: LoadingStatusService
+    private loader: LoadingStatusService,
+    private service: HeaderService
   ) { }
 
   ngOnInit() {
@@ -33,7 +37,11 @@ export class AppHeaderComponent implements OnInit, OnDestroy {
 
     this.loader_sub = this.loader.loading.subscribe(res => {
       this.loading = res;
-    })
+    });
+
+    this.service.category.subscribe(cat => {
+      this.active = cat;
+    });// no unsubscribe
   }
 
   test() {

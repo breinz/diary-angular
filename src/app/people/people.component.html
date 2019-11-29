@@ -1,0 +1,50 @@
+<div class="alert alert-hollow mt-4">
+
+    <div class="h1-actions">
+        <div class="btn-group">
+            <div class="btn-group" *ngIf="!_showDeleted">
+                <a href="/people/new" routerLink="/people/new" [new-btn]="t.t('people.btn.new')" title></a>
+                <a routerLink="/people/deleted" [secondary-btn]="t.t('element_deleted.btn.show-deleted')"
+                    icon="fa-trash" *ngIf="listContainsDeleted()"></a>
+            </div>
+            <a routerLink="/people" *ngIf="_showDeleted" [secondary-btn]="t.t('element_deleted.btn.show_active')"
+                icon="fa-user"></a>
+        </div>
+    </div>
+
+    <h1>{{ _showDeleted ? t.t('people.title.deleted') : t.t('people.title.index') }}</h1>
+
+    <table class="table table-hover" *ngIf="list">
+        <thead>
+            <tr>
+                <th>{{ t.t("people.model.name") }}</th>
+                <th>{{ t.t("people.model.metIn") }}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tr *ngFor="let people of getList()">
+            <td>
+                {{ people.firstName }} {{ people.lastName }}
+                <small class="text-muted">
+                    {{ people.from ? people.from.name : '' }}
+                </small>
+            </td>
+            <td>
+                {{ people.metIn }}
+                <small class="text-muted">
+                    {{ people.met_at | date }}
+                </small>
+            </td>
+            <td class="actions">
+                <div class="btn-group" *ngIf="!people.deleted">
+                    <a [routerLink]="'/people/'+people._id+'/edit'" edit-btn></a>
+                    <a [href]="'/people/'+people._id+'/delete'" (click)="onDelete($event, people)" delete-btn></a>
+                </div>
+                <div class="btn-group" *ngIf="people.deleted">
+                    <a [href]="'/people/'+people._id+'/recover'" (click)="onRecover($event, people)" recover-btn></a>
+                    <a [href]="'/people/'+people._id+'/remove'" (click)="onRemove($event, people)" remove-btn></a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

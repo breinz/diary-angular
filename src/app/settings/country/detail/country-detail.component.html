@@ -1,0 +1,10 @@
+<div class="alert alert-hollow">
+    <div class="h1-actions">
+        <div class="btn-group">
+            <a [routerLink]="'/settings/country/'+country._id+'/edit'" [edit-btn]="t.t('action.edit')"></a>
+            <a [href]="'/settings/country/'+country._id+'/delete'" (click)="onDelete($event, country)"
+                [delete-btn]="t.t('action.delete')"></a>
+        </div>
+    </div>
+    <h1>{{ country.name }}</h1>
+</div>

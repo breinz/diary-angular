@@ -1,0 +1,12 @@
+import { Country } from '../settings/country/country.model';
+
+export class People {
+    _id: string;
+    firstName: string;
+    lastName: string;
+    sex: boolean;
+    met_at: Date;
+    metIn: string;
+    from: Country;
+    deleted: boolean;
+}

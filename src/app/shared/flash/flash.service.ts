@@ -1,7 +1,7 @@
-//import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
-//@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: 'root' })
 export class FlashService {
 
   static DEFAULT_DURATION: number = 2500;

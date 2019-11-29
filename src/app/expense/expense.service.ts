@@ -90,6 +90,8 @@ export class ExpenseService {
 		this.http
 			.get<Expense[]>("/expense")
 			.subscribe(res => {
+				this.expense.next(null);
+
 				// setTimeout(() => {
 				this.expenses.next(res);
 				this.loader.loaderEnd();

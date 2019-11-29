@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, ElementRef, Input, Renderer2 } from '@angular/core';
 import ActionComponent from '../action-btn.abstract.component';
 
 @Component({
@@ -13,8 +13,8 @@ export class SecondaryBtnComponent extends ActionComponent implements OnInit {
 
   @Input() br: boolean = true;
 
-  constructor(private el: ElementRef) {
-    super(el);
+  constructor(private el: ElementRef, private renderer: Renderer2) {
+    super(el, renderer);
     this.klass = "btn-outline-secondary";
   }
 

@@ -2,7 +2,14 @@
     "action": {
         "login": "Login",
         "logout": "Déconnexion",
-        "save": "Enregistrer"
+        "signin": "Inscription",
+        "save": "Enregistrer",
+        "new": "Nouveau",
+        "edit": "Modifier",
+        "delete": "Supprimer",
+        "recover": "Récupérer",
+        "remove": "Supprimer définitivement",
+        "loading": "Chargement..."
     },
     "global": {
         "error": {
@@ -12,6 +19,14 @@
             "icon": {
                 "required": "L'icône est obligatoire"
             }
+        }
+    },
+    "element_deleted": {
+        "text": "Cet élément a été supprimé",
+        "or": "ou",
+        "btn": {
+            "show-deleted": "Voir les supprimés",
+            "show_active": "Voir les actifs"
         }
     },
     "login": {
@@ -30,20 +45,120 @@
     "expense": {
         "category": {
             "title": {
+                "index": "Catégories de dépenses",
+                "deleted": "Catégories de dépenses supprimées",
                 "new": "Nouvelle catégorie de dépenses"
+            },
+            "btn": {
+                "new": "Nouvelle catégorie",
+                "show_deleted": "Voir les supprimées",
+                "show_active": "Voir les actives"
+            },
+            "model": {
+                "name": "Nom",
+                "icon": "Icône",
+                "color": "Couleur"
+            },
+            "flash": {
+                "not_found": "Catégorie non trouvée",
+                "created": "Catégorie de dépense crée !",
+                "edited": "Catégorie de dépense éditée !",
+                "deleted": "Catégorie de dépense supprimée !",
+                "recovered": "Catégorie de dépense récupérée !",
+                "removed": "Catégorie de dépense supprimée définitivement !"
+            },
+            "confirm": {
+                "delete": "Êtes vous sûr de vouloir supprimer cette catégorie de dépense ? Toutes les dépenses liées seront placées dans la catégorie Non Classée",
+                "remove": "Êtes vous à 100%% sûr(e)?"
+            },
+            "no": {
+                "name": "Non classé",
+                "color": "#EEE"
             }
         },
         "title": {
-            "navbar": "Dépenses"
+            "navbar": "Dépenses",
+            "new": "Nouvelle dépense",
+            "detail": "Dépense",
+            "edit": "Editer la dépense"
         },
         "model": {
-            "name": "Nom",
-            "icon": "Icône",
-            "color": "Couleur"
+            "amount": "Montant",
+            "date": "Date",
+            "category": "Catégorie",
+            "description": "Description"
         },
         "instruction": {
             "icon": "Icône de la catégorie (<i class='fa fa-utensils'></i> <b>utensils</b> pour la nourriture par exemple) visitez la <a href='https://fontawesome.com/icons?d=gallery&m=free' target='_blank'>liste font awesome</a>",
             "color": "Essayez <b>#c3e6cb</b> (vert) <b>#f5c6cb</b> (rouge) <b>#ffeeba</b> (jaune) <b>#b8daff</b> (bleu) <b>#d6d8db</b> (gris) <b>#bee5eb</b> (cyan)"
+        },
+        "flash": {
+            "created": "Dépense enregistrée !",
+            "edited": "Dépense éditée !",
+            "deleted": "Dépense supprimée !",
+            "not_found": "Dépense inexistante !"
+        },
+        "confirm": {
+            "delete": "Êtes vous sur de vouloir supprimer cette dépense ?"
+        }
+    },
+    "people": {
+        "title": {
+            "index": "Personnes",
+            "navbar": "Personnes",
+            "new": "Nouvelle personne",
+            "deleted": "Personnes supprimées"
+        },
+        "btn": {
+            "new": "Nouvelle personne"
+        },
+        "model": {
+            "name": "Nom",
+            "firstName": "Prénom",
+            "lastName": "Nom",
+            "sex": "Sexe",
+            "met_at": "Rencontré le",
+            "metIn": "Rencontré à"
+        },
+        "instruction": {},
+        "flash": {
+            "created": "Personne enregistrée !",
+            "deleted": "Personne supprimée !",
+            "recovered": "Personne récupérée !",
+            "no_deleted": "Pas de personne supprimée !"
+        },
+        "confirm": {
+            "delete": "Êtes vous sur de vouloir supprimer cette personne ?"
+        },
+        "error": {
+            "met_at": {
+                "required": "Quand vous êtes vous rencontré ?"
+            }
+        }
+    },
+    "settings": {
+        "title": {
+            "navbar": "Paramètres"
+        }
+    },
+    "country": {
+        "title": {
+            "index": "Pays",
+            "new": "Nouveau pays"
+        },
+        "btn": {
+            "new": "Nouveau pays"
+        },
+        "model": {
+            "name": "Nom"
+        },
+        "flash": {
+            "created": "Le pays %s a été créé !",
+            "edited": "Pays édité !",
+            "deleted": "%s supprimé !"
+        },
+        "confirm": {
+            "delete": "Êtes-vous sûr de vouloir supprimer le pays %s ?"
         }
     }
 }
