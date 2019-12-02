@@ -21,9 +21,11 @@ export class CountryGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
         const path = route.routeConfig.path;
 
+        // Before accessing a country, make sure it exists
         if (path === "country/:id/edit" || path === "country/:id") {
             return this.exists(route.params.id);
         }
+
         return true;
     }
 

@@ -1,27 +1,39 @@
-# TripAngular
+# Diary Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.9.
+[Diary app](diary.julien-breiner.com) Front End
+- Track your Expenses by categories, and set up Reports
+- Track Events by categories
+- Track People you meet
+- Create Lists of various things
+- View everything on a Calendar
 
-## Development server
+Altough I'm extensively using this app, its main purpose is to serve as portfolio.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Development infos
 
-## Code scaffolding
+Generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.9 and uses
+- Components
+- Services
+- Directives ([see](https://github.com/breinz/diary-angular/blob/master/src/app/shared/link.directive.ts))
+- Pipes ([see](https://github.com/breinz/diary-angular/blob/master/src/app/shared/fixed.pipe.ts))
+- Modules (lazy loaded)
+- Routes ([see](https://github.com/breinz/diary-angular/blob/master/src/app/settings/settings-routing.module.ts)) + Guards ([see](https://github.com/breinz/diary-angular/blob/master/src/app/settings/country/country.guard.ts))
+- ReactiveForms + Validators ([see](https://github.com/breinz/diary-angular/blob/master/src/app/user/signin/signin.component.ts))
+- HTTPClient
+- Interceptors ([see](https://github.com/breinz/diary-angular/blob/master/src/app/api-interceptor.service.ts))
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Uses 
+- [Bootstrap 4](https://getbootstrap.com/docs/4.0/getting-started/introduction/)
+- [Bootstrap toggle](https://www.bootstraptoggle.com/)
+- [Fontawesome](https://fontawesome.com/icons?d=gallery&m=free)
+- [Pug](https://pugjs.org/api/getting-started.html) (some, very few ... not the best with angular IMO)
+- And API, writen in expess (GET, POST, PATCH, DELETE)
 
-## Build
+## Currently working on
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+- The people section
+- The Calendar section
 
-## Running unit tests
+## Ideas
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- Récurring events (cron based syntax)

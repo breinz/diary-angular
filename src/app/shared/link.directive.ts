@@ -4,6 +4,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Directive({
   selector: '[link]'
 })
+/**
+ * Simulate a link with any element
+ * - show the pointer
+ * - listen to click, and navigate
+ * 
+ * @usage <td (link)="/where/to/go">...</td>
+ */
 export class LinkDirective implements OnInit {
   @Input("link") url: string;
 
@@ -21,7 +28,7 @@ export class LinkDirective implements OnInit {
     // Route
     this.renderer.listen(this.el.nativeElement, "click", () => {
       this.router.navigate([this.url], { relativeTo: this.activeRoute });
-    })
+    });
   }
 
 }
