@@ -1,6 +1,6 @@
 # Diary Angular
 
-[Diary app](diary.julien-breiner.com) Front End
+[Diary app](http://julien-breiner.com) Front End
 - Track your Expenses by categories, and set up Reports
 - Track Events by categories
 - Track People you meet
