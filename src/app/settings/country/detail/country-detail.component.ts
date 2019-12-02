@@ -6,6 +6,7 @@ import { TranslationService } from 'src/app/translation.service';
 import { filter, map } from 'rxjs/operators';
 import { Country } from '../country.model';
 import { Subscription } from 'rxjs';
+import { BreadcrumbService } from 'src/app/layout/breadcrumb/breadcrumb.service';
 
 @Component({
     selector: "country-detail",
@@ -22,7 +23,8 @@ export class CountryDetailComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private flash: FlashService,
         public t: TranslationService,
-        private router: Router
+        private router: Router,
+        private bc: BreadcrumbService
     ) { }
 
     ngOnInit() {
@@ -37,6 +39,8 @@ export class CountryDetailComponent implements OnInit, OnDestroy {
             })
         ).subscribe(country => {
             this.country = country;
+
+            this.bc.build("country", country);
         });
     }
 

@@ -175,6 +175,11 @@
             "detail": "Expense",
             "edit": "Edit expense"
         },
+        "breadcrumb": {
+            "index": "Expenses",
+            "new": "New expense",
+            "edit": "Edit expense"
+        },
         "btn": {
             "new": "New Expense"
         },
@@ -211,6 +216,11 @@
                     "many": "people"
                 }
             }
+        },
+        "breadcrumb": {
+            "index": "People",
+            "new": "New person",
+            "edit": "Edit"
         },
         "btn": {
             "new": "New people"
@@ -250,6 +260,11 @@
                 "new": "New event category",
                 "edit": "Edit event category"
             },
+            "breadcrumb": {
+                "index": "Categories",
+                "new": "New event category",
+                "edit": "Edit"
+            },
             "btn": {
                 "new": "New category"
             },
@@ -286,6 +301,11 @@
             "new": "New event",
             "edit": "Edit event"
         },
+        "breadcrumb": {
+            "index": "Events",
+            "new": "New event",
+            "edit": "Edit"
+        },
         "btn": {
             "new": "New event",
             "categories": "Categories"
@@ -315,12 +335,18 @@
     "settings": {
         "title": {
             "navbar": "Settings"
+        },
+        "breadcrumb": {
+            "index": "Settings"
         }
     },
     "country": {
         "title": {
             "index": "Countries",
             "new": "New country"
+        },
+        "breadcrumb": {
+            "index": "Countries"
         },
         "btn": {
             "new": "New country"

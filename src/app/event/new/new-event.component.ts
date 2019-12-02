@@ -4,6 +4,7 @@ import { Event as EventModel } from '../event.model';
 import { EventService } from '../event.service';
 import { FlashService } from 'src/app/shared/flash/flash.service';
 import { Router } from '@angular/router';
+import { BreadcrumbService } from 'src/app/layout/breadcrumb/breadcrumb.service';
 
 @Component({
     selector: "app-new-event",
@@ -15,13 +16,14 @@ export class NewEventComponent implements OnInit {
         public t: TranslationService,
         private es: EventService,
         private flash: FlashService,
-        private router: Router
+        private router: Router,
+        private bc: BreadcrumbService
     ) {
 
     }
 
     ngOnInit() {
-
+        this.bc.build("event", null, "new");
     }
 
     public onSend(event: EventModel) {

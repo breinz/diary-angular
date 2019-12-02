@@ -1,0 +1,6 @@
+<span *ngFor="let item of items;let i=index">
+    <a [routerLink]="item[1]" *ngIf="isLink(item)">{{ item[0] }}</a>
+    <span *ngIf="!isLink(item)">{{item}}</span>
+    <i fa-icon="angle-right" fw="1" *ngIf="hasIcon(i)"></i>
+
+</span>

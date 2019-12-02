@@ -5,6 +5,7 @@ import { PeopleService } from '../people.service';
 import { FlashService } from 'src/app/shared/flash/flash.service';
 import { Router } from '@angular/router';
 import { Country } from 'src/app/settings/country/country.model';
+import { BreadcrumbService } from 'src/app/layout/breadcrumb/breadcrumb.service';
 
 @Component({
     selector: "new-people",
@@ -18,11 +19,12 @@ export class NewPeopleComponent implements OnInit {
         public t: TranslationService,
         private service: PeopleService,
         private flash: FlashService,
-        private router: Router
+        private router: Router,
+        private bc: BreadcrumbService
     ) { }
 
     ngOnInit() {
-
+        this.bc.build('people', null, "new");
     }
 
     onSend(people: People) {

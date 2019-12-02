@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import EventCategory from './eventCategory.model';
 import { FlashService } from 'src/app/shared/flash/flash.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { BreadcrumbService } from 'src/app/layout/breadcrumb/breadcrumb.service';
 
 @Component({
     selector: "app-event-category",
@@ -21,12 +22,15 @@ export class EventCategoryComponent implements OnInit, OnDestroy {
         public t: TranslationService,
         public service: EventCategoryService,
         private flash: FlashService,
-        private sanitizer: DomSanitizer
+        private sanitizer: DomSanitizer,
+        private bc: BreadcrumbService
     ) {
 
     }
 
     ngOnInit() {
+        this.bc.build("eventCategory");
+
         this.sub = this.service.list.pipe(
             filter(list => list !== null)
         ).subscribe(list => {

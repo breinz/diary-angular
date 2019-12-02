@@ -5,6 +5,7 @@ import EventCategory from '../category/eventCategory.model';
 import { Event as EventModel } from '../event.model';
 import { FlashService } from 'src/app/shared/flash/flash.service';
 import { Router } from '@angular/router';
+import { BreadcrumbService } from 'src/app/layout/breadcrumb/breadcrumb.service';
 
 @Component({
     selector: "app-event-detail",
@@ -19,7 +20,8 @@ export class EventDetailComponent implements OnInit {
         public es: EventService,
         public t: TranslationService,
         private flash: FlashService,
-        private router: Router
+        private router: Router,
+        private bc: BreadcrumbService
     ) {
 
     }
@@ -27,6 +29,8 @@ export class EventDetailComponent implements OnInit {
     ngOnInit() {
         this.event = this.es.event;
         this.category = this.es.event.category as EventCategory;
+
+        this.bc.build('event', this.event);
     }
 
     onDelete(e: Event) {

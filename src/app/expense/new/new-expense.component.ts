@@ -9,6 +9,7 @@ import { FormService } from 'src/app/shared/form.service';
 import { ExpenseService } from '../expense.service';
 import { FlashService } from 'src/app/shared/flash/flash.service';
 import { Router } from '@angular/router';
+import { BreadcrumbService } from 'src/app/layout/breadcrumb/breadcrumb.service';
 
 @Component({
   selector: 'app-new-expense',
@@ -36,10 +37,13 @@ export class NewExpenseComponent implements OnInit {
     public sanitizer: DomSanitizer,
     public fs: FormService,
     private flash: FlashService,
-    private router: Router
+    private router: Router,
+    private bc: BreadcrumbService
   ) { }
 
   ngOnInit() {
+    this.bc.build('expense', null, "new");
+
     this.fs.form = this.form;
     this.fs.element = "expense";
 

@@ -4,6 +4,7 @@ import { Event as EventModel } from '../event.model';
 import { EventService } from '../event.service';
 import { FlashService } from 'src/app/shared/flash/flash.service';
 import { Location } from '@angular/common';
+import { BreadcrumbService } from 'src/app/layout/breadcrumb/breadcrumb.service';
 
 @Component({
     selector: "app-edit-event",
@@ -14,13 +15,14 @@ export class EditEventComponent implements OnInit {
         public t: TranslationService,
         public es: EventService,
         private flash: FlashService,
-        private location: Location
+        private location: Location,
+        private bc: BreadcrumbService
     ) {
 
     }
 
     ngOnInit() {
-
+        this.bc.build("event", this.es.event, "edit");
     }
 
     public onSend(event: EventModel) {

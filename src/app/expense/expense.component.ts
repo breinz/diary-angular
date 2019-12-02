@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { FlashService } from '../shared/flash/flash.service';
 import { TranslationService } from '../translation.service';
 import { Router } from '@angular/router';
+import { BreadcrumbService } from '../layout/breadcrumb/breadcrumb.service';
 
 @Component({
 	selector: 'app-expense',
@@ -26,9 +27,13 @@ export class ExpenseComponent implements OnInit, OnDestroy {
 		private sanitizer: DomSanitizer,
 		private flash: FlashService,
 		public t: TranslationService,
-		private router: Router) { }
+		private router: Router,
+		private bc: BreadcrumbService
+	) { }
 
 	ngOnInit() {
+		this.bc.build("expense");
+
 		this.expense_sub = this.service.expenses.subscribe(res => {
 			if (res) {
 				this.expenses = res;

@@ -9,6 +9,7 @@ import EventCategory from './category/eventCategory.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FlashService } from '../shared/flash/flash.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BreadcrumbService } from '../layout/breadcrumb/breadcrumb.service';
 
 @Component({
     selector: "app-event",
@@ -28,12 +29,15 @@ export class EventComponent implements OnInit, OnDestroy {
         private sanitizer: DomSanitizer,
         private flash: FlashService,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private bc: BreadcrumbService
     ) {
 
     }
 
     ngOnInit() {
+        this.bc.build('event');
+
         this.show_deleted = !!this.route.snapshot.url.length;
 
         this.sub = this.service.list.pipe(

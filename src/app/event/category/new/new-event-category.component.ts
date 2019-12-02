@@ -4,6 +4,7 @@ import EventCategory from '../eventCategory.model';
 import { EventCategoryService } from '../event-category.service';
 import { FlashService } from 'src/app/shared/flash/flash.service';
 import { Router } from '@angular/router';
+import { BreadcrumbService } from 'src/app/layout/breadcrumb/breadcrumb.service';
 
 @Component({
     selector: "app-new-event-category",
@@ -14,13 +15,14 @@ export class NewEventCategoryComponent implements OnInit {
         public t: TranslationService,
         private service: EventCategoryService,
         private flash: FlashService,
-        private router: Router
+        private router: Router,
+        private bc: BreadcrumbService
     ) {
 
     }
 
     ngOnInit() {
-
+        this.bc.build("eventCategory", null, "new");
     }
 
     public onSend(category: EventCategory) {

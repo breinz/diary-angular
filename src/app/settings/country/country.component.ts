@@ -6,6 +6,7 @@ import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { FlashService } from 'src/app/shared/flash/flash.service';
 import { Router } from '@angular/router';
+import { BreadcrumbService } from 'src/app/layout/breadcrumb/breadcrumb.service';
 
 @Component({
     selector: "app-country",
@@ -21,12 +22,15 @@ export class CountryComponent implements OnInit, OnDestroy {
         private service: CountryService,
         public t: TranslationService,
         private flash: FlashService,
-        private router: Router
+        private router: Router,
+        private bc: BreadcrumbService
     ) {
 
     }
 
     ngOnInit() {
+        this.bc.build("country");
+
         this.service.getList();
 
         this.sub = this.service.list

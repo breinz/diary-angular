@@ -7,6 +7,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { FlashService } from 'src/app/shared/flash/flash.service';
 import { Router } from '@angular/router';
 import { Event as EventModel } from '../../event.model';
+import { BreadcrumbService } from 'src/app/layout/breadcrumb/breadcrumb.service';
 
 @Component({
     selector: "event-category-detail",
@@ -22,7 +23,8 @@ export class EventCategoryDetailComponent implements OnInit {
         public t: TranslationService,
         private sanitizer: DomSanitizer,
         private flash: FlashService,
-        private router: Router
+        private router: Router,
+        private bc: BreadcrumbService
     ) {
 
     }
@@ -34,7 +36,8 @@ export class EventCategoryDetailComponent implements OnInit {
             this.category = category;
             this.events = category.events.filter(event => {
                 return !event.deleted;
-            })
+            });
+            this.bc.build("eventCategory", category);
         })
     }
 

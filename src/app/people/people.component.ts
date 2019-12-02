@@ -6,6 +6,7 @@ import { FlashService } from '../shared/flash/flash.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { exhaustMap, tap, filter } from 'rxjs/operators';
+import { BreadcrumbService } from '../layout/breadcrumb/breadcrumb.service';
 
 @Component({
     selector: "app-people",
@@ -26,12 +27,14 @@ export class PeopleComponent implements OnInit, OnDestroy {
         private service: PeopleService,
         private flash: FlashService,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private bc: BreadcrumbService
     ) {
 
     }
 
     ngOnInit() {
+        this.bc.build('people');
 
         this.service.getList();
 

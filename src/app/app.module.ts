@@ -14,6 +14,7 @@ import { SigninComponent } from './user/signin/signin.component';
 import { FlashComponent } from './shared/flash/flash.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { SharedModule } from './shared/shared.module';
+import { BreadcrumbComponent } from './layout/breadcrumb/breadcrumb.component';
 
 
 export function translationInitializer(provider: TranslationService) {
@@ -28,6 +29,7 @@ export function translationInitializer(provider: TranslationService) {
     AppHeaderComponent, FooterComponent,
     FlashComponent,
     SpinnerComponent,
+    BreadcrumbComponent,
 
     // Auth
     LoginComponent, SigninComponent

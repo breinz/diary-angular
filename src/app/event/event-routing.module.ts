@@ -13,15 +13,16 @@ import { EventDetailComponent } from './detail/event-detail.component';
 
 const routes: Routes = [
     { path: "", component: EventComponent },
-    { path: "deleted", component: EventComponent },
-    { path: "new", component: NewEventComponent },
-    { path: ":id/edit", component: EditEventComponent, canActivate: [EventGuard] },
-    { path: ":id", component: EventDetailComponent, canActivate: [EventGuard] },
 
     { path: "category", component: EventCategoryComponent },
     { path: "category/new", component: NewEventCategoryComponent },
     { path: "category/:id/edit", component: EditEventCategoryComponent, canActivate: [EventCategoryGuard] },
     { path: "category/:id", component: EventCategoryDetailComponent, canActivate: [EventCategoryGuard] },
+
+    { path: "deleted", component: EventComponent },
+    { path: "new", component: NewEventComponent },
+    { path: ":id/edit", component: EditEventComponent, canActivate: [EventGuard] },
+    { path: ":id", component: EventDetailComponent, canActivate: [EventGuard] },
 ]
 
 @NgModule({

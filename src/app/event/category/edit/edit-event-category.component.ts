@@ -5,6 +5,7 @@ import { EventCategoryService } from '../event-category.service';
 import { take } from 'rxjs/operators';
 import { FlashService } from 'src/app/shared/flash/flash.service';
 import { Location } from '@angular/common';
+import { BreadcrumbService } from 'src/app/layout/breadcrumb/breadcrumb.service';
 
 @Component({
     selector: "edit-event-category",
@@ -18,7 +19,8 @@ export class EditEventCategoryComponent implements OnInit {
         public t: TranslationService,
         private service: EventCategoryService,
         private flash: FlashService,
-        private location: Location
+        private location: Location,
+        private bc: BreadcrumbService
     ) {
 
     }
@@ -28,6 +30,8 @@ export class EditEventCategoryComponent implements OnInit {
             take(1)
         ).subscribe(category => {
             this.category = category;
+
+            this.bc.build("eventCategory", category, "edit");
         });
 
     }

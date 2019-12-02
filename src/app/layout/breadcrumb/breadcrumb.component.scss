@@ -1,0 +1,18 @@
+@import "../../../assets/scss/variables_override";
+
+span {
+  font-size: 0.8rem;
+}
+
+a {
+  color: $text-muted;
+
+  &:hover {
+    color: $black;
+    text-decoration: none;
+  }
+}
+
+i {
+  color: $text-muted;
+}
