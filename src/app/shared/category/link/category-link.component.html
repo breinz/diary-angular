@@ -1,0 +1,7 @@
+<a [routerLink]="link">
+    <div class="content" [style]="setColorVar()">
+        <i [fa-icon]="category ? category.icon : 'ban'" class="big"></i>
+        <br>
+        {{ category ? category.name : "No category" }}
+    </div>
+</a>

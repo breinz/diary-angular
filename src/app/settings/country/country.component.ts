@@ -27,9 +27,17 @@ export class CountryComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.sub = this.service.list.pipe(filter(list => list !== null)).subscribe(list => {
-            this.countries = list;
-        })
+        this.service.getList();
+
+        this.sub = this.service.list
+            .pipe(
+                filter(list => {
+                    return list !== null
+                })
+            ).subscribe(list => {
+                this.countries = list;
+            }
+            );
     }
 
     onDelete(e: Event, country: Country) {
@@ -41,6 +49,20 @@ export class CountryComponent implements OnInit, OnDestroy {
                 this.router.navigate(["/settings/country"]);
             })
         }
+    }
+
+    previewPeople(country: Country): string {
+        let i = 0;
+        let preview = "";
+        for (const people of country.peoples) {
+
+            preview += people.firstName + ", ";
+            if (i++ >= 2) break;
+        }
+        if (country.peoples.length > 3) {
+            preview += "+ " + (country.peoples.length - 3) + ", ";
+        }
+        return preview.substr(0, preview.length - 2);
     }
 
     ngOnDestroy() {

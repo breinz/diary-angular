@@ -19,6 +19,9 @@
       <li class="nav-item" [ngClass]="{active:active==='people'}">
         <a routerLink="/people" class="nav-link" *ngIf="isAuthenticated">{{ t.t('people.title.navbar')}}</a>
       </li>
+      <li class="nav-item" [ngClass]="{active:active==='event'}">
+        <a routerLink="/event" class="nav-link" *ngIf="isAuthenticated">{{ t.t('event.title.navbar')}}</a>
+      </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li class="nav-item" *ngIf="loading">

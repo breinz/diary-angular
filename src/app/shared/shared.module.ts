@@ -13,8 +13,13 @@ import { RemoveBtnComponent } from './btn/remove-btn/remove-btn.component';
 import { SecondaryBtnComponent } from './btn/secondary-btn/secondary-btn.component';
 import { DeletedPipe } from './deleted.pipe';
 import { ElementDeletedComponent } from './element-deleted/element-deleted.component';
-import { FormInstructionComponent } from './form/form-instruction/form-instruction.component';
+import { OldFormInstructionComponent } from './form/form-instruction/old-form-instruction.component';
 import { AutofocusDirective } from './autofocus.directive';
+import { FormInstructionComponent } from './form/form-instruction/form-instruction.component';
+import { ModalComponent } from './modal/modal.component';
+import { CategoryLinkComponent } from './category/link/category-link.component';
+import { RouterModule } from '@angular/router';
+import { CategoryBadgeComponent } from './category/badge/category-badge.component';
 
 @NgModule({
     declarations: [
@@ -32,15 +37,23 @@ import { AutofocusDirective } from './autofocus.directive';
         // Form
         FormErrorComponent,
         FormInstructionComponent,
+        OldFormInstructionComponent,
 
         // Btn
         NewBtnComponent, EditBtnComponent, DeleteBtnComponent, RecoverBtnComponent, RemoveBtnComponent, SecondaryBtnComponent,
 
+        // Category
+        CategoryLinkComponent, CategoryBadgeComponent,
+
         // Element deleted
         ElementDeletedComponent,
+
+        // Modal
+        ModalComponent
     ],
     imports: [
-        CommonModule
+        CommonModule,
+        RouterModule
     ],
     exports: [
         FixedPipe,
@@ -50,8 +63,12 @@ import { AutofocusDirective } from './autofocus.directive';
         FaIconComponent,
         FormErrorComponent,
         FormInstructionComponent,
+        OldFormInstructionComponent,
         NewBtnComponent, EditBtnComponent, DeleteBtnComponent, RecoverBtnComponent, RemoveBtnComponent, SecondaryBtnComponent,
         ElementDeletedComponent,
+        ModalComponent,
+        CategoryLinkComponent,
+        CategoryBadgeComponent
     ]
 })
 export class SharedModule { }

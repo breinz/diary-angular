@@ -4,7 +4,7 @@ export class People {
     _id: string;
     firstName: string;
     lastName: string;
-    sex: boolean;
+    sexe: boolean;
     met_at: Date;
     metIn: string;
     from: Country;

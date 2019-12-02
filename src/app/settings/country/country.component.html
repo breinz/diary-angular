@@ -9,6 +9,12 @@
     <table class="table table-hover table-no-head">
         <tr *ngFor="let country of countries">
             <td [link]="'/settings/country/'+country._id">{{ country.name }}</td>
+            <td [link]="'/settings/country/'+country._id" class="text-muted">
+                <div class="badge badge-secondary" [title]="previewPeople(country)">
+                    {{ country.peoples.length }}
+                    <i fa-icon="user" fw="1"></i>
+                </div>
+            </td>
             <td class="actions">
                 <div class="btn-group">
                     <a [routerLink]="'/settings/country/'+country._id+'/edit'" edit-btn></a>

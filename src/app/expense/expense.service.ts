@@ -3,7 +3,6 @@ import { HttpClient } from "@angular/common/http";
 import Expense from './expense.model';
 import Category from './category.model';
 import { BehaviorSubject } from 'rxjs';
-import { LoadingStatusService } from '../loading-status.service';
 import { tap } from 'rxjs/operators';
 
 export interface Report {
@@ -34,8 +33,7 @@ export class ExpenseService {
 	public expense = new BehaviorSubject<Expense>(null);
 
 	constructor(
-		private http: HttpClient,
-		private loader: LoadingStatusService
+		private http: HttpClient
 	) {
 		this.getExpenses();
 		this.getReport();
@@ -86,28 +84,20 @@ export class ExpenseService {
 	}
 
 	private getExpenses(period: string = "month", date?: Date) {
-		this.loader.loaderStart();
 		this.http
 			.get<Expense[]>("/expense")
 			.subscribe(res => {
 				this.expense.next(null);
 
-				// setTimeout(() => {
 				this.expenses.next(res);
-				this.loader.loaderEnd();
-				// }, 1500);
 			});
 	}
 
 	private getReport(period: string = "month", date?: Date) {
-		this.loader.loaderStart();
 		this.http
 			.get<ExpenseReport>("/expense/report")
 			.subscribe(res => {
-				// setTimeout(() => {
 				this.report.next(res);
-				this.loader.loaderEnd();
-				// }, 3000);
 			});
 	}
 }

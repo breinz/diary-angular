@@ -7,14 +7,16 @@ import { TranslationService } from 'src/app/translation.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormService } from 'src/app/shared/form.service';
 import { ExpenseService } from '../expense.service';
-import { LoadingStatusService } from 'src/app/loading-status.service';
 import { FlashService } from 'src/app/shared/flash/flash.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-expense',
   templateUrl: './new-expense.component.html',
-  styleUrls: ['./new-expense.component.scss']
+  styleUrls: ['./new-expense.component.scss'],
+  providers: [
+    FormService
+  ]
 })
 export class NewExpenseComponent implements OnInit {
 
@@ -33,7 +35,6 @@ export class NewExpenseComponent implements OnInit {
     public t: TranslationService,
     public sanitizer: DomSanitizer,
     public fs: FormService,
-    private loader: LoadingStatusService,
     private flash: FlashService,
     private router: Router
   ) { }
@@ -66,9 +67,7 @@ export class NewExpenseComponent implements OnInit {
   }
 
   public onSubmit() {
-    this.loader.loaderStart();
     this.service.add(this.form.value).subscribe(res => {
-      this.loader.loaderEnd();
 
       this.flash.success(this.t.t("expense.flash.created"));
 

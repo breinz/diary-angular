@@ -1,0 +1,33 @@
+<div class="alert alert-hollow mt-4">
+    <div class="h1-actions">
+        <div class="btn-group" *ngIf="!show_deleted">
+            <a routerLink="/event/new" [new-btn]="t.t('event.btn.new')"></a>
+            <a routerLink="/event/category" [secondary-btn]="t.t('event.btn.categories')" icon="fa-list"></a>
+            <a routerLink="/event/deleted" [secondary-btn]="t.t('element_deleted.btn.show-deleted')" icon="fa-trash"
+                *ngIf="has_deleted()"></a>
+        </div>
+        <div class="btn-group" *ngIf="show_deleted">
+            <a routerLink="/event" [secondary-btn]="t.t('element_deleted.btn.show_active')" icon="fa-calendar"></a>
+        </div>
+    </div>
+    <h1>{{ t.t('event.title.index') }}</h1>
+
+    <table class="table table-hover table-no-head">
+        <tr *ngFor="let event of getEvents()">
+            <td [link]="'/event/'+event._id">
+                <i [fa-icon]="getIcon(event)" fw="1" [style]="getIconColor(event)"></i>
+                {{ event.title }}
+            </td>
+            <td class="actions">
+                <div class="btn-group" *ngIf="!event.deleted">
+                    <a [routerLink]="'/event/'+event._id+'/edit'" edit-btn></a>
+                    <a [href]="'/event/'+event._id+'/delete'" delete-btn (click)="onDelete($event, event)"></a>
+                </div>
+                <div class="btn-group" *ngIf="event.deleted">
+                    <a [href]="'/event/'+event._id+'/recover'" recover-btn (click)="onRecover($event, event)"></a>
+                    <a [href]="'/event/'+event._id+'/remove'" remove-btn (click)="onRemove($event, event)"></a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -39,11 +39,11 @@ export class ExpenseExpenseComponent implements OnInit {
 
     if (confirm(this.t.t("expense.confirm.delete"))) {
 
-      this.l.loaderStart();
+      // this.l.loaderStart();
 
       this.service.delete(this.expense).subscribe(res => {
 
-        this.l.loaderEnd();
+        // this.l.loaderEnd();
 
         this.flash.success(this.t.t("expense.flash.deleted"));
 

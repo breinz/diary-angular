@@ -95,11 +95,21 @@
     },
     "global": {
         "error": {
+            "not_set": "This field doesn't seem valid",
             "name": {
                 "required": "The name is required"
             },
+            "firstName": {
+                "required": "The first name is required"
+            },
             "icon": {
                 "required": "The icon is required"
+            },
+            "color": {
+                "required": "The color is required"
+            },
+            "date": {
+                "required": "The date is required"
             }
         }
     },
@@ -134,7 +144,8 @@
             "btn": {
                 "new": "New category",
                 "show_deleted": "Show deleted",
-                "show_active": "Show active"
+                "show_active": "Show active",
+                "expense": "Categories"
             },
             "model": {
                 "name": "Name",
@@ -164,6 +175,9 @@
             "detail": "Expense",
             "edit": "Edit expense"
         },
+        "btn": {
+            "new": "New Expense"
+        },
         "model": {
             "amount": "Amount",
             "date": "Date",
@@ -189,7 +203,14 @@
             "index": "People",
             "navbar": "People",
             "new": "New people",
-            "deleted": "Deleted people"
+            "deleted": "Deleted people",
+            "country": {
+                "detail": {
+                    "none": "people",
+                    "one": "people",
+                    "many": "people"
+                }
+            }
         },
         "btn": {
             "new": "New people"
@@ -198,9 +219,10 @@
             "name": "Name",
             "firstName": "First name",
             "lastName": "Last name",
-            "sex": "Sex",
+            "sexe": "Sex",
             "met_at": "Met at",
-            "metIn": "Met in"
+            "metIn": "Met in",
+            "from": "From"
         },
         "instruction": {},
         "flash": {
@@ -215,7 +237,79 @@
         "error": {
             "met_at": {
                 "required": "When did you meet?"
+            },
+            "metIn": {
+                "required": "Where did you meet?"
             }
+        }
+    },
+    "event": {
+        "category": {
+            "title": {
+                "index": "Event categories",
+                "new": "New event category",
+                "edit": "Edit event category"
+            },
+            "btn": {
+                "new": "New category"
+            },
+            "model": {
+                "name": "Name",
+                "icon": "Icon",
+                "color": "Color"
+            },
+            "instruction": {
+                "icon": "Event icon (<i class='fa fa-birthday-cake'></i> <b>birthday-cake</b> is good for birthday for example) visit <a href='https://fontawesome.com/icons?d=gallery&m=free' target='_blank'>font awesome list</a>",
+                "color": "Try one of <b>#c3e6cb</b> (green) <b>#f5c6cb</b> (red) <b>#ffeeba</b> (yellow) <b>#b8daff</b> (blue) <b>#d6d8db</b> (gray) <b>#bee5eb</b> (cyan)"
+            },
+            "flash": {
+                "created": "Event category created!",
+                "edited": "%s edited!",
+                "deleted": "%s deleted!"
+            },
+            "confirm": {
+                "delete": "Are you sure you want to delete the event category %s? All related events will be uncategorized"
+            },
+            "none": {
+                "color": "#EEE",
+                "name": "No category"
+            }
+        },
+        "title": {
+            "navbar": "Events",
+            "index": "Events",
+            "category": {
+                "none": "events",
+                "one": "event",
+                "many": "events"
+            },
+            "new": "New event",
+            "edit": "Edit event"
+        },
+        "btn": {
+            "new": "New event",
+            "categories": "Categories"
+        },
+        "model": {
+            "title": "Title",
+            "date": "Date",
+            "category": "Category"
+        },
+        "flash": {
+            "created": "The event %s has been created!",
+            "deleted": "The event %s has been deleted!",
+            "edited": "The event %s has been edited!",
+            "recovered": "The event %s has been recovered!",
+            "removed": "The event %s has been permanently removed!"
+        },
+        "error": {
+            "title": {
+                "required": "The event title is required"
+            }
+        },
+        "confirm": {
+            "delete": "Are you sure you want to delete the event %s?",
+            "remove": "Are you 100%% sure you want to remove the event %s?"
         }
     },
     "settings": {

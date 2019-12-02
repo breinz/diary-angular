@@ -13,7 +13,7 @@ export class LoadingStatusService {
     }
 
     private set status(value: number) {
-        this._status = value;
+        this._status = Math.max(value, 0);
 
         if (this.loading.value && this._status <= 0) {
             this.loading.next(false);
@@ -23,11 +23,14 @@ export class LoadingStatusService {
     }
 
     public loaderStart() {
-        this.status = Math.max(this.status++, 1);
+        this.status++;// = Math.max(this.status++, 1);
+
     }
 
     public loaderEnd() {
-        this.status--;
+        setTimeout(() => {
+            this.status--;// = Math.max(this.status--, 0);
+        }, 500);
     }
 
 }

@@ -1,0 +1,45 @@
+<form [formGroup]="form" (ngSubmit)="onSend()">
+
+    <div class="form-group">
+
+        <!-- Name -->
+        <label for="name">{{ t.t('event.category.model.name') }}</label>
+        <input type="text" formControlName="name" class="form-control" [ngClass]="formService.is_invalid('name')"
+            autofocus>
+        <app-form-error *ngIf="formService.hasError('name')" [text]="formService.getErrorMessage('name')">
+        </app-form-error>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <!-- Icon -->
+            <div class="form-group">
+                <label for="icon">{{ t.t('event.category.model.icon') }}</label>
+                <input type="text" formControlName="icon" class="form-control"
+                    [ngClass]="formService.is_invalid('icon')">
+                <app-form-error *ngIf="formService.hasError('icon')" [text]="formService.getErrorMessage('icon')">
+                </app-form-error>
+                <app-form-instruction *ngIf="!formService.hasError('icon')"
+                    [html]="t.t('event.category.instruction.icon')"></app-form-instruction>
+
+            </div>
+
+        </div>
+        <div class="col-md-6">
+
+            <!-- Color -->
+            <div class="form-group">
+                <label for="color">{{ t.t('event.category.model.color') }}</label>
+                <input type="text" formControlName="color" class="form-control"
+                    [ngClass]="formService.is_invalid('color')">
+                <app-form-error *ngIf="formService.hasError('color')" [text]="formService.getErrorMessage('color')">
+                </app-form-error>
+                <app-form-instruction *ngIf="!formService.hasError('color')"
+                    [html]="t.t('event.category.instruction.color')"></app-form-instruction>
+            </div>
+
+        </div>
+    </div>
+
+    <input type="submit" [value]="t.t('action.save')" class="btn btn-success" [disabled]="form.invalid">
+</form>

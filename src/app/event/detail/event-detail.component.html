@@ -1,0 +1,35 @@
+<div class="mt-4">
+    <element-deleted (recover)="onRecover()" (remove)="onRemove()" *ngIf="event.deleted"></element-deleted>
+
+    <div class="alert alert-hollow">
+        <div class="h1-actions">
+            <div class="btn-group" *ngIf="!event.deleted">
+                <a [routerLink]="'/event/'+event._id+'/edit'" [edit-btn]="t.t('action.edit')"></a>
+                <a [href]="'/event/'+event._id+'/delete'" [delete-btn]="t.t('action.delete')"
+                    (click)=" onDelete($event)"></a>
+            </div>
+        </div>
+        <h1>{{ event.title }}</h1>
+        <dl>
+            <dt>{{ t.t('event.model.date') }}</dt>
+            <dd>{{ event.date | date }}</dd>
+
+            <dt>{{ t.t('event.model.category') }}</dt>
+            <dd>
+                <div class="row">
+                    <div class="col-md-2 col-sm-4">
+                        <app-category-link [category]="category"
+                            [link]="category ? '/event/category/'+category._id : '/'" *ngIf="category">
+                        </app-category-link>
+                        <app-category-badge *ngIf="!category"></app-category-badge>
+                    </div>
+                </div>
+                <!-- <a [routerLink]="'/event/category/'+category._id">
+                <i [fa-icon]="category.icon"></i>
+                {{ category.name }}
+            </a> -->
+            </dd>
+        </dl>
+    </div>
+
+</div>

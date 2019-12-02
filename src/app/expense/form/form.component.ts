@@ -10,7 +10,10 @@ import { ExpenseCategoryService } from '../category/expense-category.service';
 @Component({
   selector: 'expense-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss']
+  styleUrls: ['./form.component.scss'],
+  providers: [
+    FormService
+  ]
 })
 export class ExpenseFormComponent implements OnInit {
 

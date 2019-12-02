@@ -1,0 +1,27 @@
+<div class="alert alert-hollow mt-4">
+    <div class="h1-actions">
+        <div class="btn-group">
+            <a [routerLink]="'/event/category/'+category._id+'/edit'" [edit-btn]="t.t('action.edit')"></a>
+            <a [href]="'/event/category/'+category._id+'/delete'" [delete-btn]="t.t('action.delete')"
+                (click)="onDelete($event)"></a>
+        </div>
+    </div>
+    <h1>{{ category.name }}</h1>
+    <i [fa-icon]="category.icon" class="outline huge" [style]="getIconColor()"></i>
+</div>
+
+<div class="row">
+    <div class="col-md-6" *ngIf="events.length">
+        <div class="alert alert-hollow">
+            <h2>{{ events.length }} {{ t.p('event.title.category', events.length) }}</h2>
+            <table class="table table-hover table-no-head">
+                <tr *ngFor="let event of events">
+                    <td [link]="'/event/'+event._id">{{ event.title }}</td>
+                    <td [link]="'/event/'+event._id" class="text-muted">
+                        <small>{{ event.date | date }}</small>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

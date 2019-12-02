@@ -1,0 +1,28 @@
+<div class="alert alert-hollow mt-4">
+    <div class="h1-actions">
+        <a routerLink="/event/category/new" [new-btn]="t.t('event.category.btn.new')"></a>
+    </div>
+    <h1>{{ t.t('event.category.title.index') }}</h1>
+
+    <table class="table table-hover table-no-head">
+        <tr *ngFor="let category of list">
+            <td [link]="'/event/category/'+category._id">
+                <i [fa-icon]="category.icon" fw="1" [style]="getIconColor(category)"></i>
+                {{ category.name }}
+            </td>
+            <td [link]="'/event/category/'+category._id">
+                <div class="badge badge-secondary" [title]="">
+                    {{ category.events.length }}
+                    <i [fa-icon]="category.icon" fw="1"></i>
+                </div>
+            </td>
+            <td class="actions">
+                <div class="btn-group">
+                    <a [routerLink]="'/event/category/'+category._id+'/edit'" edit-btn></a>
+                    <a [href]="'/event/category/'+category._id+'/delete'" (click)="onDelete($event, category)"
+                        delete-btn></a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

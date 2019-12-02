@@ -8,3 +8,20 @@
     </div>
     <h1>{{ country.name }}</h1>
 </div>
+
+<div class="row">
+    <div class="col-md-6" *ngIf="country.peoples.length">
+        <div class="alert alert-hollow">
+            <h2>{{ country.peoples.length + " " + t.p('people.title.country.detail', country.peoples.length) }}</h2>
+            <table class="table table-hover table-no-head">
+                <tr *ngFor="let people of country.peoples">
+                    <td [link]="'/people/'+people._id">
+                        <i fa-icon="male" fw="1" class="text-info" *ngIf="!people.sexe"></i>
+                        <i fa-icon="female" fw="1" class="text-danger" *ngIf="people.sexe"></i>
+                        {{ people.firstName }} {{ people.lastName }}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

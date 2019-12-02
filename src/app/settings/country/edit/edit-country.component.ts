@@ -6,7 +6,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FlashService } from 'src/app/shared/flash/flash.service';
 import { TranslationService } from 'src/app/translation.service';
 import { Location } from '@angular/common';
-import { LoadingStatusService } from 'src/app/loading-status.service';
 
 @Component({
     selector: "edit-country",
@@ -21,14 +20,12 @@ export class EditCountryComponent implements OnInit {
         private route: ActivatedRoute,
         private flash: FlashService,
         private t: TranslationService,
-        private location: Location,
-        private loader: LoadingStatusService
+        private location: Location
     ) {
 
     }
 
     ngOnInit() {
-        this.loader.loaderStart();
         this.service.list.pipe(
             filter(list => list !== null),
             map(list => {
@@ -40,15 +37,12 @@ export class EditCountryComponent implements OnInit {
             }),
             take(1)
         ).subscribe(country => {
-            this.loader.loaderEnd();
             this.country = country;
         });
     }
 
     onSend(values: Country) {
-        this.loader.loaderStart();
         this.service.patch(this.country, values).subscribe(res => {
-            this.loader.loaderEnd();
             this.flash.success(this.t.t('country.flash.edited'));
             this.location.back();
 

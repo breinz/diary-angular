@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { ExpenseCategory } from './expense-category.model';
 import { tap, map } from 'rxjs/operators';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { LoadingStatusService } from 'src/app/loading-status.service';
 
 @Injectable({ providedIn: "root" })
 export class ExpenseCategoryService {
@@ -12,8 +11,7 @@ export class ExpenseCategoryService {
     public list = new BehaviorSubject<ExpenseCategory[]>(null);
 
     constructor(
-        private api: HttpClient,
-        private loader: LoadingStatusService
+        private api: HttpClient
     ) {
         this.getList();
     }
@@ -109,12 +107,10 @@ export class ExpenseCategoryService {
      * Find all expense categories 
      */
     private getList() {
-        this.loader.loaderStart();
 
         return this.api
             .get<{ categories: ExpenseCategory[] }>("/expense/category")
             .subscribe(res => {
-                this.loader.loaderEnd();
                 this.list.next(res.categories);
             });
     }

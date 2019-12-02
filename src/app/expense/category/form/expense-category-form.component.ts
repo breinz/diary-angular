@@ -5,7 +5,10 @@ import { FormGroup } from '@angular/forms';
 
 @Component({
     selector: "expense-category-form",
-    templateUrl: "./expense-category-form.component.html"
+    templateUrl: "./expense-category-form.component.html",
+    providers: [
+        FormService
+    ]
 })
 export class ExpenseCategoryForm implements OnInit {
 

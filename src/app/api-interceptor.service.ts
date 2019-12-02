@@ -1,10 +1,11 @@
-import { HttpInterceptor, HttpRequest, HttpHandler } from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEventType, HttpHeaderResponse } from '@angular/common/http';
 import { UserService } from './user/user.service';
 import { Injectable } from '@angular/core';
-import { take, exhaustMap, catchError } from 'rxjs/operators';
+import { take, exhaustMap, catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { FlashService } from './shared/flash/flash.service';
+import { LoadingStatusService } from './loading-status.service';
 
 /**
  * Prepend the api url
@@ -17,7 +18,8 @@ export class ApiInterceptorService implements HttpInterceptor {
     constructor(
         private userService: UserService,
         private router: Router,
-        private flash: FlashService) {
+        private flash: FlashService,
+        private loader: LoadingStatusService) {
 
     }
 
@@ -25,9 +27,12 @@ export class ApiInterceptorService implements HttpInterceptor {
 
         console.log(req.url[0] == "/" ? ("API: " + req.method) : "FILE:", req.url);
 
+        this.loader.loaderStart();
+
         return this.userService.current_user.pipe(
             take(1),
             exhaustMap(user => {
+
                 let modifiedReq = req.clone();
 
                 if (req.url[0] === "/") {
@@ -49,7 +54,13 @@ export class ApiInterceptorService implements HttpInterceptor {
                 }
 
                 return next.handle(modifiedReq).pipe(
+                    tap(event => {
+                        if (event.type === HttpEventType.Response) {
+                            this.loader.loaderEnd();
+                        }
+                    }),
                     catchError((err: any) => {
+                        this.loader.loaderEnd();
                         if (err.error && err.error.error) {
                             switch (err.error.error) {
                                 case "INVALID_USER":

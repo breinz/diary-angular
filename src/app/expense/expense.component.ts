@@ -3,7 +3,6 @@ import { ExpenseService, ExpenseReport, Report } from './expense.service';
 import Expense from './expense.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
-import { LoadingStatusService } from '../loading-status.service';
 import { FlashService } from '../shared/flash/flash.service';
 import { TranslationService } from '../translation.service';
 import { Router } from '@angular/router';
@@ -25,9 +24,8 @@ export class ExpenseComponent implements OnInit, OnDestroy {
 	constructor(
 		private service: ExpenseService,
 		private sanitizer: DomSanitizer,
-		private loader: LoadingStatusService,
 		private flash: FlashService,
-		private t: TranslationService,
+		public t: TranslationService,
 		private router: Router) { }
 
 	ngOnInit() {
@@ -50,11 +48,7 @@ export class ExpenseComponent implements OnInit, OnDestroy {
 
 		if (confirm(this.t.t("expense.confirm.delete"))) {
 
-
-			this.loader.loaderStart();
-
 			this.service.delete(expense).subscribe(res => {
-				this.loader.loaderEnd();
 
 				this.flash.success(this.t.t("expense.flash.deleted"));
 

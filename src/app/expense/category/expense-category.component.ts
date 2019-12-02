@@ -24,8 +24,7 @@ export class ExpenseCategoryComponent implements OnInit, OnDestroy {
         private sanitizer: DomSanitizer,
         private router: Router,
         private flash: FlashService,
-        public t: TranslationService,
-        private loader: LoadingStatusService
+        public t: TranslationService
     ) {
 
     }
@@ -47,15 +46,12 @@ export class ExpenseCategoryComponent implements OnInit, OnDestroy {
         event.preventDefault();
 
         if (confirm(this.t.t("expense.category.confirm.delete"))) {
-            this.loader.loaderStart();
 
             this.service.delete(category).subscribe(
                 res => {
-                    this.loader.loaderEnd();
                     this.flash.success(this.t.t("expense.category.flash.deleted"));
                 },
                 err => {
-                    this.loader.loaderEnd();
                     this.flash.error(this.t.t("expense.category.flash.not_found"));
                 });
         }
@@ -64,10 +60,7 @@ export class ExpenseCategoryComponent implements OnInit, OnDestroy {
     public onRecover(category: ExpenseCategory, event: Event) {
         event.preventDefault();
 
-        this.loader.loaderStart();
-
         this.service.recover(category).subscribe(res => {
-            this.loader.loaderEnd();
             this.flash.success(this.t.t("expense.category.flash.recovered"));
         });
 
@@ -78,9 +71,7 @@ export class ExpenseCategoryComponent implements OnInit, OnDestroy {
 
         if (confirm(this.t.t("expense.category.confirm.remove"))) {
 
-            this.loader.loaderStart();
             this.service.remove(category).subscribe(res => {
-                this.loader.loaderEnd();
                 this.flash.success(this.t.t("expense.category.flash.removed"));
             });
         }

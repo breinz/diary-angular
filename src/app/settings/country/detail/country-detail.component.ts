@@ -3,8 +3,7 @@ import { CountryService } from '../country.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlashService } from 'src/app/shared/flash/flash.service';
 import { TranslationService } from 'src/app/translation.service';
-import { LoadingStatusService } from 'src/app/loading-status.service';
-import { filter, map, take } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { Country } from '../country.model';
 import { Subscription } from 'rxjs';
 
@@ -23,12 +22,10 @@ export class CountryDetailComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private flash: FlashService,
         public t: TranslationService,
-        private loader: LoadingStatusService,
         private router: Router
     ) { }
 
     ngOnInit() {
-        this.loader.loaderStart();
         this.sub = this.service.list.pipe(
             filter(list => list !== null),
             map(list => {
@@ -39,7 +36,6 @@ export class CountryDetailComponent implements OnInit, OnDestroy {
                 }
             })
         ).subscribe(country => {
-            this.loader.loaderEnd();
             this.country = country;
         });
     }

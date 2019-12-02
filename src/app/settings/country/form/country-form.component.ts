@@ -6,7 +6,10 @@ import { Country } from '../country.model';
 
 @Component({
     selector: "country-form",
-    templateUrl: "./country-form.component.html"
+    templateUrl: "./country-form.component.html",
+    providers: [
+        FormService
+    ]
 })
 export class CountryForm implements OnInit {
 

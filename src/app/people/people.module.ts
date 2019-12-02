@@ -7,6 +7,7 @@ import { NewPeopleComponent } from './new/new-people.component';
 import { PeopleFormComponent } from './form/people-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { CountrySharedModule } from '../settings/country/country-shared.module';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import { CommonModule } from '@angular/common';
         CommonModule,
         SharedModule,
         PeopleRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        CountrySharedModule
     ]
 })
 export class PeopleModule { }

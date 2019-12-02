@@ -33,6 +33,8 @@ export class PeopleComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
 
+        this.service.getList();
+
         /* this.sub = this.route.url.pipe(
              tap(url => {
                  this._showDeleted = url.length > 0 && url[0].path == "deleted";

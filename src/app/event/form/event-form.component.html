@@ -1,0 +1,38 @@
+<form [formGroup]="form" (ngSubmit)="onSend()">
+
+    <!-- Title -->
+    <div class="form-group">
+        <label for="title">{{ t.t('event.model.title') }}</label>
+        <input type="text" class="form-control" formControlName="title" [ngClass]="fs.is_invalid('title')">
+        <app-form-error *ngIf="fs.hasError('title')" [text]="fs.getErrorMessage('title')"></app-form-error>
+    </div>
+
+    <!-- Date -->
+    <div class="form-group">
+        <label for="date">{{ t.t('event.model.date') }}</label>
+        <input type="date" class="form-control" formControlName="date" [ngClass]="fs.is_invalid('date')">
+        <app-form-error *ngIf="fs.hasError('date')" [text]="fs.getErrorMessage('date')"></app-form-error>
+    </div>
+
+    <!-- Category -->
+    <div class="form-group">
+        <label for="category">{{ t.t('event.model.category') }}</label>
+        <div class="input-group">
+            <select formControlName="category" id="category" class="form-control">
+                <option *ngFor="let category of categories" [value]="category._id">{{ category.name }}</option>
+            </select>
+            <div class="input-group-append">
+                <a href="/event/category/new" class="btn input-group-text" (click)="onEventCategoryModal($event)">
+                    <i fa-icon="plus"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <input type="submit" [value]="t.t('action.save')" class="btn btn-success" [disabled]="form.invalid">
+
+</form>
+
+<app-modal modalId="newEventCategoryModal" [title]="t.t('event.category.title.new')">
+    <app-event-category-form (send)="onAddEventCategory($event)"></app-event-category-form>
+</app-modal>

@@ -1,0 +1,11 @@
+@import "../../../../assets/scss/variables_override";
+
+.content {
+  text-align: center;
+  border-radius: $border-radius;
+  border: 1px solid $border-color;
+
+  i {
+    color: var(--color);
+  }
+}

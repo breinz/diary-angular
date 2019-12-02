@@ -6,5 +6,5 @@
         <app-form-error *ngIf="f.hasError('name')" [text]="f.getErrorMessage('name')"></app-form-error>
     </div>
 
-    <input type="submit" [value]="t.t('action.save')" class="btn btn-success">
+    <input type="submit" [value]="t.t('action.save')" class="btn btn-success" [disabled]="form.invalid">
 </form>

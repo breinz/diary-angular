@@ -43,17 +43,17 @@ export class ExpenseGuard implements CanActivate {
         //     // We already checked this expense
         //     return true;
         // }
-        this.l.loaderStart();
+        // this.l.loaderStart();
 
         return new Promise((resolve, reject) => {
 
             this.service.getExpense(id).subscribe(
                 res => {
-                    this.l.loaderEnd();
+                    // this.l.loaderEnd();
                     resolve(true);
                 },
                 err => {
-                    this.l.loaderEnd();
+                    // this.l.loaderEnd();
                     this.flash.error(this.t.t('expense.flash.not_found'));
                     this.router.navigate(['/expense']);
                     reject();

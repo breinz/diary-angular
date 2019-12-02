@@ -16,7 +16,8 @@ const routes: Routes = [
     () => import("./expense/expense.module").then(m => m.ModuleName)*/
   },
   { path: "people", loadChildren: "./people/people.module#PeopleModule", canActivate: [LoginGuard] },
-  { path: "settings", loadChildren: "./settings/settings.module#SettingsModule", canActivate: [LoginGuard] }
+  { path: "settings", loadChildren: "./settings/settings.module#SettingsModule", canActivate: [LoginGuard] },
+  { path: "event", loadChildren: "./event/event.module#EventModule", canActivate: [LoginGuard] }
 ];
 
 @NgModule({

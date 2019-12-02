@@ -1,3 +1,2 @@
-<small class="form-text text-muted">
-    <ng-content></ng-content>
-</small>
+<small class="form-text text-muted" *ngIf="html" [innerHTML]=html></small>
+<small class="form-text text-muted" *ngIf="!html">{{ text }}</small>

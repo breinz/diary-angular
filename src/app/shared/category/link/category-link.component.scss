@@ -1,0 +1,35 @@
+@import "../../../../assets/scss/variables_override";
+
+a {
+  color: $black;
+  //margin: 0 1rem;
+
+  .content {
+    text-align: center;
+    border-radius: $border-radius;
+    border: 1px solid $border-color;
+
+    i {
+      color: var(--color);
+    }
+  }
+
+  &:hover,
+  &.active {
+    text-decoration: none;
+
+    .content {
+      background-color: var(--color);
+
+      i {
+        color: $black;
+      }
+    }
+  }
+
+  &.active:hover {
+    .content {
+      background-color: #eee;
+    }
+  }
+}

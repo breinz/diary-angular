@@ -23,13 +23,15 @@
             </tr>
         </thead>
         <tr *ngFor="let people of getList()">
-            <td>
+            <td [link]="'/people/'+people._id">
+                <i fa-icon="male" *ngIf="!people.sexe" class="text-info"></i>
+                <i fa-icon="female" *ngIf="people.sexe" class="text-danger"></i>
                 {{ people.firstName }} {{ people.lastName }}
                 <small class="text-muted">
                     {{ people.from ? people.from.name : '' }}
                 </small>
             </td>
-            <td>
+            <td [link]="'/people/'+people._id">
                 {{ people.metIn }}
                 <small class="text-muted">
                     {{ people.met_at | date }}

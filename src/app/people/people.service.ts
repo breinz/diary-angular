@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { People } from './people.model';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
-import { LoadingStatusService } from '../loading-status.service';
-import { tap, take } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: "root" })
 export class PeopleService {
@@ -11,26 +10,21 @@ export class PeopleService {
     public list = new BehaviorSubject<People[]>(null);
 
     constructor(
-        private api: HttpClient,
-        private loader: LoadingStatusService
+        private api: HttpClient
     ) {
-        this.getList();
+        // this.getList();
     }
 
 
     public getList() {
-        this.loader.loaderStart();
         return this.api.get<People[]>("/people").subscribe(res => {
-            this.loader.loaderEnd();
             this.list.next(res);
         });
     }
 
     public add(people: People) {
-        this.loader.loaderStart();
         return this.api.post("/people", people).pipe(
             tap(res => {
-                this.loader.loaderEnd();
                 this.getList();
             })
         );
@@ -49,12 +43,10 @@ export class PeopleService {
     }
 
     private patch(people: People) {
-        this.loader.loaderStart();
         return this.api.patch<{ ok: boolean }>('/people', people, {
             params: { id: people._id }
         }).pipe(
             tap(res => {
-                this.loader.loaderEnd();
                 this.getList();
             })
         );
