@@ -27,7 +27,7 @@ Uses
 - [Bootstrap toggle](https://www.bootstraptoggle.com/)
 - [Fontawesome](https://fontawesome.com/icons?d=gallery&m=free)
 - [Pug](https://pugjs.org/api/getting-started.html) (some, very few ... not the best with angular IMO)
-- And API, writen in expess (GET, POST, PATCH, DELETE)
+- And [API](https://github.com/breinz/diary-express), writen in expess (GET, POST, PATCH, DELETE)
 
 ## Currently working on
 
