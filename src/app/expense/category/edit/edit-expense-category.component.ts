@@ -7,6 +7,7 @@ import { FlashService } from 'src/app/shared/flash/flash.service';
 import { TranslationService } from 'src/app/translation.service';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
+import { BreadcrumbService } from 'src/app/layout/breadcrumb/breadcrumb.service';
 
 @Component({
     selector: "edit-expense-category",
@@ -28,7 +29,8 @@ export class EditExpenseCategoryComponent implements OnInit, OnDestroy {
         private categoryService: ExpenseCategoryService,
         private flash: FlashService,
         private t: TranslationService,
-        private location: Location
+        private location: Location,
+        private bc: BreadcrumbService
     ) {
 
     }
@@ -39,6 +41,8 @@ export class EditExpenseCategoryComponent implements OnInit, OnDestroy {
             if (category) {
 
                 this.category = category;
+
+                this.bc.build("expenseCategory", this.category, "edit");
 
                 this.form.setValue({
                     "name": this.category.name,

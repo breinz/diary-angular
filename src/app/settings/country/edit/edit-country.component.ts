@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FlashService } from 'src/app/shared/flash/flash.service';
 import { TranslationService } from 'src/app/translation.service';
 import { Location } from '@angular/common';
+import { BreadcrumbService } from 'src/app/layout/breadcrumb/breadcrumb.service';
 
 @Component({
     selector: "edit-country",
@@ -20,12 +21,14 @@ export class EditCountryComponent implements OnInit {
         private route: ActivatedRoute,
         private flash: FlashService,
         private t: TranslationService,
-        private location: Location
+        private location: Location,
+        private bc: BreadcrumbService
     ) {
 
     }
 
     ngOnInit() {
+
         this.service.list.pipe(
             filter(list => list !== null),
             map(list => {
@@ -38,6 +41,7 @@ export class EditCountryComponent implements OnInit {
             take(1)
         ).subscribe(country => {
             this.country = country;
+            this.bc.build("country", country, "edit");
         });
     }
 

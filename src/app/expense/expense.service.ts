@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import Expense from './expense.model';
 import Category from './category.model';
 import { BehaviorSubject } from 'rxjs';
@@ -32,11 +32,14 @@ export class ExpenseService {
 	public report = new BehaviorSubject<ExpenseReport>(null);
 	public expense = new BehaviorSubject<Expense>(null);
 
+	public month: string;
+	public year: string;
+
 	constructor(
 		private http: HttpClient
 	) {
-		this.getExpenses();
-		this.getReport();
+		//this.getExpenses();
+		//this.getReport();
 	}
 
 	public add(expense: Expense) {
@@ -83,19 +86,26 @@ export class ExpenseService {
 			);
 	}
 
-	private getExpenses(period: string = "month", date?: Date) {
+	public getExpenses() {
+		let params = new HttpParams();
+		if (this.year) params = params.append("year", this.year);
+		if (this.month) params = params.append("month", this.month);
+
 		this.http
-			.get<Expense[]>("/expense")
-			.subscribe(res => {
+			.get<Expense[]>("/expense", { params }).subscribe(res => {
 				this.expense.next(null);
 
 				this.expenses.next(res);
 			});
 	}
 
-	private getReport(period: string = "month", date?: Date) {
+	public getReport() {
+		let params = new HttpParams();
+		if (this.year) params = params.append("year", this.year);
+		if (this.month) params = params.append("month", this.month);
+
 		this.http
-			.get<ExpenseReport>("/expense/report")
+			.get<ExpenseReport>("/expense/report", { params })
 			.subscribe(res => {
 				this.report.next(res);
 			});

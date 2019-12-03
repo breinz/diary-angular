@@ -7,6 +7,7 @@ import { FlashService } from 'src/app/shared/flash/flash.service';
 import { Subscription } from 'rxjs';
 import { TranslationService } from 'src/app/translation.service';
 import { LoadingStatusService } from 'src/app/loading-status.service';
+import { BreadcrumbService } from 'src/app/layout/breadcrumb/breadcrumb.service';
 
 @Component({
     selector: "app-expense-category",
@@ -24,12 +25,15 @@ export class ExpenseCategoryComponent implements OnInit, OnDestroy {
         private sanitizer: DomSanitizer,
         private router: Router,
         private flash: FlashService,
-        public t: TranslationService
+        public t: TranslationService,
+        private bc: BreadcrumbService
     ) {
 
     }
 
     public ngOnInit() {
+        this.bc.build("expenseCategory");
+
         this.sub = this.service.list.subscribe(list => {
             if (!list) return;
             this.categories = list;

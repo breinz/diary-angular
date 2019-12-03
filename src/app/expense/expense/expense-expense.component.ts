@@ -8,6 +8,7 @@ import { TranslationService } from 'src/app/translation.service';
 import { ExpenseService } from '../expense.service';
 import { LoadingStatusService } from 'src/app/loading-status.service';
 import Expense from '../expense.model';
+import { BreadcrumbService } from 'src/app/layout/breadcrumb/breadcrumb.service';
 
 @Component({
   selector: 'app-expense-expense',
@@ -25,13 +26,16 @@ export class ExpenseExpenseComponent implements OnInit {
     private route: ActivatedRoute,
     private flash: FlashService,
     private router: Router,
-    public sanitizer: DomSanitizer
+    public sanitizer: DomSanitizer,
+    private bc: BreadcrumbService
   ) { }
 
   ngOnInit() {
 
     // @see ExpenseGuard
     this.expense = this.service.expense.value;
+
+    this.bc.build("expense", this.expense);
   }
 
   public onDelete(e: Event) {

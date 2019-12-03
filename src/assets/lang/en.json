@@ -141,6 +141,11 @@
                 "deleted": "Deleted expense categories",
                 "new": "New expense category"
             },
+            "breadcrumb": {
+                "index": "Categories",
+                "new": "New category",
+                "edit": "Edit"
+            },
             "btn": {
                 "new": "New category",
                 "show_deleted": "Show deleted",
@@ -188,6 +193,11 @@
             "date": "Date",
             "category": "Category",
             "description": "Description"
+        },
+        "error": {
+            "amount": {
+                "required": "The amount must be provided"
+            }
         },
         "instruction": {
             "icon": "Category icon (<i class='fa fa-utensils'></i> <b>utensils</b> is good for food for example) visit <a href='https://fontawesome.com/icons?d=gallery&m=free' target='_blank'>font awesome list</a>",
@@ -346,7 +356,9 @@
             "new": "New country"
         },
         "breadcrumb": {
-            "index": "Countries"
+            "index": "Countries",
+            "new": "New country",
+            "edit": "Edit"
         },
         "btn": {
             "new": "New country"

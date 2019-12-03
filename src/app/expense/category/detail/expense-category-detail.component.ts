@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslationService } from 'src/app/translation.service';
 import { FlashService } from 'src/app/shared/flash/flash.service';
 import { Subscription } from 'rxjs';
+import { BreadcrumbService } from 'src/app/layout/breadcrumb/breadcrumb.service';
 
 @Component({
   selector: 'app-expense-category-detail',
@@ -22,15 +23,19 @@ export class ExpenseCategoryDetailComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     public t: TranslationService,
     private flash: FlashService,
-    private router: Router
+    private router: Router,
+    private bc: BreadcrumbService
   ) { }
 
   ngOnInit() {
+
     const id = this.route.snapshot.params["id"];
 
     this.sub = this.service.find(id).subscribe(
       el => {
         this.category = el;
+
+        this.bc.build("expenseCategory", this.category);
       },
       err => {
         this.flash.error(this.t.t("expense.category.flash.not_found"));

@@ -5,7 +5,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { FlashService } from '../shared/flash/flash.service';
 import { TranslationService } from '../translation.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { BreadcrumbService } from '../layout/breadcrumb/breadcrumb.service';
 
 @Component({
@@ -21,6 +21,10 @@ export class ExpenseComponent implements OnInit, OnDestroy {
 
 	private report_sub: Subscription;
 	private expense_sub: Subscription;
+	private route_sub: Subscription;
+
+	public year: string;
+	public month: string;
 
 	constructor(
 		private service: ExpenseService,
@@ -28,10 +32,22 @@ export class ExpenseComponent implements OnInit, OnDestroy {
 		private flash: FlashService,
 		public t: TranslationService,
 		private router: Router,
-		private bc: BreadcrumbService
+		private bc: BreadcrumbService,
+		private route: ActivatedRoute
 	) { }
 
 	ngOnInit() {
+		this.route_sub = this.route.params.subscribe(params => {
+			this.year = params.year || new Date().getFullYear();
+			this.month = params.month || new Date().getMonth() + 1;
+
+			this.service.month = this.month;
+			this.service.year = this.year;
+
+			this.service.getExpenses();
+			this.service.getReport();
+		});
+
 		this.bc.build("expense");
 
 		this.expense_sub = this.service.expenses.subscribe(res => {
@@ -61,6 +77,56 @@ export class ExpenseComponent implements OnInit, OnDestroy {
 
 			});
 		}
+	}
+
+	getCurrentMonth() {
+		let m = +this.month - 1;
+		return this.t.t('date.month.' + m + '.long');
+	}
+
+	getPrevMonth() {
+		let y = "";
+		let m = +this.month - 2;
+		if (m === -1) {
+			m = 11;
+			y = " " + (+this.year - 1);
+		}
+		return this.t.t('date.month.' + m + '.long') + y;
+	}
+
+	getPrevLink() {
+		let y = +this.year;
+		let m = +this.month - 1;
+		if (m === 0) {
+			m = 12;
+			y--;
+		}
+		return "/expense/" + y + "/" + this.zero(m);
+	}
+
+	getNextMonth() {
+		let y = "";
+		let m = +this.month;
+		if (m === 12) {
+			m = 0;
+			y = " " + (+this.year + 1);
+		}
+		return this.t.t('date.month.' + m + '.long') + y;
+	}
+
+	getNextLink() {
+		let y = +this.year;
+		let m = +this.month + 1;
+		if (m === 13) {
+			m = 1;
+			y++;
+		}
+		return "/expense/" + y + "/" + this.zero(m);
+	}
+
+	private zero(value: any): string {
+		if (+value < 10) return "0" + value;
+		return value;
 	}
 
 	getExpenseIconClass(expense: Expense): { [index: string]: boolean } {
@@ -109,6 +175,7 @@ export class ExpenseComponent implements OnInit, OnDestroy {
 	ngOnDestroy() {
 		this.report_sub.unsubscribe();
 		this.expense_sub.unsubscribe();
+		this.route_sub.unsubscribe();
 	}
 
 }

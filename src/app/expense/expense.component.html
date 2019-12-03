@@ -1,17 +1,17 @@
 <div class="row">
-  <div class="col mt-3">
+  <div class="col-12 mt-3">
 
     <div class="h1-actions">
       <div class="btn-group">
-        <a routerLink="2019-11" class="btn btn-sm btn-outline-secondary">
+        <a [routerLink]="getPrevLink()" class="btn btn-sm btn-outline-secondary">
           <i fa-icon="caret-left" fw="1"></i>
-          November
+          {{ getPrevMonth() }}
         </a>
-        <a routerLink="2019" class="btn btn-sm btn-outline-secondary">
-          2019
+        <a routerLink="/expense" class="btn btn-sm btn-outline-secondary disabled">
+          {{year}}
         </a>
-        <a routerLink="2020-01" class="btn btn-sm btn-outline-secondary">
-          January 2020
+        <a [routerLink]="getNextLink()" class="btn btn-sm btn-outline-secondary">
+          {{ getNextMonth() }}
           <i fa-icon="caret-right" fw="1"></i>
         </a>
       </div>
@@ -22,109 +22,109 @@
       </div>
     </div>
     <h1>
-      November 2019
+      {{ getCurrentMonth() }}
+      {{ year }}
     </h1>
-
-    <div class="row" *ngIf="report">
-      <div class="col-md-4">
-        <div class="row">
-          <div class="col-12">
-
-            <!-- Total -->
-            <div class="alert alert-hollow text-center">
-              <div class="huge">
-                {{ report.total | fixed:0 }} €
-              </div>
-              Spent this month
-            </div>
-          </div>
-
-          <div class="col-12">
-            <div class="row">
-
-              <!-- Categories -->
-              <div class="col" *ngIf="report && report.categories">
-                <div class="alert alert-hollowx">
-                  <div class="row" *ngFor="let category of report.categories">
-                    <div class="col-sm-8" [style]="getCategoryBg(category.category)">
-                      <i class="fa fa-fw" [ngClass]="getIcon(category.category)"></i>
-                      {{ category.category ? category.category.name : "No category" }}
-                    </div>
-                    <div class="col-sm-4 text-right" [style]="getCategoryBg(category.category)">
-                      <b>{{ category.total | fixed:0 }} €</b>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-8">
-        <!-- Chart -->
-      </div>
-
-      <div class="col" *ngIf="report && report.reports">
-        <div class="row">
-          <div class="col-md-4" *ngFor="let r of getActiveReports()">
-            <div class="alert alert-hollow text-center">
-              <div class="huge">
-                <i [fa-icon]="r.icon" element="expense" [style]="getStyleColor('color', r.color)" class="outline"></i>
-                {{ r.report.value | fixed}}
-              </div>
-              {{ 'per '+r.report.per}}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <!-- Detail -->
-    <div class="alert alert-hollow" *ngIf="expenses && expenses.length">
-
-      <div class="h1-actions">
-        <div class="btn-group">
-          <a new-btn="New expense" href="/expense/new" routerLink="/expense/new"></a>
-          <a secondary-btn="Categories" icon="fa-list" href="/expense/category" routerLink="/expense/category"></a>
-        </div>
-      </div>
-      <h3>Detail</h3>
-
-      <table class="table table-hover table-no-head">
-
-        <tr *ngFor="let expense of expenses">
-
-          <td [link]="'/expense/'+expense._id">
-            {{ expense.date | date:"d MMM yy" }}
-            <small class="text-muted">{{ expense.description }}</small>
-          </td>
-
-          <td [link]="'/expense/'+expense._id">
-            <div class="container">
-              <div class="row">
-                <div class="col-sm-6 text-right">
-                  <i class="fa" [ngClass]="getExpenseIconClass(expense)"></i>
-                  &nbsp;
-                  {{ expense.amount | fixed }}
-                </div>
-              </div>
-            </div>
-          </td>
-
-          <td class="actions">
-            <div class="btn-group">
-              <a href="#" edit-btn [routerLink]="'/expense/'+expense._id+'/edit'"></a>
-              <a [href]="'/expense/'+expense._id+'/delete'" delete-btn (click)="onDelete($event, expense)"></a>
-            </div>
-          </td>
-
-        </tr>
-
-      </table>
-
-    </div>
-
   </div>
+</div>
+
+<div class="row" *ngIf="report">
+  <div class="col-md-4">
+    <div class="row">
+      <div class="col-12">
+
+        <!-- Total -->
+        <div class="alert alert-hollow text-center">
+          <div class="huge">
+            {{ report.total | fixed:0 }} €
+          </div>
+          Spent this month
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="row">
+
+          <!-- Categories -->
+          <div class="col" *ngIf="report && report.categories">
+            <div class="alert alert-hollowx">
+              <div class="row" *ngFor="let category of report.categories">
+                <div class="col-sm-8" [style]="getCategoryBg(category.category)">
+                  <i class="fa fa-fw" [ngClass]="getIcon(category.category)"></i>
+                  {{ category.category ? category.category.name : "No category" }}
+                </div>
+                <div class="col-sm-4 text-right" [style]="getCategoryBg(category.category)">
+                  <b>{{ category.total | fixed:0 }} €</b>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <!-- Chart -->
+  </div>
+
+  <div class="col" *ngIf="report && report.reports">
+    <div class="row">
+      <div class="col-md-4" *ngFor="let r of getActiveReports()">
+        <div class="alert alert-hollow text-center">
+          <div class="huge">
+            <i [fa-icon]="r.icon" element="expense" [style]="getStyleColor('color', r.color)" class="outline"></i>
+            {{ r.report.value | fixed}}
+          </div>
+          {{ 'per '+r.report.per}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Detail -->
+<div class="alert alert-hollow" *ngIf="expenses && expenses.length">
+
+  <!-- <div class="h1-actions">
+    <div class="btn-group">
+      <a new-btn="New expense" href="/expense/new" routerLink="/expense/new"></a>
+      <a secondary-btn="Categories" icon="fa-list" href="/expense/category" routerLink="/expense/category"></a>
+    </div>
+  </div> -->
+  <h3>Detail</h3>
+
+  <table class="table table-hover table-no-head">
+
+    <tr *ngFor="let expense of expenses">
+
+      <td [link]="'/expense/'+expense._id">
+        {{ expense.date | date:"d MMM yy" }}
+        <small class="text-muted">{{ expense.description }}</small>
+      </td>
+
+      <td [link]="'/expense/'+expense._id">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-6 text-right">
+              <i class="fa" [ngClass]="getExpenseIconClass(expense)"></i>
+              &nbsp;
+              {{ expense.amount | fixed }}
+            </div>
+          </div>
+        </div>
+      </td>
+
+      <td class="actions">
+        <div class="btn-group">
+          <a href="#" edit-btn [routerLink]="'/expense/'+expense._id+'/edit'"></a>
+          <a [href]="'/expense/'+expense._id+'/delete'" delete-btn (click)="onDelete($event, expense)"></a>
+        </div>
+      </td>
+
+    </tr>
+
+  </table>
+
 </div>
