@@ -1,0 +1,5 @@
+<div class="alert alert-hollow mt-4">
+    <h1>Edit {{ people.firstName}} {{ people.lastName }}</h1>
+
+    <people-form (send)="onSend($event)" [people]="people"></people-form>
+</div>

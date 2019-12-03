@@ -62,38 +62,39 @@
                 "short": "dec"
             }
         ],
-        "days": [
+        "day": [
             {
                 "long": "Monday",
-                "short": "mon"
+                "short": "Mon"
             },
             {
                 "long": "Tuesday",
-                "short": "tue"
+                "short": "Tue"
             },
             {
                 "long": "Wednesday",
-                "short": "wed"
+                "short": "Wed"
             },
             {
                 "long": "Thursday",
-                "short": "thu"
+                "short": "Thu"
             },
             {
                 "long": "Friday",
-                "short": "fri"
+                "short": "Fri"
             },
             {
                 "long": "Saturday",
-                "short": "sat"
+                "short": "Sat"
             },
             {
                 "long": "Sunday",
-                "short": "sun"
+                "short": "Sun"
             }
         ]
     },
     "global": {
+        "loading": "Loading...",
         "error": {
             "not_set": "This field doesn't seem valid",
             "name": {
@@ -132,6 +133,11 @@
         "model": {
             "email": "Email",
             "password": "Password"
+        }
+    },
+    "diary": {
+        "breadcrumb": {
+            "index": "Diary"
         }
     },
     "expense": {
@@ -247,12 +253,15 @@
         "instruction": {},
         "flash": {
             "created": "People created",
+            "edited": "%s edited!",
             "deleted": "People deleted!",
             "recovered": "People recovered!",
+            "removed": "%s has been permanently removed!",
             "no_deleted": "No deleted people!"
         },
         "confirm": {
-            "delete": "Are you sure you want to delete this person?"
+            "delete": "Are you sure you want to delete this person?",
+            "remove": "Are you 100%% sure you want to remove %s?"
         },
         "error": {
             "met_at": {
@@ -351,6 +360,7 @@
         }
     },
     "country": {
+        "not_set": "Country not set",
         "title": {
             "index": "Countries",
             "new": "New country"

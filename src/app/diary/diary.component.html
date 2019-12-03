@@ -1,0 +1,24 @@
+<div class="alert alert-hollow mt-4">
+    <h1>Diary</h1>
+
+    <table class="table table-no-head">
+        <thead>
+            <tr>
+                <th *ngFor="let index of [0, 1, 2, 3, 4, 5, 6]" style="border-top: none;width: 5%;">
+                    {{ t.t('date.day.'+index+'.short') }}
+                </th>
+            </tr>
+        </thead>
+        <tr *ngFor="let w of weeks">
+            <td *ngFor="let d of week"
+                [ngClass]="{outOfMonth:outOfMonth(w,d),inMonth:!outOfMonth(w,d),weekEnd:d>=5,today:isToday(w,d)}">
+                <div *ngIf="outOfMonth(w, d)"></div>
+                <div *ngIf="!outOfMonth(w, d)">
+                    <span class="day">
+                        {{ getDayOfMonth(w, d) }}
+                    </span>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

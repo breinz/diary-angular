@@ -125,7 +125,8 @@
             "lastName": "Nom",
             "sexe": "Sexe",
             "met_at": "Rencontré le",
-            "metIn": "Rencontré à"
+            "metIn": "Rencontré à",
+            "from": "Originaire de"
         },
         "instruction": {},
         "flash": {

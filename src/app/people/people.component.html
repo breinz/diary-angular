@@ -14,6 +14,8 @@
 
     <h1>{{ _showDeleted ? t.t('people.title.deleted') : t.t('people.title.index') }}</h1>
 
+    <app-loading-alert *ngIf="loading"></app-loading-alert>
+
     <table class="table table-hover" *ngIf="list">
         <thead>
             <tr>

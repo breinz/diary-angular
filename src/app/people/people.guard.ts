@@ -13,14 +13,19 @@ export class PeopleGuard implements CanActivate {
         private service: PeopleService,
         private router: Router,
         private flash: FlashService,
-        private t: TranslationService) {
+        private t: TranslationService
+    ) {
 
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-        if (route.routeConfig.path == "deleted") {
+        if (route.routeConfig.path === "deleted") {
             return this.canActivateDeleted();
+        }
+
+        if (route.routeConfig.path === ":id" || route.routeConfig.path === ":id/edit") {
+            return this.peopleExist(route.params.id);
         }
 
         return true;
@@ -54,4 +59,17 @@ export class PeopleGuard implements CanActivate {
 
         })
     }
+
+    private peopleExist(id: string): Promise<boolean> {
+        return new Promise((resolve, reject) => {
+            this.service.getPeople(id).subscribe(res => {
+                resolve(true);
+            }, err => {
+                this.flash.error("people.flash.not_found");
+                this.router.navigate(["/people"]);
+                return reject();
+            })
+        });
+    }
+
 }

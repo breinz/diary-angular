@@ -14,7 +14,9 @@ import { BreadcrumbService } from '../layout/breadcrumb/breadcrumb.service';
 })
 export class PeopleComponent implements OnInit, OnDestroy {
 
-    public list: People[] = [];
+    public loading: boolean = false;
+
+    public list: People[];
 
     public _showDeleted: boolean = false;
 
@@ -54,7 +56,12 @@ export class PeopleComponent implements OnInit, OnDestroy {
              }
          });*/
 
-        this.list_sub = this.service.list.pipe(filter(list => list !== null)).subscribe(list => {
+        this.list_sub = this.service.list.subscribe(list => {
+            if (list === null) {
+                return this.loading = true;
+            }
+
+            this.loading = false;
             this.list = list;
         });
 
@@ -99,6 +106,14 @@ export class PeopleComponent implements OnInit, OnDestroy {
 
     public onRemove(e: Event, people: People) {
         e.preventDefault();
+
+        if (confirm(this.t.t('people.confirm.remove', people.firstName))) {
+
+            this.service.remove(people).subscribe(res => {
+                this.flash.success(this.t.t("people.flash.removed", people.firstName));
+                this.router.navigate(['/people']);
+            });
+        }
     }
 
     public showDeleted() {
@@ -106,6 +121,8 @@ export class PeopleComponent implements OnInit, OnDestroy {
     }
 
     public listContainsDeleted(): boolean {
+        if (!this.list) return false;
+
         for (const people of this.list) {
             if (people.deleted) return true;
         }

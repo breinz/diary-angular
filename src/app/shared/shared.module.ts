@@ -20,6 +20,8 @@ import { ModalComponent } from './modal/modal.component';
 import { CategoryLinkComponent } from './category/link/category-link.component';
 import { RouterModule } from '@angular/router';
 import { CategoryBadgeComponent } from './category/badge/category-badge.component';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { LoadingAlertComponent } from './loading-alert/loading-alert.component';
 
 @NgModule({
     declarations: [
@@ -33,6 +35,10 @@ import { CategoryBadgeComponent } from './category/badge/category-badge.componen
 
         // Icon
         FaIconComponent,
+        SpinnerComponent,
+
+        // Components
+        LoadingAlertComponent,
 
         // Form
         FormErrorComponent,
@@ -61,6 +67,8 @@ import { CategoryBadgeComponent } from './category/badge/category-badge.componen
         AutofocusDirective,
         LinkDirective,
         FaIconComponent,
+        SpinnerComponent,
+        LoadingAlertComponent,
         FormErrorComponent,
         FormInstructionComponent,
         OldFormInstructionComponent,

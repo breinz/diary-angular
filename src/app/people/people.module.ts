@@ -8,12 +8,16 @@ import { PeopleFormComponent } from './form/people-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CountrySharedModule } from '../settings/country/country-shared.module';
+import { PeopleDetailComponent } from './detail/people-detail.component';
+import { EditPeopleComponent } from './edit/edit-people.component';
 
 @NgModule({
     declarations: [
         PeopleComponent,
         NewPeopleComponent,
-        PeopleFormComponent
+        PeopleFormComponent,
+        PeopleDetailComponent,
+        EditPeopleComponent
     ],
     imports: [
         CommonModule,

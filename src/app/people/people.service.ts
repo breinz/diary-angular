@@ -8,6 +8,7 @@ import { tap } from 'rxjs/operators';
 export class PeopleService {
 
     public list = new BehaviorSubject<People[]>(null);
+    public people = new BehaviorSubject<People>(null);
 
     constructor(
         private api: HttpClient
@@ -22,6 +23,15 @@ export class PeopleService {
         });
     }
 
+    public getPeople(id: string) {
+        return this.api.get<People>("/people/people", { params: { id } })
+            .pipe(
+                tap(res => {
+                    this.people.next(res);
+                })
+            );
+    }
+
     public add(people: People) {
         return this.api.post("/people", people).pipe(
             tap(res => {
@@ -30,19 +40,38 @@ export class PeopleService {
         );
     }
 
+    public patch(id: string, values: People) {
+        return this.api
+            .patch<{}>("/people", values, { params: { id } })
+            .pipe(
+                tap(res => {
+                    this.getList()
+                })
+            );
+    }
+
     public delete(people: People) {
         let patched = { ...people };
         patched.deleted = true;
-        return this.patch(patched);
+        return this.patch(patched._id, patched);
     }
 
     public recover(people: People) {
         let patched = { ...people };
         patched.deleted = false;
-        return this.patch(patched);
+        return this.patch(patched._id, patched);
     }
 
-    private patch(people: People) {
+    public remove(people: People) {
+        return this.api.delete<{}>("/people", { params: { id: people._id } })
+            .pipe(
+                tap(res => {
+                    this.getList();
+                })
+            );
+    }
+
+    /*private patch(people: People) {
         return this.api.patch<{ ok: boolean }>('/people', people, {
             params: { id: people._id }
         }).pipe(
@@ -50,5 +79,5 @@ export class PeopleService {
                 this.getList();
             })
         );
-    }
+    }*/
 }

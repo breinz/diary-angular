@@ -8,6 +8,7 @@ import { filter, take } from 'rxjs/operators';
 import { Country } from 'src/app/settings/country/country.model';
 import { Subscription } from 'rxjs';
 import { FlashService } from 'src/app/shared/flash/flash.service';
+import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name';
 //import $ from "jquery";
 declare var $: any;
 
@@ -22,6 +23,7 @@ declare var $: any;
 export class PeopleFormComponent implements OnInit, OnDestroy {
 
     @Input() values: People = null;
+    @Input() people: People;
     @Output() send = new EventEmitter<People>();
 
     public countries: Country[];
@@ -51,14 +53,32 @@ export class PeopleFormComponent implements OnInit, OnDestroy {
 
         $("#sexe").bootstrapToggle();
 
-        if (this.values) {
+        if (this.people) {
+            this.form.setValue({
+                "firstName": this.people.firstName,
+                "lastName": this.people.lastName,
+                "sexe": !!this.people.sexe,
+                "met_at": new Date(this.people.met_at).toISOString().substr(0, 10),
+                "metIn": this.people.metIn,
+                "from": this.people.from ? this.people.from._id : null
+            });
+            if (!!this.people.sexe) {
+                $("#sexe").bootstrapToggle("on");
+            }
+        } else if (this.values) { // !?!?!?
             if (this.values.sexe) {
                 $("#sexe").bootstrapToggle("on");
             }
         } else {
             this.form.get("met_at").setValue(new Date().toISOString().substr(0, 10));
-            this.form.get("sexe").setValue(true);
+            $("#sexe").bootstrapToggle("off");
         }
+
+        // Need to update ReactiveForm myself since a programmatically (by bootstrap toggle) change isn't reflected
+        const f = this.form;
+        $("#sexe").change(function () {
+            f.get('sexe').setValue($(this).prop('checked'))
+        })
 
         this.countryService.getList();
 
