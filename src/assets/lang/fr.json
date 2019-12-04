@@ -11,7 +11,91 @@
         "remove": "Supprimer définitivement",
         "loading": "Chargement..."
     },
+    "date": {
+        "month": [
+            {
+                "long": "Janvier",
+                "short": "Jan"
+            },
+            {
+                "long": "Février",
+                "short": "Fev"
+            },
+            {
+                "long": "Mars",
+                "short": "Mar"
+            },
+            {
+                "long": "Avril",
+                "short": "Avr"
+            },
+            {
+                "long": "Mai",
+                "short": "Mai"
+            },
+            {
+                "long": "Juin",
+                "short": "Juin"
+            },
+            {
+                "long": "Juillet",
+                "short": "Juil"
+            },
+            {
+                "long": "Août",
+                "short": "Aou"
+            },
+            {
+                "long": "Septembre",
+                "short": "Sept"
+            },
+            {
+                "long": "Octobre",
+                "short": "Oct"
+            },
+            {
+                "long": "Novembre",
+                "short": "Nov"
+            },
+            {
+                "long": "Décembre",
+                "short": "Dec"
+            }
+        ],
+        "day": [
+            {
+                "long": "Lundi",
+                "short": "Lun"
+            },
+            {
+                "long": "Mardi",
+                "short": "Mar"
+            },
+            {
+                "long": "Mercredi",
+                "short": "Mer"
+            },
+            {
+                "long": "Jeudi",
+                "short": "Jeu"
+            },
+            {
+                "long": "Vendredi",
+                "short": "Ven"
+            },
+            {
+                "long": "Samedi",
+                "short": "Sam"
+            },
+            {
+                "long": "Dimanche",
+                "short": "Dim"
+            }
+        ]
+    },
     "global": {
+        "title": "Journal",
+        "loading": "Chargement...",
         "error": {
             "name": {
                 "required": "Le nom est obligatoire"

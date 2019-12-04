@@ -4,6 +4,8 @@ export interface Event {
     _id: string;
     title: string;
     date: Date;
-    category: string | EventCategory,
-    deleted: boolean
+    category: string | EventCategory;
+    categories?: EventCategory[];
+    deleted: boolean;
+    total?: number;
 }

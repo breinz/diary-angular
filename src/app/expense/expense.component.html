@@ -3,17 +3,7 @@
 
     <div class="h1-actions">
       <div class="btn-group">
-        <a [routerLink]="getPrevLink()" class="btn btn-sm btn-outline-secondary">
-          <i fa-icon="caret-left" fw="1"></i>
-          {{ getPrevMonth() }}
-        </a>
-        <a routerLink="/expense" class="btn btn-sm btn-outline-secondary disabled">
-          {{year}}
-        </a>
-        <a [routerLink]="getNextLink()" class="btn btn-sm btn-outline-secondary">
-          {{ getNextMonth() }}
-          <i fa-icon="caret-right" fw="1"></i>
-        </a>
+        <app-month-navigation [month]="month" [year]="year" base="/expense"></app-month-navigation>
       </div>
       &nbsp;
       <div class="btn-group">
@@ -21,14 +11,13 @@
         <a routerLink="/expense/category" [secondary-btn]="t.t('expense.category.btn.expense')" icon="fa-list"></a>
       </div>
     </div>
-    <h1>
-      {{ getCurrentMonth() }}
-      {{ year }}
-    </h1>
+    <h1>{{ getCurrentMonth() }} {{ year }}</h1>
   </div>
 </div>
 
-<div class="row" *ngIf="report">
+<app-loading-alert *ngIf="loading"></app-loading-alert>
+
+<div class="row" *ngIf="!loading && report">
   <div class="col-md-4">
     <div class="row">
       <div class="col-12">
@@ -85,7 +74,7 @@
 
 
 <!-- Detail -->
-<div class="alert alert-hollow" *ngIf="expenses && expenses.length">
+<div class="alert alert-hollow" *ngIf="!loading && expenses && expenses.length">
 
   <!-- <div class="h1-actions">
     <div class="btn-group">

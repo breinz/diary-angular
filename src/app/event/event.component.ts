@@ -17,6 +17,8 @@ import { BreadcrumbService } from '../layout/breadcrumb/breadcrumb.service';
 })
 export class EventComponent implements OnInit, OnDestroy {
 
+    public loading: boolean = true;
+
     public events: EventModel[];
 
     private sub: Subscription;
@@ -40,9 +42,12 @@ export class EventComponent implements OnInit, OnDestroy {
 
         this.show_deleted = !!this.route.snapshot.url.length;
 
-        this.sub = this.service.list.pipe(
-            filter(list => list !== null)
-        ).subscribe(list => {
+        this.sub = this.service.list.subscribe(list => {
+            if (list === null) {
+                this.loading = true;
+                return;
+            }
+            this.loading = false;
             this.events = list;
         })
         this.service.getList();

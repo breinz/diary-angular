@@ -1,0 +1,67 @@
+<div class="mt-4">
+    <h1>
+        {{ day }} {{ t.t('date.month.'+monthD+'.long') }} {{ year }}
+    </h1>
+
+    <app-loading-alert *ngIf="loading"></app-loading-alert>
+
+    <div class="row" *ngIf="!loading">
+
+        <div class="col-sm-12" *ngIf="noData()">
+            <div class="alert alert-secondary text-center">
+                {{ t.t('diary.day.no_data') }}
+            </div>
+        </div>
+
+        <!-- People -->
+        <div class="col-md-6" *ngIf="people && people.length">
+            <div class="alert alert-hollow no-overflow">
+                <i fa-icon="user" class="alert-icon"></i>
+                <table class="table table-hover table-no-head mb-0" style="position: relative;">
+                    <tr *ngFor="let p of people">
+                        <td [link]="'/people/'+p._id">
+                            <i fa-icon="male" class="text-info" *ngIf="!p.sexe" fw="1"></i>
+                            <i fa-icon="female" class="text-danger" *ngIf="p.sexe" fw="1"></i>
+                            {{ p.firstName }} {{ p.lastName }}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Event -->
+        <div class="col-md-6" *ngIf="events && events.length">
+            <div class="alert alert-hollow no-overflow">
+                <i fa-icon="calendar-alt" class="alert-icon"></i>
+                <table class="table table-hover table-no-head mb-0" style="position: relative;">
+                    <tr *ngFor="let event of events">
+                        <td [link]="'/event/'+event._id">
+                            <i [fa-icon]="getEventIcon(event)" fw="1" [style]="getEventIconColor(event)"></i>
+                            {{ event.title }}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Expense -->
+        <div class="col-md-6" *ngIf="expenses && expenses.length">
+            <div class="alert alert-hollow no-overflow">
+                <i fa-icon="euro-sign" class="alert-icon"></i>
+                <table class="table table-hover table-no-head mb-0" style="position: relative;">
+                    <tr *ngFor="let expense of expenses">
+                        <td [link]="'/expense/'+expense._id">
+                            <i [fa-icon]="getExpenseIcon(expense)" fw="1" [style]="getExpenseIconColor(expense)"></i>
+                            {{ expense.amount | fixed:2 }} €
+                            <div *ngIf="expense.description">
+                                <small class="text-muted">{{ expense.description }}</small>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>

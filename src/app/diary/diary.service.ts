@@ -1,0 +1,27 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import Expense from '../expense/expense.model';
+import { People } from '../people/people.model';
+import { Event } from '../event/event.model';
+
+@Injectable({ providedIn: "root" })
+export class DiaryService {
+
+    constructor(
+        private api: HttpClient
+    ) {
+
+    }
+
+    public getElements(year: string, month: string) {
+        return this.api.get<{ expenses: Expense[], people: People[], events: Event[] }>("/diary", {
+            params: { year, month }
+        });
+    }
+
+    public getDay(year: string, month: string, day: string) {
+        return this.api.get<{ expenses: Expense[], people: People[], events: Event[] }>("/diary/day", {
+            params: { year, month, day }
+        });
+    }
+}

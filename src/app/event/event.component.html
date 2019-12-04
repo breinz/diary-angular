@@ -12,7 +12,9 @@
     </div>
     <h1>{{ t.t('event.title.index') }}</h1>
 
-    <table class="table table-hover table-no-head">
+    <app-loading-alert *ngIf="loading"></app-loading-alert>
+
+    <table class="table table-hover table-no-head" *ngIf="!loading">
         <tr *ngFor="let event of getEvents()">
             <td [link]="'/event/'+event._id">
                 <i [fa-icon]="getIcon(event)" fw="1" [style]="getIconColor(event)"></i>

@@ -5,6 +5,8 @@ import { filter } from 'rxjs/operators';
 import { People } from '../people.model';
 import { Subscription } from 'rxjs';
 import { TranslationService } from 'src/app/translation.service';
+import { FlashService } from 'src/app/shared/flash/flash.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: "app-people-detail",
@@ -18,7 +20,9 @@ export class PeopleDetailComponent implements OnInit, OnDestroy {
     constructor(
         private bc: BreadcrumbService,
         private service: PeopleService,
-        public t: TranslationService
+        public t: TranslationService,
+        private flash: FlashService,
+        private router: Router
     ) {
 
     }
@@ -35,6 +39,29 @@ export class PeopleDetailComponent implements OnInit, OnDestroy {
 
     public onDelete(e: Event) {
         e.preventDefault();
+
+        if (confirm(this.t.t("people.confirm.delete"))) {
+            this.service.delete(this.people).subscribe(res => {
+                this.flash.success(this.t.t("people.flash.deleted"));
+                this.people.deleted = true;
+            });
+        }
+    }
+
+    public onRecover() {
+        this.service.recover(this.people).subscribe(res => {
+            this.flash.success(this.t.t("people.flash.recovered"));
+            this.people.deleted = false;
+        });
+    }
+
+    public onRemove() {
+        if (confirm(this.t.t('people.confirm.remove', this.people.firstName + " " + this.people.lastName))) {
+            this.service.remove(this.people).subscribe(res => {
+                this.flash.success(this.t.t("people.flash.removed", this.people.firstName + " " + this.people.lastName));
+                this.router.navigate(["/people"]);
+            });
+        }
     }
 
     ngOnDestroy() {

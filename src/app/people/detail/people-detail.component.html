@@ -1,35 +1,41 @@
-<div class="alert alert-hollow mt-4">
+<div class="mt-4">
 
-    <div class="h1-actions">
-        <div class="btn-group" *ngIf="!people.deleted">
-            <a [routerLink]="'/people/'+people._id+'/edit'" [edit-btn]="t.t('action.edit')"></a>
-            <a [href]="'/people/'+people._id+'/delete'" (click)="onDelete($event)"
-                [delete-btn]="t.t('action.delete')"></a>
+    <element-deleted *ngIf="people.deleted" (recover)="onRecover()" (remove)="onRemove()"></element-deleted>
+
+    <div class="alert alert-hollow">
+
+        <div class="h1-actions">
+            <div class="btn-group" *ngIf="!people.deleted">
+                <a [routerLink]="'/people/'+people._id+'/edit'" [edit-btn]="t.t('action.edit')"></a>
+                <a [href]="'/people/'+people._id+'/delete'" (click)="onDelete($event)"
+                    [delete-btn]="t.t('action.delete')"></a>
+            </div>
         </div>
+
+        <h1>
+            <i fa-icon="male" class="text-info" *ngIf="!people.sexe"></i>
+            <i fa-icon="female" class="text-danger" *ngIf="people.sexe"></i>
+            {{ people.firstName }} {{ people.lastName }}
+        </h1>
+
+        <dl>
+            <dt>{{ t.t('people.model.met_at') }}</dt>
+            <dd>{{ people.met_at | date }}</dd>
+
+            <dt>{{ t.t('people.model.metIn') }}</dt>
+            <dd>{{ people.metIn }}</dd>
+
+            <dt>{{ t.t('people.model.from') }}</dt>
+            <dd>
+                <a [routerLink]="'/settings/country/'+people.from._id" *ngIf="people.from">
+                    {{ people.from.name }}
+                </a>
+                <span *ngIf="!people.from">
+                    <i fa-icon="ban"></i>
+                    {{ t.t('country.not_set') }}
+                </span>
+            </dd>
+        </dl>
     </div>
 
-    <h1>
-        <i fa-icon="male" class="text-info" *ngIf="!people.sexe"></i>
-        <i fa-icon="female" class="text-danger" *ngIf="people.sexe"></i>
-        {{ people.firstName }} {{ people.lastName }}
-    </h1>
-
-    <dl>
-        <dt>{{ t.t('people.model.met_at') }}</dt>
-        <dd>{{ people.met_at | date }}</dd>
-
-        <dt>{{ t.t('people.model.metIn') }}</dt>
-        <dd>{{ people.metIn }}</dd>
-
-        <dt>{{ t.t('people.model.from') }}</dt>
-        <dd>
-            <a [routerLink]="'/settings/country/'+people.from._id" *ngIf="people.from">
-                {{ people.from.name }}
-            </a>
-            <span *ngIf="!people.from">
-                <i fa-icon="ban"></i>
-                {{ t.t('country.not_set') }}
-            </span>
-        </dd>
-    </dl>
 </div>

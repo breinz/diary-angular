@@ -12,7 +12,7 @@ const routes: Routes = [
 
   /*IF ANGULAR 8+ & TSCONFIG --module:esnext :
   () => import("./expense/expense.module").then(m => m.ModuleName)*/
-  { path: "", pathMatch: "full", loadChildren: "./diary/diary.module#DiaryModule" },
+  { path: "", loadChildren: "./diary/diary.module#DiaryModule" },
   { path: "expense", loadChildren: "./expense/expense.module#ExpenseModule", canActivate: [LoginGuard] },
   { path: "people", loadChildren: "./people/people.module#PeopleModule", canActivate: [LoginGuard] },
   { path: "settings", loadChildren: "./settings/settings.module#SettingsModule", canActivate: [LoginGuard] },

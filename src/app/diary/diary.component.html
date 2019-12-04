@@ -1,24 +1,52 @@
-<div class="alert alert-hollow mt-4">
-    <h1>Diary</h1>
+<div class="mt-4">
 
-    <table class="table table-no-head">
-        <thead>
-            <tr>
-                <th *ngFor="let index of [0, 1, 2, 3, 4, 5, 6]" style="border-top: none;width: 5%;">
-                    {{ t.t('date.day.'+index+'.short') }}
-                </th>
+
+    <div class="h1-actions">
+        <app-month-navigation [month]="month" [year]="year"></app-month-navigation>
+    </div>
+
+    <h1>{{ t.t('date.month.'+monthD+'.long') }} {{ year }}</h1>
+
+    <div class="alert alert-hollow">
+
+
+        <app-loading-alert style="position: absolute;" *ngIf="loading"></app-loading-alert>
+
+        <table class="table table-no-head">
+            <thead>
+                <tr>
+                    <th *ngFor="let index of [0, 1, 2, 3, 4, 5, 6]" style="border-top: none;width: 5%;">
+                        {{ t.t('date.day.'+index+'.short') }}
+                    </th>
+                </tr>
+            </thead>
+            <tr *ngFor="let w of weeks">
+                <td *ngFor="let d of week"
+                    [ngClass]="{outOfMonth:outOfMonth(w,d),inMonth:!outOfMonth(w,d),weekEnd:d>=5,today:isToday(w,d)}"
+                    (click)="onCellClick(w, d)">
+                    <div *ngIf="outOfMonth(w, d)"></div>
+                    <div *ngIf="!outOfMonth(w, d)">
+                        <div class="day">
+                            {{ getDayOfMonth(w, d) }}
+                        </div>
+                        <!-- Event -->
+                        <div *ngFor="let event of getEvents(w, d)" class="text-info">
+                            <i [fa-icon]="icon" fw="1" *ngFor="let icon of getEventIcons(event)"></i>
+                            <small><b>{{ getEventName(event) }}</b></small>
+                        </div>
+                        <!-- Expense -->
+                        <div *ngIf="getExpense(w, d)" class="text-danger">
+                            <i fa-icon="euro-sign" fw="1"></i>
+                            <small><b>{{ getExpenseAmount(w,d) }}</b> </small>
+                        </div>
+                        <!-- People -->
+                        <div class="text-success" *ngIf="hasPeople(w, d)">
+                            <i fa-icon="user" fw="1"></i>
+                            <small><b>{{ getPeopleName(w, d) }}</b></small>
+                        </div>
+                    </div>
+                </td>
             </tr>
-        </thead>
-        <tr *ngFor="let w of weeks">
-            <td *ngFor="let d of week"
-                [ngClass]="{outOfMonth:outOfMonth(w,d),inMonth:!outOfMonth(w,d),weekEnd:d>=5,today:isToday(w,d)}">
-                <div *ngIf="outOfMonth(w, d)"></div>
-                <div *ngIf="!outOfMonth(w, d)">
-                    <span class="day">
-                        {{ getDayOfMonth(w, d) }}
-                    </span>
-                </div>
-            </td>
-        </tr>
-    </table>
+        </table>
+    </div>
 </div>

@@ -12,8 +12,9 @@ import { ExpenseExpenseComponent } from './expense/expense-expense.component';
 import { EditExpenseComponent } from './edit/edit-expense.component';
 
 // :year{4}/:month{2}
-const monthMatcher = (url: UrlSegment[]): UrlMatchResult => {
+export function monthMatcher(url: UrlSegment[]): UrlMatchResult {
     if (url.length === 2 && url[0].path.length === 4 && url[1].path.length === 2) {
+
         return {
             consumed: url,
             posParams: {
@@ -33,7 +34,7 @@ const routes: Routes = [
     { path: "category/:id/edit", component: EditExpenseCategoryComponent },
 
     // Expense
-    { path: "", component: ExpenseComponent },
+    { path: "", pathMatch: "full", component: ExpenseComponent },
     { matcher: monthMatcher, component: ExpenseComponent },
     { path: "new", component: NewExpenseComponent },
     { path: ":id", canActivate: [ExpenseGuard], component: ExpenseExpenseComponent },

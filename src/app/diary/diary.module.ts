@@ -4,10 +4,12 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { DiaryRoutingModule } from './diary-routing.module';
 import { DiaryComponent } from './diary.component';
+import { DiaryDayComponent } from './day/diary-day.component';
 
 @NgModule({
     declarations: [
-        DiaryComponent
+        DiaryComponent,
+        DiaryDayComponent
     ],
     imports: [
         CommonModule,

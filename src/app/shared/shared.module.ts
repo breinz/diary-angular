@@ -22,6 +22,7 @@ import { RouterModule } from '@angular/router';
 import { CategoryBadgeComponent } from './category/badge/category-badge.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { LoadingAlertComponent } from './loading-alert/loading-alert.component';
+import { MonthNavigationComponent } from './month-navigation/month-navigation.component';
 
 @NgModule({
     declarations: [
@@ -39,6 +40,7 @@ import { LoadingAlertComponent } from './loading-alert/loading-alert.component';
 
         // Components
         LoadingAlertComponent,
+        MonthNavigationComponent,
 
         // Form
         FormErrorComponent,
@@ -69,6 +71,7 @@ import { LoadingAlertComponent } from './loading-alert/loading-alert.component';
         FaIconComponent,
         SpinnerComponent,
         LoadingAlertComponent,
+        MonthNavigationComponent,
         FormErrorComponent,
         FormInstructionComponent,
         OldFormInstructionComponent,

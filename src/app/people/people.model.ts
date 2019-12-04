@@ -9,4 +9,5 @@ export class People {
     metIn: string;
     from: Country;
     deleted: boolean;
+    date?: string;
 }

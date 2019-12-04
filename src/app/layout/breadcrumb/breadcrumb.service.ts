@@ -32,6 +32,9 @@ export class BreadcrumbService {
         switch (type) {
             case "diary":
                 //this._bc.push([this.t.t("diary.breadcrumb.index"), "/"]);
+                if (action) {
+                    this._bc.push([this.t.t("global.title"), '/'], action);
+                }
                 break;
             case "expense":
                 this._build(el, action, "_id", "/expense", "expense.breadcrumb.");

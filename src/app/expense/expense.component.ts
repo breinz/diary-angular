@@ -15,6 +15,8 @@ import { BreadcrumbService } from '../layout/breadcrumb/breadcrumb.service';
 })
 export class ExpenseComponent implements OnInit, OnDestroy {
 
+	public loading = true;
+
 	public expenses: Expense[];
 	public report: ExpenseReport;
 	// public total: number;
@@ -38,8 +40,18 @@ export class ExpenseComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		this.route_sub = this.route.params.subscribe(params => {
+			this.loading = true;
+
+			this.report = null;
+			this.expenses = null;
+
 			this.year = params.year || new Date().getFullYear();
 			this.month = params.month || new Date().getMonth() + 1;
+
+			// if (+this.month > 12 || +this.month < 1) {
+			// 	this.flash.error(this.t.t("global.error.request.invalid"));
+			// 	return this.router.navigate(["/expense"]);
+			// }
 
 			this.service.month = this.month;
 			this.service.year = this.year;
@@ -53,6 +65,7 @@ export class ExpenseComponent implements OnInit, OnDestroy {
 		this.expense_sub = this.service.expenses.subscribe(res => {
 			if (res) {
 				this.expenses = res;
+				this.loading = false;
 			}
 		})
 
@@ -82,51 +95,6 @@ export class ExpenseComponent implements OnInit, OnDestroy {
 	getCurrentMonth() {
 		let m = +this.month - 1;
 		return this.t.t('date.month.' + m + '.long');
-	}
-
-	getPrevMonth() {
-		let y = "";
-		let m = +this.month - 2;
-		if (m === -1) {
-			m = 11;
-			y = " " + (+this.year - 1);
-		}
-		return this.t.t('date.month.' + m + '.long') + y;
-	}
-
-	getPrevLink() {
-		let y = +this.year;
-		let m = +this.month - 1;
-		if (m === 0) {
-			m = 12;
-			y--;
-		}
-		return "/expense/" + y + "/" + this.zero(m);
-	}
-
-	getNextMonth() {
-		let y = "";
-		let m = +this.month;
-		if (m === 12) {
-			m = 0;
-			y = " " + (+this.year + 1);
-		}
-		return this.t.t('date.month.' + m + '.long') + y;
-	}
-
-	getNextLink() {
-		let y = +this.year;
-		let m = +this.month + 1;
-		if (m === 13) {
-			m = 1;
-			y++;
-		}
-		return "/expense/" + y + "/" + this.zero(m);
-	}
-
-	private zero(value: any): string {
-		if (+value < 10) return "0" + value;
-		return value;
 	}
 
 	getExpenseIconClass(expense: Expense): { [index: string]: boolean } {

@@ -14,6 +14,8 @@ import { BreadcrumbService } from 'src/app/layout/breadcrumb/breadcrumb.service'
 })
 export class CountryComponent implements OnInit, OnDestroy {
 
+    public loading = true;
+
     public countries: Country[] = [];
 
     private sub: Subscription;
@@ -33,15 +35,16 @@ export class CountryComponent implements OnInit, OnDestroy {
 
         this.service.getList();
 
-        this.sub = this.service.list
-            .pipe(
-                filter(list => {
-                    return list !== null
-                })
-            ).subscribe(list => {
-                this.countries = list;
+        this.sub = this.service.list.subscribe(list => {
+            if (!list) {
+                this.loading = true;
+                return;
             }
-            );
+
+            this.loading = false;
+            this.countries = list;
+        }
+        );
     }
 
     onDelete(e: Event, country: Country) {

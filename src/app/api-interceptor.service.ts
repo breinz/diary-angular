@@ -1,11 +1,13 @@
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEventType, HttpHeaderResponse } from '@angular/common/http';
 import { UserService } from './user/user.service';
 import { Injectable } from '@angular/core';
-import { take, exhaustMap, catchError, tap } from 'rxjs/operators';
+import { take, exhaustMap, catchError, tap, delay } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { FlashService } from './shared/flash/flash.service';
 import { LoadingStatusService } from './loading-status.service';
+
+import { environment } from "../environments/environment";
 
 /**
  * Prepend the api url
@@ -38,7 +40,7 @@ export class ApiInterceptorService implements HttpInterceptor {
                 if (req.url[0] === "/") {
                     // Add api url
                     modifiedReq = modifiedReq.clone({
-                        url: "http://localhost:3000/api" + req.url
+                        url: environment.api + req.url
                     });
 
                     // Add user token
@@ -54,6 +56,7 @@ export class ApiInterceptorService implements HttpInterceptor {
                 }
 
                 return next.handle(modifiedReq).pipe(
+                    //delay(1000),
                     tap(event => {
                         if (event.type === HttpEventType.Response) {
                             this.loader.loaderEnd();

@@ -38,6 +38,7 @@ export class EventDetailComponent implements OnInit {
 
         if (confirm(this.t.t('event.confirm.delete', this.event.title))) {
             this.es.delete(this.es.event).subscribe(res => {
+                this.flash.success(this.t.t('event.flash.deleted', this.event.title));
                 this.event.deleted = true;
             })
         }
@@ -45,6 +46,7 @@ export class EventDetailComponent implements OnInit {
 
     onRecover() {
         this.es.recover(this.event).subscribe(res => {
+            this.flash.success(this.t.t('event.flash.recovered', this.event.title));
             this.event.deleted = false;
         });
     }

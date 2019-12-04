@@ -94,8 +94,12 @@
         ]
     },
     "global": {
+        "title": "Diary",
         "loading": "Loading...",
         "error": {
+            "request": {
+                "invalid": "Invalid request!"
+            },
             "not_set": "This field doesn't seem valid",
             "name": {
                 "required": "The name is required"
@@ -138,6 +142,9 @@
     "diary": {
         "breadcrumb": {
             "index": "Diary"
+        },
+        "day": {
+            "no_data": "No entry for this day"
         }
     },
     "expense": {
@@ -176,7 +183,13 @@
                 "remove": "Are you 100%% sure?"
             },
             "no": {
+                "deprecated": "DEPRECATED",
                 "name": "No category",
+                "color": "#EEE"
+            },
+            "none": {
+                "name": "No category",
+                "icon": "euro-sign",
                 "color": "#EEE"
             }
         },
@@ -306,7 +319,8 @@
             },
             "none": {
                 "color": "#EEE",
-                "name": "No category"
+                "name": "No category",
+                "icon": "calendar-alt"
             }
         },
         "title": {
