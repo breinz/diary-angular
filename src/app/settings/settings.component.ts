@@ -3,6 +3,7 @@ import { HeaderService } from '../app-header/header.service';
 import { BreadcrumbService } from '../layout/breadcrumb/breadcrumb.service';
 import { Router, NavigationEnd, } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { TranslationService } from '../translation.service';
 
 @Component({
     selector: "app-settings",
@@ -16,7 +17,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
     constructor(
         private headerService: HeaderService,
         private bc: BreadcrumbService,
-        private router: Router
+        private router: Router,
+        public t: TranslationService
     ) { }
 
     ngOnInit() {

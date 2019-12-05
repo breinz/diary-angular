@@ -385,6 +385,7 @@
             "edit": "Edit"
         },
         "btn": {
+            "sidebar": "Countries",
             "new": "New country"
         },
         "model": {

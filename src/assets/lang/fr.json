@@ -97,11 +97,24 @@
         "title": "Journal",
         "loading": "Chargement...",
         "error": {
+            "request": {
+                "invalid": "Requête invalide!"
+            },
+            "not_set": "Ce champ ne semble pas valide",
             "name": {
                 "required": "Le nom est obligatoire"
             },
+            "firstName": {
+                "required": "Le prénom est obligatoire"
+            },
             "icon": {
                 "required": "L'icône est obligatoire"
+            },
+            "color": {
+                "required": "La couleur est obligatoire"
+            },
+            "date": {
+                "required": "La date est obligatoire"
             }
         }
     },
@@ -126,6 +139,14 @@
             "password": "Mot de passe"
         }
     },
+    "diary": {
+        "breadcrumb": {
+            "index": "Journal"
+        },
+        "day": {
+            "no_data": "Aucune entrée pour cette date"
+        }
+    },
     "expense": {
         "category": {
             "title": {
@@ -133,10 +154,16 @@
                 "deleted": "Catégories de dépenses supprimées",
                 "new": "Nouvelle catégorie de dépenses"
             },
+            "breadcrumb": {
+                "index": "Catégories",
+                "new": "Nouvelle catégory",
+                "edit": "Modifier"
+            },
             "btn": {
                 "new": "Nouvelle catégorie",
                 "show_deleted": "Voir les supprimées",
-                "show_active": "Voir les actives"
+                "show_active": "Voir les actives",
+                "expense": "Catégories"
             },
             "model": {
                 "name": "Nom",
@@ -156,7 +183,13 @@
                 "remove": "Êtes vous à 100%% sûr(e)?"
             },
             "no": {
+                "deprecated": "DEPRECATED",
                 "name": "Non classé",
+                "color": "#EEE"
+            },
+            "none": {
+                "name": "Pas de catégorie",
+                "icon": "euro-sign",
                 "color": "#EEE"
             }
         },
@@ -166,11 +199,24 @@
             "detail": "Dépense",
             "edit": "Editer la dépense"
         },
+        "breadcrumb": {
+            "index": "Dépenses",
+            "new": "Nouvelle dépense",
+            "edit": "Modifier la dépense"
+        },
+        "btn": {
+            "new": "Nouvelle dépense"
+        },
         "model": {
             "amount": "Montant",
             "date": "Date",
             "category": "Catégorie",
             "description": "Description"
+        },
+        "error": {
+            "amount": {
+                "required": "Le montant doit être renseigné"
+            }
         },
         "instruction": {
             "icon": "Icône de la catégorie (<i class='fa fa-utensils'></i> <b>utensils</b> pour la nourriture par exemple) visitez la <a href='https://fontawesome.com/icons?d=gallery&m=free' target='_blank'>liste font awesome</a>",
@@ -200,6 +246,11 @@
                 }
             }
         },
+        "breadcrumb": {
+            "index": "Personnes",
+            "new": "Nouvelle personne",
+            "edit": "Modifier la personne"
+        },
         "btn": {
             "new": "Nouvelle personne"
         },
@@ -215,30 +266,126 @@
         "instruction": {},
         "flash": {
             "created": "Personne enregistrée !",
+            "edited": "%s modifié !",
             "deleted": "Personne supprimée !",
             "recovered": "Personne récupérée !",
+            "removed": "%s a été supprimé définivement !",
             "no_deleted": "Pas de personne supprimée !"
         },
         "confirm": {
-            "delete": "Êtes vous sur de vouloir supprimer cette personne ?"
+            "delete": "Êtes vous sur de vouloir supprimer cette personne ?",
+            "remove": "Êtes vous 100%% sûr(e) de vouloir supprimer %s ?"
         },
         "error": {
             "met_at": {
                 "required": "Quand vous êtes vous rencontré ?"
+            },
+            "metIn": {
+                "required": "Où vous êtes vous rencontré ?"
             }
+        }
+    },
+    "event": {
+        "category": {
+            "title": {
+                "index": "Catégorie d'événement",
+                "new": "Nouvelle catégorie d'événement",
+                "edit": "Modifier la catégorie d'événement"
+            },
+            "breadcrumb": {
+                "index": "Catégories",
+                "new": "Nouvelle catégorie d'événement",
+                "edit": "Modifier"
+            },
+            "btn": {
+                "new": "Nouvelle catégorie"
+            },
+            "model": {
+                "name": "Nom",
+                "icon": "Icône",
+                "color": "Couleur"
+            },
+            "instruction": {
+                "icon": "L'icône de l'événement (<i class='fa fa-birthday-cake'></i> <b>birthday-cake</b> pour un anniversaire par exemple) consultez <a href='https://fontawesome.com/icons?d=gallery&m=free' target='_blank'>la liste font awesome</a>",
+                "color": "Essayez <b>#c3e6cb</b> (vert) <b>#f5c6cb</b> (rouge) <b>#ffeeba</b> (jaune) <b>#b8daff</b> (bleu) <b>#d6d8db</b> (gris) <b>#bee5eb</b> (cyan)"
+            },
+            "flash": {
+                "created": "La catégorie d'événement a été crée !",
+                "edited": "La catégorie d'événement %s a été modifiée !",
+                "deleted": "La catégorie d'événement %s a été supprimée !"
+            },
+            "confirm": {
+                "delete": "Êtes-vous sûr de vouloir supprimer la catégorie d'événement %s ? Tous les événements liés seront décatégorisés"
+            },
+            "none": {
+                "color": "#EEE",
+                "name": "Pas de catégorie",
+                "icon": "calendar-alt"
+            }
+        },
+        "title": {
+            "navbar": "Événements",
+            "index": "Événements",
+            "category": {
+                "none": "événements",
+                "one": "événement",
+                "many": "événements"
+            },
+            "new": "Nouvel événement",
+            "edit": "Modifier l'événement"
+        },
+        "breadcrumb": {
+            "index": "Événements",
+            "new": "Nouvel événement",
+            "edit": "Modifier l'événement"
+        },
+        "btn": {
+            "new": "Nouvel événement",
+            "categories": "Catégories"
+        },
+        "model": {
+            "title": "Titre",
+            "date": "Date",
+            "category": "Catégorie"
+        },
+        "flash": {
+            "created": "L'événement %s a été créé !",
+            "deleted": "L'événement %s a été supprimé !",
+            "edited": "L'événement %s a été modifié !",
+            "recovered": "L'événement %s a été récupéré !",
+            "removed": "L'événement %s a été définitivement supprimé !"
+        },
+        "error": {
+            "title": {
+                "required": "Le titre de l'événement est obligatoire"
+            }
+        },
+        "confirm": {
+            "delete": "Êtes-vous sûr de vouloir supprimer l'événement %s ?",
+            "remove": "Êtes vous 100%% sûr de vouloir supprimer l'événement %s?"
         }
     },
     "settings": {
         "title": {
             "navbar": "Paramètres"
+        },
+        "breadcrumb": {
+            "index": "Paramètres"
         }
     },
     "country": {
+        "not_set": "Pas de pays",
         "title": {
             "index": "Pays",
             "new": "Nouveau pays"
         },
+        "breadcrumb": {
+            "index": "Pays",
+            "new": "Nouveau pays",
+            "edit": "Modifier le pays"
+        },
         "btn": {
+            "sidebar": "Pays",
             "new": "Nouveau pays"
         },
         "model": {

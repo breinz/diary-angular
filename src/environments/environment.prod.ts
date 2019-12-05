@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api: "http://julien-breiner.com/api"
+  api: "https://julien-breiner.com/api"
 };

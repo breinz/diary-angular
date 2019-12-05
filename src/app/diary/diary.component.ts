@@ -141,7 +141,7 @@ export class DiaryComponent implements OnInit, OnDestroy {
 
         if (!expense) return '';
 
-        return expense.amount + " €";
+        return expense.amount.toFixed(2) + " €";
     }
 
     public getEvents(w: number, d: number) {
