@@ -5,6 +5,7 @@ import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { FlashService } from 'src/app/shared/flash/flash.service';
 import { TranslationService } from 'src/app/translation.service';
+import { BreadcrumbService } from 'src/app/layout/breadcrumb/breadcrumb.service';
 
 @Component({
   selector: 'app-login',
@@ -24,11 +25,13 @@ export class LoginComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private flash: FlashService,
-    public t: TranslationService
+    public t: TranslationService,
+    private bc: BreadcrumbService
   ) {
   }
 
   ngOnInit() {
+    this.bc.build('');
   }
 
   onSubmit() {

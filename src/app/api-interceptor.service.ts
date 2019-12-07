@@ -27,7 +27,10 @@ export class ApiInterceptorService implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler) {
 
-        console.log(req.url[0] == "/" ? ("API: " + req.method) : "FILE:", req.url);
+        console.groupCollapsed(req.url[0] == "/" ? req.method : "FILE");
+        console.log(req.url);
+
+        //console.log(req.url[0] == "/" ? ("API: " + req.method) : "FILE:", req.url);
 
         this.loader.loaderStart();
 
@@ -59,15 +62,21 @@ export class ApiInterceptorService implements HttpInterceptor {
                     //delay(1000),
                     tap(event => {
                         if (event.type === HttpEventType.Response) {
+                            console.log(event.body);
+                            console.groupEnd();
                             this.loader.loaderEnd();
                         }
                     }),
                     catchError((err: any) => {
+                        console.log("--ERROR--");
+                        console.groupEnd();
                         this.loader.loaderEnd();
                         if (err.error && err.error.error) {
                             switch (err.error.error) {
                                 case "INVALID_USER":
                                 case "INVALID_TOKEN":
+                                case "OUTDATED_TOKEN":
+                                    //this.userService.current_user.
                                     this.flash.error("Please login to access this page");
                                     this.router.navigate(['/login']);
                                     break;

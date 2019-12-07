@@ -11,6 +11,8 @@ export class TranslationService {
     private data: any = null;
     private default_data: any = null;
 
+    public current_lang: string;
+
     constructor(private http: HttpClient,
         private sanitizer: DomSanitizer) {
     }
@@ -20,16 +22,51 @@ export class TranslationService {
      */
     public preload(): Promise<boolean> {
         return new Promise((resolve, reject) => {
-            this.http.get("assets/lang/en.json").subscribe(
+
+            // Get The browser language
+            let default_lang = "en";
+            if (navigator) {
+                let l = navigator.language || (<any>navigator).browserLanguage;
+                l = l.substr(0, 2);
+                if (l === "fr" || l === "en") {
+                    default_lang = l;
+                }
+            }
+
+            // Get the logged in user language
+            const userData: { lang: string } = JSON.parse(localStorage.getItem("userData"));
+
+            this.current_lang = userData && userData.lang ? userData.lang : default_lang;
+
+            // Load the default lang file
+            this.http.get("assets/lang/" + this.current_lang + ".json").subscribe(
                 data => {
                     this.default_data = data;
-                    console.log("TRANSLATION: en loaded");
+                    console.groupCollapsed("I18N");
+                    console.log(this.current_lang + " loaded as fallback lang");
+                    console.groupEnd();
                     resolve(true);
                 },
                 err => {
                     reject(err);
                 });
         });
+    }
+
+    /**
+     * Used only when no user is logged in
+     */
+    public change() {
+        this.current_lang = this.current_lang === "fr" ? "en" : "fr";
+
+        // Load the default lang file
+        this.http.get("assets/lang/" + this.current_lang + ".json").subscribe(
+            data => {
+                this.default_data = data;
+                console.groupCollapsed("I18N");
+                console.log(this.current_lang + " loaded as fallback lang");
+                console.groupEnd();
+            });
     }
 
     public init(user: UserService) {
@@ -43,8 +80,11 @@ export class TranslationService {
             if (loggedInUser) {
                 try {
                     this.http.get("assets/lang/" + loggedInUser.lang + ".json").subscribe(data => {
-                        console.log("TRANSLATION: " + loggedInUser.lang + " loaded");
+                        console.groupCollapsed("I18N");
+                        console.log(loggedInUser.lang + " loaded as desired lang");
+                        console.groupEnd();
                         this.data = data;
+                        this.current_lang = loggedInUser.lang;
                     });
                 } catch (error) {
                     console.error("Error loading lang ", loggedInUser.lang);

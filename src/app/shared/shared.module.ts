@@ -23,6 +23,7 @@ import { CategoryBadgeComponent } from './category/badge/category-badge.componen
 import { SpinnerComponent } from './spinner/spinner.component';
 import { LoadingAlertComponent } from './loading-alert/loading-alert.component';
 import { MonthNavigationComponent } from './month-navigation/month-navigation.component';
+import { BsBtnComponent } from './btn/bs-btn/bs-btn.component';
 
 @NgModule({
     declarations: [
@@ -48,7 +49,7 @@ import { MonthNavigationComponent } from './month-navigation/month-navigation.co
         OldFormInstructionComponent,
 
         // Btn
-        NewBtnComponent, EditBtnComponent, DeleteBtnComponent, RecoverBtnComponent, RemoveBtnComponent, SecondaryBtnComponent,
+        NewBtnComponent, EditBtnComponent, DeleteBtnComponent, RecoverBtnComponent, RemoveBtnComponent, SecondaryBtnComponent, BsBtnComponent,
 
         // Category
         CategoryLinkComponent, CategoryBadgeComponent,
@@ -75,7 +76,7 @@ import { MonthNavigationComponent } from './month-navigation/month-navigation.co
         FormErrorComponent,
         FormInstructionComponent,
         OldFormInstructionComponent,
-        NewBtnComponent, EditBtnComponent, DeleteBtnComponent, RecoverBtnComponent, RemoveBtnComponent, SecondaryBtnComponent,
+        NewBtnComponent, EditBtnComponent, DeleteBtnComponent, RecoverBtnComponent, RemoveBtnComponent, SecondaryBtnComponent, BsBtnComponent,
         ElementDeletedComponent,
         ModalComponent,
         CategoryLinkComponent,

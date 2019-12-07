@@ -8,6 +8,7 @@ export default class ActionComponent implements OnInit {
     public title: string;
 
     protected klass: string = null;
+    public size = "sm";
 
     private _element: ElementRef;
     private _renderer: Renderer2;
@@ -20,7 +21,8 @@ export default class ActionComponent implements OnInit {
     ngOnInit() {
         this._renderer.addClass(this._element.nativeElement, "btn");
         this._renderer.addClass(this._element.nativeElement, this.klass);
-        this._renderer.addClass(this._element.nativeElement, "btn-sm");
+
+        this._renderer.addClass(this._element.nativeElement, "btn-" + this.size);
 
         if (this.title) {
             this._renderer.setProperty(this._element.nativeElement, "title", this.title);

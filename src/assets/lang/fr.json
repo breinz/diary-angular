@@ -9,7 +9,8 @@
         "delete": "Supprimer",
         "recover": "Récupérer",
         "remove": "Supprimer définitivement",
-        "loading": "Chargement..."
+        "loading": "Chargement...",
+        "send": "Envoyer"
     },
     "date": {
         "month": [
@@ -115,7 +116,51 @@
             },
             "date": {
                 "required": "La date est obligatoire"
+            },
+            "email": {
+                "required": "Merci de renseigner une adresse email",
+                "invalid": "L'email ne semble pas valide"
             }
+        }
+    },
+    "home": {
+        "title": {
+            "home": "Bien le bonjour!"
+        },
+        "text": {
+            "1": "Journal vous permet de suivre vos dépenses, vos évènements, les personnes que vous rencontrez et bien plus.",
+            "2": "Cette application a pour but de servir de portfolio, étant à la recherche d'un emploi en tant que développeur MEAN. Si vous souhaitez m'embaucher, ou juste papotter",
+            "3": " !"
+        },
+        "btn": {
+            "contact": "cliquez ici",
+            "signin": "Ouvrir un compte",
+            "demo": "Démo"
+        }
+    },
+    "contact": {
+        "title": {
+            "index": "Contact"
+        },
+        "model": {
+            "reason": "Raison de votre message",
+            "email": "Votre adresse email",
+            "name": "Votre nom",
+            "company": "Quelle société représentez-vous?",
+            "city": "Ville",
+            "message": "Votre message"
+        },
+        "error": {
+            "message": {
+                "required": "Rien à dire ? Même pas un petit coucou ?"
+            }
+        },
+        "reason": {
+            "job": " Je souhaite vous proposer un job",
+            "team": "J'aimerai que vous rejoignez mon équipe",
+            "money": "Je veux faire de vous un millionnaire",
+            "megalo": "Ensemble nous dirigerons le monde !!",
+            "other": "Autre"
         }
     },
     "element_deleted": {
@@ -142,6 +187,10 @@
     "diary": {
         "breadcrumb": {
             "index": "Journal"
+        },
+        "text": {
+            "empty": "Aucun élément pour ce mois",
+            "few": "Vous avez peu d'élément ce mois, continuez à renseigner votre journal"
         },
         "day": {
             "no_data": "Aucune entrée pour cette date"
@@ -199,6 +248,15 @@
             "detail": "Dépense",
             "edit": "Editer la dépense"
         },
+        "text": {
+            "spent": {
+                "month": {
+                    "none": "Dépensés ce mois",
+                    "one": "Dépensé ce mois",
+                    "many": "Dépensés ce mois"
+                }
+            }
+        },
         "breadcrumb": {
             "index": "Dépenses",
             "new": "Nouvelle dépense",
@@ -245,6 +303,10 @@
                     "many": "personnes"
                 }
             }
+        },
+        "none": {
+            "text": "Il semble que vous n'avez pas encore enregistré de personne rencontrée",
+            "btn": "Créez votre première personne"
         },
         "breadcrumb": {
             "index": "Personnes",
@@ -334,6 +396,10 @@
             "new": "Nouvel événement",
             "edit": "Modifier l'événement"
         },
+        "none": {
+            "text": "Il semble que vous n'avez pas encore enregistré d'événement",
+            "btn": "Enregistrez votre premier événement"
+        },
         "breadcrumb": {
             "index": "Événements",
             "new": "Nouvel événement",
@@ -383,6 +449,10 @@
             "index": "Pays",
             "new": "Nouveau pays",
             "edit": "Modifier le pays"
+        },
+        "none": {
+            "text": "Il semble que vous n'avez pas encore enregistré de pays",
+            "btn": "Enregistrez votre premier pays"
         },
         "btn": {
             "sidebar": "Pays",

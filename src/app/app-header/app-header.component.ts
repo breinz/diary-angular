@@ -6,6 +6,8 @@ import { TranslationService } from '../translation.service';
 import { LoadingStatusService } from '../loading-status.service';
 import { HeaderService } from './header.service';
 
+declare const $: any;
+
 @Component({
   selector: 'app-header',
   templateUrl: './app-header.component.html',
@@ -42,6 +44,13 @@ export class AppHeaderComponent implements OnInit, OnDestroy {
     this.service.category.subscribe(cat => {
       this.active = cat;
     });// no unsubscribe
+
+  }
+
+  public closeNavbar() {
+    if ($("#navbarNav").hasClass("show")) {
+      $(".navbar-toggler").click();
+    }
   }
 
   test() {

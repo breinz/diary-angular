@@ -3,6 +3,9 @@ import { RouterModule, Routes, UrlSegment, UrlMatchResult, UrlSegmentGroup, Rout
 
 import { DiaryComponent } from './diary.component';
 import { DiaryDayComponent } from './day/diary-day.component';
+import { LoginGuard } from '../login-guard.service';
+import { HomeComponent } from './home/home.component';
+import { ContactComponent } from './contact/contact.component';
 
 // :year{4}/:month{2}
 export function monthMatcher(url: UrlSegment[], group: UrlSegmentGroup, route: Route): UrlMatchResult {
@@ -48,9 +51,10 @@ export function dayMatcher(url: UrlSegment[]): UrlMatchResult {
 }
 
 const routes: Routes = [
-    { path: "", component: DiaryComponent },
-    { matcher: monthMatcher, component: DiaryComponent },
-    { matcher: dayMatcher, component: DiaryDayComponent }
+    { path: "", component: HomeComponent },
+    { matcher: monthMatcher, component: DiaryComponent, canActivate: [LoginGuard] },
+    { matcher: dayMatcher, component: DiaryDayComponent, canActivate: [LoginGuard] },
+    { path: "contact", component: ContactComponent }
 ]
 
 @NgModule({

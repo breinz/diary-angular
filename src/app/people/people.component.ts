@@ -15,6 +15,7 @@ import { BreadcrumbService } from '../layout/breadcrumb/breadcrumb.service';
 export class PeopleComponent implements OnInit, OnDestroy {
 
     public loading: boolean = false;
+    public empty = true;
 
     public list: People[];
 
@@ -63,6 +64,8 @@ export class PeopleComponent implements OnInit, OnDestroy {
 
             this.loading = false;
             this.list = list;
+
+            this.empty = list.length === 0;
         });
 
         this.route_sub = this.route.url.subscribe(url => {

@@ -15,6 +15,7 @@ import { BreadcrumbService } from 'src/app/layout/breadcrumb/breadcrumb.service'
 export class CountryComponent implements OnInit, OnDestroy {
 
     public loading = true;
+    public empty = true;
 
     public countries: Country[] = [];
 
@@ -43,6 +44,8 @@ export class CountryComponent implements OnInit, OnDestroy {
 
             this.loading = false;
             this.countries = list;
+
+            this.empty = this.countries.length === 0;
         }
         );
     }

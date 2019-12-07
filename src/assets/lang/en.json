@@ -9,7 +9,8 @@
         "delete": "Delete",
         "recover": "Recover",
         "remove": "Delete permanently",
-        "loading": "Loading..."
+        "loading": "Loading...",
+        "send": "Send"
     },
     "date": {
         "month": [
@@ -116,6 +117,45 @@
             "date": {
                 "required": "The date is required"
             }
+        }
+    },
+    "home": {
+        "title": {
+            "home": "Hi there!"
+        },
+        "text": {
+            "1": "Diary let you keep track of your expenses, events, people you meet and many other things plus more things to come",
+            "2": "This app is to be served as portfolio as I'm looking for a job as a MEAN developer. If you wanna hire me, or just chat",
+            "3": "!"
+        },
+        "btn": {
+            "contact": "click here",
+            "demo": "Demo"
+        }
+    },
+    "contact": {
+        "title": {
+            "index": "Contact"
+        },
+        "model": {
+            "reason": "Reason of your message",
+            "email": "Your email address",
+            "name": "Your name",
+            "company": "Your company",
+            "city": "City",
+            "message": "Your message"
+        },
+        "error": {
+            "message": {
+                "required": "Nothing to say? Not even Hi!"
+            }
+        },
+        "reason": {
+            "job": "I wanna offer you a job",
+            "team": "I want you to join our team",
+            "money": "I wanna make you a millionnaire",
+            "megalo": "Let's rule the world together!!",
+            "other": "Other"
         }
     },
     "element_deleted": {

@@ -1,4 +1,4 @@
-import { CanActivate, RouterStateSnapshot, ActivatedRouteSnapshot, Router } from '@angular/router';
+import { CanActivate, RouterStateSnapshot, ActivatedRouteSnapshot, Router, UrlTree } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { UserService } from './user/user.service';
 import { Observable } from 'rxjs';
@@ -16,13 +16,19 @@ export class LoginGuard implements CanActivate {
     public canActivate(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
-    ): Observable<boolean> | Promise<boolean> | boolean {
+    ): Observable<boolean> | Promise<boolean> | boolean | UrlTree {
 
         if (this.user.loggedIn) {
             return true;
         }
 
-        this.flash.error("Please log in to access this page");
-        this.router.navigate(['/login']);
+        if (route.routeConfig.path !== "") {
+            this.flash.error("Please log in to access this page");
+            this.router.navigate(['/login']);
+            return false;
+        }
+        console.log("return false");
+        return false;
+        //return this.router.parseUrl('/');
     }
 }

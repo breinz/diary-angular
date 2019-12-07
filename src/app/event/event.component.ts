@@ -18,6 +18,7 @@ import { BreadcrumbService } from '../layout/breadcrumb/breadcrumb.service';
 export class EventComponent implements OnInit, OnDestroy {
 
     public loading: boolean = true;
+    public empty = true;
 
     public events: EventModel[];
 
@@ -49,6 +50,8 @@ export class EventComponent implements OnInit, OnDestroy {
             }
             this.loading = false;
             this.events = list;
+
+            this.empty = this.events.length === 0;
         })
         this.service.getList();
     }

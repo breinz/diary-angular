@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { throwError, BehaviorSubject, pipe } from 'rxjs';
+import { throwError, BehaviorSubject } from 'rxjs';
 import { tap, catchError, take } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
@@ -13,6 +13,7 @@ interface UserData {
   name: string;
   email: string;
   token: string;
+  refreshToken: string;
   expireAt: string;
   lang: string;
 }
@@ -33,29 +34,35 @@ export class UserService {
 
   test() {
     this.current_user.pipe(take(1)).subscribe(user => {
-      user.lang = user.lang == "en" ? "fr" : "en";
-      this.current_user.next(user);
+      if (user) {
+        user.lang = user.lang == "en" ? "fr" : "en";
+        this.current_user.next(user);
+      } else {
+        this.t.change();
+      }
     }
+    );
 
-    )
   }
 
   public autoLogin() {
     const userData: UserData = JSON.parse(localStorage.getItem("userData"));
 
     if (!userData) {
-      return;
+      return true;
     }
 
-    const loadedUser = new User(userData.id, userData.name, userData.email, userData.token, new Date(userData.expireAt), userData.lang);
+    const loadedUser = new User(userData.id, userData.name, userData.email, userData.token, userData.refreshToken, new Date(userData.expireAt), userData.lang);
 
     if (loadedUser.token) {
       console.log("auto logged in");
       this.current_user.next(loadedUser);
       this.loggedIn = true;
 
-
+      this.prepareRefresh();
     }
+
+    return true;
   }
 
   public login(formData: any) {
@@ -77,8 +84,22 @@ export class UserService {
       );
   }
 
+  private prepareRefresh() {
+    const now = new Date();
+    let diff = this.current_user.value.expireAt.getTime() - now.getTime() - (5 * 60 * 1000);
+    if (diff > 0) {
+      setTimeout(() => {
+        this.refresh();
+      }, diff);
+    }
+  }
+
+  private refresh() {
+    console.log("REFRESH!!");
+  }
+
   private _logIn(res: UserData) {
-    const user = new User(res.id, res.name, res.email, res.token, new Date(res.expireAt), res.lang);
+    const user = new User(res.id, res.name, res.email, res.token, res.refreshToken, new Date(res.expireAt), res.lang);
     this.current_user.next(user);
     localStorage.setItem("userData", JSON.stringify(res));
     this.loggedIn = true;
@@ -95,7 +116,9 @@ export class UserService {
 
     localStorage.removeItem("userData");
 
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login']).then(() => {
+      this.router.navigate(['/']);
+    });
 
     this.loggedIn = false;
   }

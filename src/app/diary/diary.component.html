@@ -7,6 +7,14 @@
 
     <h1>{{ t.t('date.month.'+monthD+'.long') }} {{ year }}</h1>
 
+    <div class="alert alert-secondary" *ngIf="empty">
+        {{ t.t('diary.text.empty') }}
+    </div>
+
+    <div class="alert alert-info" *ngIf="few">
+        {{ t.t('diary.text.few') }}
+    </div>
+
     <div class="alert alert-hollow">
 
 

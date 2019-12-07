@@ -1,5 +1,5 @@
 <div class="alert alert-hollow mt-4">
-    <div class="h1-actions">
+    <div class="h1-actions" *ngIf="!loading && !empty">
         <div class="btn-group" *ngIf="!show_deleted">
             <a routerLink="/event/new" [new-btn]="t.t('event.btn.new')"></a>
             <a routerLink="/event/category" [secondary-btn]="t.t('event.btn.categories')" icon="fa-list"></a>
@@ -14,7 +14,12 @@
 
     <app-loading-alert *ngIf="loading"></app-loading-alert>
 
-    <table class="table table-hover table-no-head" *ngIf="!loading">
+    <div class="alert alert-info text-center" *ngIf="empty && !loading">
+        <p class="text-info">{{ t.t('event.none.text') }}</p>
+        <a routerLink="/event/new" [bs-btn]="t.t('event.none.btn')" icon="plus" color="info" size="lg"></a>
+    </div>
+
+    <table class="table table-hover table-no-head" *ngIf="!loading && !empty">
         <tr *ngFor="let event of getEvents()">
             <td [link]="'/event/'+event._id">
                 <i [fa-icon]="getIcon(event)" fw="1" [style]="getIconColor(event)"></i>

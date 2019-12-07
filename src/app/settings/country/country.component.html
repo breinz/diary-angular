@@ -1,5 +1,5 @@
 <div class="alert alert-hollow">
-    <div class="h1-actions">
+    <div class="h1-actions" *ngIf="!loading && !empty">
         <div class="btn-group">
             <a routerLink="/settings/country/new" [new-btn]="t.t('country.btn.new')"></a>
         </div>
@@ -8,7 +8,12 @@
 
     <app-loading-alert *ngIf="loading"></app-loading-alert>
 
-    <table class="table table-hover table-no-head" *ngIf="!loading">
+    <div class="alert alert-info text-center" *ngIf="empty && !loading">
+        <p class="text-info">{{ t.t('country.none.text') }}</p>
+        <a routerLink="/settings/country/new" [bs-btn]="t.t('country.none.btn')" icon="plus" color="info" size="lg"></a>
+    </div>
+
+    <table class="table table-hover table-no-head" *ngIf="!loading && !empty">
         <tr *ngFor="let country of countries">
             <td [link]="'/settings/country/'+country._id">{{ country.name }}</td>
             <td [link]="'/settings/country/'+country._id" class="text-muted">

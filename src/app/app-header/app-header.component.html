@@ -3,7 +3,7 @@
     <div class="row"> 
   <div class="col-12">-->
 
-  <a routerLink="/" class="navbar-brand">{{ t.t('global.title') }}</a>
+  <a routerLink="/" class="navbar-brand" (click)="closeNavbar()">{{ t.t('global.title') }}</a>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
     aria-expanded="false" aria-label="Toggle navigation">
@@ -14,13 +14,19 @@
     <ul class="navbar-nav mr-auto">
 
       <li class="nav-item" [ngClass]="{active:active==='expense'}">
-        <a routerLink="/expense" class="nav-link" *ngIf="isAuthenticated">{{ t.t('expense.title.navbar')}}</a>
+        <a routerLink="/expense" class="nav-link" *ngIf="isAuthenticated" (click)="closeNavbar()">
+          {{ t.t('expense.title.navbar')}}
+        </a>
       </li>
       <li class="nav-item" [ngClass]="{active:active==='people'}">
-        <a routerLink="/people" class="nav-link" *ngIf="isAuthenticated">{{ t.t('people.title.navbar')}}</a>
+        <a routerLink="/people" class="nav-link" *ngIf="isAuthenticated" (click)="closeNavbar()">
+          {{ t.t('people.title.navbar')}}
+        </a>
       </li>
       <li class="nav-item" [ngClass]="{active:active==='event'}">
-        <a routerLink="/event" class="nav-link" *ngIf="isAuthenticated">{{ t.t('event.title.navbar')}}</a>
+        <a routerLink="/event" class="nav-link" *ngIf="isAuthenticated" (click)="closeNavbar()">
+          {{ t.t('event.title.navbar')}}
+        </a>
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
@@ -28,25 +34,37 @@
         <spinner></spinner>
       </li>
       <li class="nav-item" *ngIf="!isAuthenticated">
-        <a routerLink="/signin" class="nav-link">{{ t.t('action.signin') }}</a>
+        <a routerLink="/signin" class="nav-link" (click)="closeNavbar()">
+          {{ t.t('action.signin') }}
+        </a>
       </li>
       <li class="nav-item" *ngIf="!isAuthenticated">
-        <a routerLink="/login" class="nav-link">{{ t.t('action.login' )}}</a>
-      </li>
-      <li class="nav-item" *ngIf="isAuthenticated">
-        <a routerLink="/me" class="nav-link a">{{ current_user.name }}</a>
-      </li>
-      <li class="nav-item" *ngIf="current_user">
-        <a (click)="test()" class="nav-link a">{{ current_user.lang }}</a>
-      </li>
-      <li class="nav-item" [ngClass]="{active:active==='settings'}">
-        <a routerLink="/settings" class="nav-link" *ngIf="isAuthenticated" [title]="t.t('settings.title.navbar')">
-          <i fa-icon="cog"></i>
+        <a routerLink="/login" class="nav-link" (click)="closeNavbar()">
+          {{ t.t('action.login' )}}
         </a>
       </li>
       <li class="nav-item" *ngIf="isAuthenticated">
-        <a (click)="logout()" class="nav-link a" [title]="t.t('action.logout')">
-          <i fa-icon="times"></i>
+        <a routerLink="/me" class="nav-link a" (click)="closeNavbar()">
+          {{ current_user.name }}
+        </a>
+      </li>
+      <li class="nav-item">
+        <a (click)="test()" class="nav-link a" (click)="closeNavbar()">
+          {{ t.current_lang }}
+        </a>
+      </li>
+      <li class="nav-item" [ngClass]="{active:active==='settings'}">
+        <a routerLink="/settings" class="nav-link" *ngIf="isAuthenticated" [title]="t.t('settings.title.navbar')"
+          (click)="closeNavbar()">
+          <i fa-icon="cog" class="d-none d-sm-inline"></i>
+          <span class="d-sm-none"> Settings</span>
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="isAuthenticated">
+        <a (click)="logout()" class="nav-link a text-hover-danger" [title]="t.t('action.logout')"
+          (click)="closeNavbar()">
+          <i fa-icon="times" class="d-none d-sm-inline"></i>
+          <span class="d-sm-none"> Logout</span>
         </a>
       </li>
       <!-- <li class="dropdown" appDropdown *ngIf="isAuthenticated">

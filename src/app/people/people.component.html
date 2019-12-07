@@ -1,6 +1,6 @@
 <div class="alert alert-hollow mt-4">
 
-    <div class="h1-actions">
+    <div class="h1-actions" *ngIf="!loading && !empty">
         <div class="btn-group">
             <div class="btn-group" *ngIf="!_showDeleted">
                 <a href="/people/new" routerLink="/people/new" [new-btn]="t.t('people.btn.new')" title></a>
@@ -16,7 +16,12 @@
 
     <app-loading-alert *ngIf="loading"></app-loading-alert>
 
-    <table class="table table-hover" *ngIf="list">
+    <div class="alert alert-info text-center" *ngIf="empty && !loading">
+        <p class="text-info">{{ t.t('people.none.text') }}</p>
+        <a routerLink="/people/new" [bs-btn]="t.t('people.none.btn')" icon="plus" color="info" size="lg"></a>
+    </div>
+
+    <table class="table table-hover" *ngIf="!empty">
         <thead>
             <tr>
                 <th>{{ t.t("people.model.name") }}</th>

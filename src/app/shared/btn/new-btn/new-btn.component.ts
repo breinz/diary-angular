@@ -11,6 +11,7 @@ export class NewBtnComponent extends ActionComponent implements OnInit {
 
   @Input("new-btn") text: string = null;
   @Input() title: string;
+  @Input() size: string;
 
   @Input() br: boolean = true;
 

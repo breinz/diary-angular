@@ -14,6 +14,7 @@ import { SigninComponent } from './user/signin/signin.component';
 import { FlashComponent } from './shared/flash/flash.component';
 import { SharedModule } from './shared/shared.module';
 import { BreadcrumbComponent } from './layout/breadcrumb/breadcrumb.component';
+import { OutComponent } from './out/out.component';
 
 
 export function translationInitializer(provider: TranslationService) {
@@ -30,7 +31,10 @@ export function translationInitializer(provider: TranslationService) {
     BreadcrumbComponent,
 
     // Auth
-    LoginComponent, SigninComponent
+    LoginComponent, SigninComponent,
+
+    // TMP
+    OutComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +48,13 @@ export function translationInitializer(provider: TranslationService) {
       provide: HTTP_INTERCEPTORS,
       useClass: ApiInterceptorService,
       multi: true
-    },
+    }/*,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: userInitializer,
+      deps: [UserService],
+      multi: true
+    }*/,
     {
       provide: APP_INITIALIZER,
       useFactory: translationInitializer,

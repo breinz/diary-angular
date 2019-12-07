@@ -1,0 +1,28 @@
+<app-diary *ngIf="loggedIn"></app-diary>
+
+<div class="alert alert-hollow mt-4" *ngIf="!loggedIn">
+    <h1>{{ t.t('home.title.home') }}</h1>
+    <p>{{ t.t('home.text.1') }} </p>
+    <div class="text-center mb-3">
+        <!-- <div class="btn-group"> -->
+        <a routerLink="/signin" class="btn btn-outline-success btn-lg">
+            <i fa-icon="key"></i>
+            <br>
+            {{ t.t('action.signin') }}
+        </a>
+        &nbsp;
+        <a href="/demo" (click)="onDemo($event)" class="btn btn-lg btn-outline-secondary disabled">
+            <i fa-icon="umbrella-beach"></i>
+            <br>
+            {{ t.t('home.btn.demo') }}
+            <small>
+                <small class="text-warning">in progress</small>
+            </small>
+        </a>
+        <!-- </div> -->
+    </div>
+    <p>
+        {{ t.t('home.text.2') }}
+        <a routerLink="/contact" class="badge badge-info">{{ t.t('home.btn.contact') }}</a>{{ t.t('home.text.3') }}
+    </p>
+</div>

@@ -6,7 +6,7 @@ import Expense from '../expense/expense.model';
 import { People } from '../people/people.model';
 import { Event as EventModel } from '../event/event.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, empty } from 'rxjs';
 import { FlashService } from '../shared/flash/flash.service';
 
 @Component({
@@ -17,6 +17,8 @@ import { FlashService } from '../shared/flash/flash.service';
 export class DiaryComponent implements OnInit, OnDestroy {
 
     public loading: boolean = true;
+    public empty = false;
+    public few = false;
 
     public year: string;
     public month: string;
@@ -57,6 +59,8 @@ export class DiaryComponent implements OnInit, OnDestroy {
         this.route_sub = this.route.params.subscribe(params => {
 
             this.loading = true;
+            this.empty = false;
+            this.few = false;
 
             this.year = params.year || new Date().getFullYear();
             this.month = params.month || new Date().getMonth() + 1;
@@ -80,6 +84,12 @@ export class DiaryComponent implements OnInit, OnDestroy {
                 this.expenses = res.expenses;
                 this.people = res.people;
                 this.events = res.events;
+
+                const total = this.expenses.length + this.people.length + this.events.length;
+                if (total < 5) {
+                    this.empty = total === 0;
+                    this.few = !this.empty;
+                }
             });
 
             this.countWeeks();

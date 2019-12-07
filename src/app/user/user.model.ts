@@ -5,6 +5,7 @@ export default class User {
         public name: string,
         public email: string,
         private _token: string,
+        public refreshToken: string,
         private _expiredAt: Date,
         public lang?: string
     ) {

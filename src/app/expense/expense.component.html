@@ -27,7 +27,7 @@
           <div class="huge">
             {{ report.total | fixed:0 }} €
           </div>
-          Spent this month
+          {{ t.p('expense.text.spent.month', report.total.toFixed(0)) }}
         </div>
       </div>
 

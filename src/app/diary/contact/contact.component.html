@@ -1,0 +1,69 @@
+<div class="alert alert-hollow mt-4">
+    <h1>{{ t.t('contact.title.index') }}</h1>
+
+    <form [formGroup]="form">
+        <!-- Reason -->
+        <div class="form-group">
+            <label for="reason">{{ t.t('contact.model.reason') }}</label>
+            <select id="reason" class="form-control" formControlName="reason">
+                <option value="job">{{ t.t('contact.reason.job') }}</option>
+                <option value="team">{{ t.t('contact.reason.team') }}</option>
+                <option value="money">{{ t.t('contact.reason.money') }}</option>
+                <option value="megalo">{{ t.t('contact.reason.megalo') }}</option>
+                <option value="other">{{ t.t('contact.reason.other') }}</option>
+            </select>
+        </div>
+
+        <div class="row">
+
+            <!-- Email -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="email">{{ t.t('contact.model.email') }}</label>
+                    <input type="email" formControlName="email" id="email" class="form-control"
+                        [ngClass]="fs.is_invalid('email')">
+                    <app-form-error *ngIf="fs.hasError('email')" [text]="fs.getErrorMessage('email')"></app-form-error>
+                </div>
+            </div>
+
+            <!-- Name -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="name">{{ t.t('contact.model.name') }}</label>
+                    <input type="text" formControlName="name" id="name" class="form-control">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+
+            <!-- Company -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="company">{{ t.t('contact.model.company') }}</label>
+                    <input type="text" formControlName="company" id="company" class="form-control">
+                </div>
+
+            </div>
+            <!-- City -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="city">{{ t.t('contact.model.city') }}</label>
+                    <input type="text" formControlName="city" id="city" class="form-control">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="message">{{ t.t('contact.model.message') }}</label>
+            <textarea formControlName="message" id="message" rows="3" class="form-control"
+                [ngClass]="fs.is_invalid('message')"></textarea>
+            <app-form-error *ngIf="fs.hasError('message')" [text]="fs.getErrorMessage('message')"></app-form-error>
+        </div>
+
+        <input type="submit" [value]="t.t('action.send')" class="btn btn-info" [disabled]="form.invalid">
+
+
+    </form>
+</div>

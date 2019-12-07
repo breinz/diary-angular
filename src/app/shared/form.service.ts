@@ -77,6 +77,13 @@ export class FormService {
             }
         }
 
+        if (this.element === "contact") {
+            switch (field) {
+                case "message":
+                    if (comp.errors.required) return this.t.t("contact.error.message.required");
+            }
+        }
+
         // Generic error messages
 
         switch (field) {
