@@ -24,4 +24,8 @@ export class DiaryService {
             params: { year, month, day }
         });
     }
+
+    public sendContact(data: { reason: string, email: string, name: string, company: string, city: string, message: string }) {
+        return this.api.post("/contact", data);
+    }
 }
